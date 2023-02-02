@@ -2,7 +2,7 @@ import React from "react";
 
 const Options = props => {
     return (
-        <div className="profile-options h-16 w-10/12 flex flex-row justify-between text-var-6 md:text-dsk-options opacity-40">
+        <div className="profile-options h-16 flex flex-row justify-between text-var-6 md:text-dsk-options opacity-40 md:w-10/12 w-9/12" style={{marginBottom: props.margins ? "13px" : null, marginTop: props.margins ? "50px" : null}} >
             <div className="h-16 w-2/5 flex items-center">
                 <form action="" method="get">
                     <p className="inline-block">search </p>

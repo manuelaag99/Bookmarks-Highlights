@@ -26,6 +26,7 @@ module.exports = {
       "dsk-card-title": "1.3rem",
       "dsk-card-text": "1rem",
       "dsk-card-button": "1.3rem",
+      "dsk-add-command": "1rem",
       "tbl-profile-name": "",
       "tbl-profile-bio": "",
       "tbl-breaker": "",
@@ -33,18 +34,21 @@ module.exports = {
       "tbl-card-title": "",
       "tbl-card-text": "",
       "tbl-card-button": "",
+      "tbl-add-command": "1rem",
       "mob-profile-name": "",
       "mob-profile-bio": "",
       "mob-breaker": "",
       "mob-options": "",
       "mob-card-title": "",
       "mob-card-text": "",
-      "mob-card-button": ""
+      "mob-card-button": "",
+      "mob-add-command": "3rem"
     },
     extend: {
       height: {
         "13": "32rem",
-        "76": "19rem"
+        "76": "19rem",
+        "102": "26rem",
       },
       width: {
         "66": "17rem",
