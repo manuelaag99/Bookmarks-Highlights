@@ -1,0 +1,29 @@
+BOOKMARKS AND HIGHLIGHTS
+
+name: REQUIRED
+email: REQUIRED
+password: REQUIRED
+listOfEntries:
+	photo: REQUIRED
+	book/article title: REQUIRED
+	tags: REQUIRED
+	date: REQUIRED
+listOfBooks:
+	book/article title: REQUIRED
+	note:
+	photo: REQUIRED
+	
+
+name is given by the user
+email is given by the user
+password is given by the user
+listOfEntries is only started up once the user uploads the first photo
+
+registering users
+logging in users
+logging in with google and facebook
+upload photos
+fill out forms
+retrieve data from those forms
+send data to mongodb 
+retrieve data from mongodb to display on the website

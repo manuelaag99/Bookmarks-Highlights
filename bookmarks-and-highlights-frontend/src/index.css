@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  max-height: 3000px;
+  font-family: 'Asap', sans-serif;
+}
+
+p {
+  font-family: ;
+}
+
+.card {
+  border-radius: 15px;
+  min-height: 40px;
+  min-width: 100px;
+  box-shadow: 1px 1px 2px rgb(179, 179, 179);
+}
