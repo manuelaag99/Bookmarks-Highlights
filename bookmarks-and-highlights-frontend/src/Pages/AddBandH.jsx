@@ -11,7 +11,6 @@ const TAGLIST = ["history", "germany", "world war two"]
 const AddBandH = props => {
     const location = useLocation();
     const { userid } = location.state
-    console.log(userid);
 
     return (
 
