@@ -1,17 +1,17 @@
 BOOKMARKS AND HIGHLIGHTS
 
-name: REQUIRED
+displayName: REQUIRED
 email: REQUIRED
 password: REQUIRED
-listOfEntries:
-	photo: REQUIRED
-	book/article title: REQUIRED
-	tags: REQUIRED
-	date: REQUIRED
-listOfBooks:
-	book/article title: REQUIRED
-	note:
-	photo: REQUIRED
+listOfEntries: [
+		title: REQUIRED
+		collection: [
+			photo: REQUIRED
+			tags: REQUIRED
+			date: REQUIRED
+			]
+		]
+
 	
 
 name is given by the user
@@ -27,3 +27,9 @@ fill out forms
 retrieve data from those forms
 send data to mongodb 
 retrieve data from mongodb to display on the website
+
+MOCK USER
+name: Manuel Alanis
+email: manuelaag99@mail.com
+password: 1ozidjn-aPnM
+listOfEntries:

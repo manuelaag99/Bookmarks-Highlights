@@ -3,7 +3,8 @@ import React from "react";
 const CardText = props => {
     return (
         <div className="card-txt h-7 m-auto text-left">
-            <p className="md:text-dsk-card-text">{props.textOfCard} photos in this collection</p> 
+            {(props.textOfCard === 1 ? <p className="text-dsk-card-text">{props.textOfCard} photo in this collection</p> : <p className="text-dsk-card-text">{props.textOfCard} photos in this collection</p>)}
+             
         </div>
     )
 }

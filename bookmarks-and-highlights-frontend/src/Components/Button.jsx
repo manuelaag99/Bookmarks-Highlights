@@ -1,10 +1,11 @@
 import React from "react";
 
+
 const Button = props => {
     return (
-        <div className="card w-76 h-12 bg-var-4 m-auto cursor-pointer flex justify-center hover:h-14 hover:bg-var-4-hovered duration-300">
-            <button className="m-auto text-var-1 font-bold md:text-dsk-card-button">{props.buttonText}</button>
-        </div>
+        <button className={"font-bold md:text-dsk-card-button " + (props.isDefaultButton ? "text-var-1" : props.isFacebookButton ? "text-var-1" : "text-var-5") + " shadow-card w-full mx-auto cursor-pointer flex justify-center h-12 md:pt-2 pt-3 md:hover:h-14 md:hover:pt-4 rounded-tag duration-300 " + (props.isDefaultButton ? "bg-var-4 hover:bg-var-4-hovered" : props.isFacebookButton ? "bg-facebook hover:bg-facebook-hovered " : "bg-var-1 hover:bg-var-1-hovered ") + (props.isDefaultButton ? " mt-0" : null)}>
+        {props.buttonText}
+        </button>
     )
 }
 
