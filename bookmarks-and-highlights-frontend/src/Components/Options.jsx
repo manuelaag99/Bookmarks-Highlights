@@ -13,7 +13,7 @@ const Options = props => {
                 <div className="w-full h-8 text-right">
                     <p className="inline-block">{props.rightText}</p>
                     <input className="inline-block bg-var-3 outline-none w-1/4 pl-2 pr-0" list="query" name="" id="" autoComplete="off"/>
-                </div>            
+                </div>
             </div>
         </div>
     )

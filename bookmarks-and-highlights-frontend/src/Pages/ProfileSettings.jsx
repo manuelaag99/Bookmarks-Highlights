@@ -1,15 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import AddUpdateDeleteBtn from "../Components/AddUpdateDeleteBtn";
 import BackBtnForAddOrUpdate from "../Components/BackBtnForAddOrUpdate";
 import FormForAddOrUpdate from "../Components/FormForAddOrUpdate";
 
 const ProfileSettings = props => {
+    const location = useLocation();
+    const { userid } = location.state;
+
     return (
         <div className="flex flex-wrap items-center justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
             <div className="fixed top-0 w-full h-1/10 z-20">
-                <Link className="w-15 h-full absolute left-0" to="/myprofile">
+                <Link className="w-15 h-full absolute left-0" to={"/" + userid + "/myprofile"}>
                     <BackBtnForAddOrUpdate/>
                 </Link>
             </div>

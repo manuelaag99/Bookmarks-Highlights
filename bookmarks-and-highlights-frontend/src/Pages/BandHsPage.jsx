@@ -10,11 +10,10 @@ import ProfileTop from "../Components/ProfileTop";
 const BandHsPage = props => {
     const location = useLocation();
     const { userid, bookid, title, entries } = location.state
-    console.log(entries);
     return (
         <div className="flex flex-wrap justify-center mx-auto md:w-full w-8/10">
-            <div className="fixed w-full h-1/10 z-20">
-                <Link className="w-1/12 h-full absolute left-0 top-0" to={"/" + userid + "/myprofile"}>
+            <div className="md:absolute fixed w-full h-1/10 z-20">
+                <Link className="md:w-1/12 w-1/10 h-full absolute left-0 top-0" to={"/" + userid + "/myprofile"}>
                     <BackBtnForAddOrUpdate/>
                 </Link>
             </div>

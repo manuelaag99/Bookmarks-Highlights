@@ -66,7 +66,7 @@ const usersData = [
         shortBio: "I love reading and books about impossible romance",
         listOfEntries: [
           {
-            title: "The History of Latin America",
+            title: "The History of Latin America (Jones, 2017)",
             bookId: "0o23e3t2dgdd677",
             collection: [
               {
@@ -99,7 +99,7 @@ const usersData = [
             ]
           },
           {
-            title: "The History of Europe",
+            title: "The History of Europe (Lars, 2014)",
             bookId: "931871h2e813he",
             collection: [
               {
@@ -110,6 +110,39 @@ const usersData = [
                 ],
                 date: "2021/10/10",
                 pageNumber: "100"
+              }
+            ]
+          },
+          {
+            title: "Origins of Antisemitism (Johnson, 2009)",
+            bookId: "0o23e3t2dgdd677",
+            collection: [
+              {
+                collectionItemId: "6452",
+                photoUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg",
+                tags: [
+                  "history", "germany", "europe", "religion"
+                ],
+                date: "2022/10/05",
+                pageNumber: "120"
+              },
+              {
+                collectionItemId: "0232",
+                photoUrl: "https://media.istockphoto.com/id/470986879/photo/book-page-love.jpg?s=612x612&w=0&k=20&c=i1500WHaaoSu250PoQI9jJnf_xtMy_g7Q_qT7nHfbns=",
+                tags: [
+                  "history", "racism", "nazis"
+                ],
+                date: "2022/09/30",
+                pageNumber: "47"
+              },
+              {
+                collectionItemId: "8594",
+                photoUrl: "https://preview.redd.it/5p1njt4sjdx11.jpg?auto=webp&s=e915268a22edc7d8fda95ca143d8543f0cbe498c",
+                tags: [
+                  "history", "violence", "europe", "discrimination"
+                ],
+                date: "2022/09/20",
+                pageNumber: "12"
               }
             ]
           }

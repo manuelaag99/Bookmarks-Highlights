@@ -7,6 +7,7 @@ import ProfileSettings from "../Pages/ProfileSettings";
 import SettingsCommand from "./SettingsCommand";
 
 const Profiletop = props => {
+
     return (
         <div className={"profile-top pt-14 flex justify-center md:w-10/12 w-full " + (props.isProfilePage ? "md:h-52 h-72" : "h-44")}>
             <div className="relative rounded-tag shadow-card bg-var-2 w-full flex md:flex-row flex-col md:justify-start justify-center md:p-6 md:pl-7 md:h-36">
@@ -14,7 +15,7 @@ const Profiletop = props => {
                 <CardTopInfo isProfilePage={props.isProfilePage} boldText={props.name} regularText={props.bio} />
                 {props.isProfilePage ? 
                 <div>
-                    <Link to="/:userid/myprofile/settings" element={<ProfileSettings />}>
+                    <Link to={"/" + props.userid + "/myprofile/settings"} element={<ProfileSettings />} state={props.stateToSend}>
                         <SettingsCommand isProfilePage={true}/>
                     </Link>
                 </div> : 

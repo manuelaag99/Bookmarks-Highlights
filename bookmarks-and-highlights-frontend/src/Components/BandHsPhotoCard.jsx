@@ -5,8 +5,6 @@ import PhotoWindow from "./Portals/PhotoWindow";
 import SettingsCommand from "./SettingsCommand";
 
 const BandHsPhotoCard = props => {
-    console.log(props)
-
     return (
         <div className="rounded-tag shadow-card xl:w-9/10 md:w-88 w-full h-96 bg-var-2 p-4 box-border flex flex-col flex-wrap hover:h-102 duration-500 justify-center mb-14 sm:mx-5 xl:mx-auto">
             <div className="flex flex-row flex-wrap h-1/10 w-full justify-between font-bold">
@@ -27,7 +25,7 @@ const BandHsPhotoCard = props => {
                         <p>{tag}</p>
                     </div>
                 })}
-                <Link to={"/" + props.userid + "/" + props.bookid + "/update/" + props.itemid} state={{ userid: props.userid, bookid: props.bookid, title: props.title, entries: props.entries, itemid: props.itemid}}>
+                <Link to={"/" + props.userid + "/bandhs/idofbook/" + props.bookid + "/update/itemid/" + props.itemid} state={{ userid: props.userid, bookid: props.bookid, title: props.title, entries: props.entries, itemid: props.itemid}}>
                     <SettingsCommand isProfilePage={false} isBandHsPhotoCard={true} />
                 </Link>
             </div>
