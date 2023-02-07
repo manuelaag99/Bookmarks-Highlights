@@ -6,10 +6,15 @@ const PhotoWindow = props => {
     const [windowClose, setWindowClose] = React.useState(false)
 
     const closePhotoWindow = () => {
-        setWindowClose((prevBoolean) => {
-            return !prevBoolean
+        setWindowClose(() => {
+            return true;
         })
-        console.log(windowClose)
+    }
+    
+    const openPhotoWindow = () => {
+        setWindowClose(() => {
+            return false;
+        })
     }
 
     const photoWindow = (

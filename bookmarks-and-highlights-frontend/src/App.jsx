@@ -22,7 +22,7 @@ function App() {
           <Route path="/:userid/myprofile" element={<ProfilePage />}/>
           <Route path="/:userid/myprofile/settings" element={<ProfileSettings />}/>
           <Route path="/:userid/bandhs/:bookid" element={<BandHsPage />}/>
-          <Route path="/:userid/update" element={<UpdateBandH />}/>
+          <Route path="/:userid/:bookid/update/:itemid" element={<UpdateBandH />}/>
           <Route path="/:userid/add" element={<AddBandH />}/>
         </Routes>
       </Router>

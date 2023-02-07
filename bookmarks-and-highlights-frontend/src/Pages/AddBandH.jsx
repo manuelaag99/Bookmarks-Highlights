@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import FormForAddOrUpdate from "../Components/FormForAddOrUpdate";
 import PhotoForAddOrUpdate from "../Components/PhotoForAddOrUpdate";
@@ -10,12 +10,12 @@ const TAGLIST = ["history", "germany", "world war two"]
 // this one is very similar to /UpdateBandH so I might simplify this code or put them together once I've worked out the API 
 const AddBandH = props => {
     const location = useLocation();
-    const { userid } = location.state
+    const { user } = location.state
 
     return (
 
         <div className="flex flex-wrap items-center justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
-            <TopForAddOrUpdate isUpdating={false} isAddButton={true} route={"/" + userid + "/myprofile"}/>
+            <TopForAddOrUpdate isUpdating={false} isAddButton={true} route={"/" + user.id + "/myprofile"}/>
             <div className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row">
                 <PhotoForAddOrUpdate photo="" />
 

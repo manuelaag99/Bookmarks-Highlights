@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom"
+import { Link, useParams, useLocation } from "react-router-dom"
 
 import BackBtnForAddOrUpdate from "../Components/BackBtnForAddOrUpdate"
 import CardsSection from "../Components/CardsSection";
@@ -7,13 +7,10 @@ import Options from "../Components/Options";
 import PhotoWindow from "../Components/Portals/PhotoWindow";
 import ProfileTop from "../Components/ProfileTop";
 
-const CARDTITLE = "Title of the book/article"
-const NUMBOFPHOTOS = "10"
-
 const BandHsPage = props => {
     const location = useLocation();
-    const { userid, bookid, title, listofphotos } = location.state    
-
+    const { userid, bookid, title, entries } = location.state
+    console.log(entries);
     return (
         <div className="flex flex-wrap justify-center mx-auto md:w-full w-8/10">
             <div className="fixed w-full h-1/10 z-20">
@@ -21,16 +18,12 @@ const BandHsPage = props => {
                     <BackBtnForAddOrUpdate/>
                 </Link>
             </div>
-            <ProfileTop 
-                isProfilePage={false} 
-                needsPhoto={false} 
-                name={title} 
-                bio={(listofphotos.length > 1) ? listofphotos.length + " photos in this collection" : 
-                (listofphotos.length === 1) ? "1 photo in this collection" :
+            <ProfileTop isProfilePage={false} needsPhoto={false} name={title} 
+                bio={(entries.length > 1) ? entries.length + " photos in this collection" : 
+                (entries.length === 1) ? "1 photo in this collection" :
                 "There are no photos in this collection yet"} />
             <Options isProfilePage={false} margins={true} rightText="order by: " />
-            <CardsSection 
-                isProfilePage={false} />
+            <CardsSection isProfilePage={false} userid={userid} bookid={bookid} title={title} entries={entries} />
             <PhotoWindow />
         </div>
     )

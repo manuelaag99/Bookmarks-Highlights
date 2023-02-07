@@ -14,7 +14,6 @@ import usersData from "../DUMMYDATA";
 const allUsersData = usersData
 
 const ProfilePage = props => {
-
     const { userid } = useParams();
     const selectedUser = allUsersData.find(user => {
         return user.id === userid
@@ -26,7 +25,7 @@ const ProfilePage = props => {
             <EmptyLine />
             <Breaker breakerText="MY BOOKMARKS & HIGHLIGHTS" />
             <Options isProfilePage={true} rightText="group by: " />
-            <CardsSection cardsInfo={selectedUser.listOfEntries} isProfilePage={true} userid={selectedUser.id} />
+            <CardsSection userInfo={selectedUser} cardsInfo={selectedUser.listOfEntries} isProfilePage={true} userid={selectedUser.id} />
             <Link to={"/" + selectedUser.id + "/add"} state={{ userid: selectedUser.id }}>
                 <AddCommand userId={selectedUser.id} />
             </Link>

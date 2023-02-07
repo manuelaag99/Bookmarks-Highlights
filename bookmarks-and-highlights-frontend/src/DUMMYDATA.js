@@ -12,6 +12,7 @@ const usersData = [
             bookId: "0tk09gjr90gj",
             collection: [
               {
+                collectionItemId: "5001",
                 photoUrl: "http://static.everypixel.com/ep-pixabay/1694/0943/3745/51620/16940943374551620074-book.jpg",
                 tags: [
                   "history", "latin america", "colonization"
@@ -20,6 +21,7 @@ const usersData = [
                 pageNumber: "30"
               },
               {
+                collectionItemId: "5602",
                 photoUrl: "https://media.istockphoto.com/id/470986879/photo/book-page-love.jpg?s=612x612&w=0&k=20&c=i1500WHaaoSu250PoQI9jJnf_xtMy_g7Q_qT7nHfbns=",
                 tags: [
                   "history", "latin america", "colonization", "slavery"
@@ -28,6 +30,7 @@ const usersData = [
                 pageNumber: "35"
               },
               {
+                collectionItemId: "8904",
                 photoUrl: "https://preview.redd.it/5p1njt4sjdx11.jpg?auto=webp&s=e915268a22edc7d8fda95ca143d8543f0cbe498c",
                 tags: [
                   "history", "latin america", "colonization", "labor", "population", "family"
@@ -42,6 +45,7 @@ const usersData = [
             bookId: "ao78hf8w74efj",
             collection: [
               {
+                collectionItemId: "1230",
                 photoUrl: "https://preview.redd.it/d9766td2pnzy.jpg?auto=webp&s=4c68eb76c689f8b1db0c7a8d816ae3eb22959822",
                 tags: [
                   "history", "europe", "liberalism", "colonization"
@@ -66,6 +70,7 @@ const usersData = [
             bookId: "0o23e3t2dgdd677",
             collection: [
               {
+                collectionItemId: "6500",
                 photoUrl: "http://static.everypixel.com/ep-pixabay/1694/0943/3745/51620/16940943374551620074-book.jpg",
                 tags: [
                   "history", "latin america", "colonization"
@@ -74,6 +79,7 @@ const usersData = [
                 pageNumber: "30"
               },
               {
+                collectionItemId: "6784",
                 photoUrl: "https://media.istockphoto.com/id/470986879/photo/book-page-love.jpg?s=612x612&w=0&k=20&c=i1500WHaaoSu250PoQI9jJnf_xtMy_g7Q_qT7nHfbns=",
                 tags: [
                   "history", "latin america", "colonization", "slavery"
@@ -82,6 +88,7 @@ const usersData = [
                 pageNumber: "35"
               },
               {
+                collectionItemId: "0432",
                 photoUrl: "https://preview.redd.it/5p1njt4sjdx11.jpg?auto=webp&s=e915268a22edc7d8fda95ca143d8543f0cbe498c",
                 tags: [
                   "history", "latin america", "colonization", "labor", "population", "family"
@@ -96,6 +103,7 @@ const usersData = [
             bookId: "931871h2e813he",
             collection: [
               {
+                collectionItemId: "4310",
                 photoUrl: "https://preview.redd.it/d9766td2pnzy.jpg?auto=webp&s=4c68eb76c689f8b1db0c7a8d816ae3eb22959822",
                 tags: [
                   "history", "europe", "liberalism", "colonization"

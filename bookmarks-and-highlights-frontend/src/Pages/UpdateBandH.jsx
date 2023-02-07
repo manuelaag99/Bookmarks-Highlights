@@ -1,13 +1,18 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 import FormForAddOrUpdate from "../Components/FormForAddOrUpdate";
 import PhotoForAddOrUpdate from "../Components/PhotoForAddOrUpdate";
 import TopForAddOrUpdate from "../Components/TopForAddOrUpdate";
 
 const UpdateBandH = props => {
+    const location = useLocation();
+    const { userid, bookid, title, entries, itemid } = location.state;
+    console.log(entries)
+
     return (
         <div className="flex flex-wrap items-center justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
-            <TopForAddOrUpdate isUpdating={true} isAddButton={false} route="/:userid/bandhs/:bookid"/>
+            <TopForAddOrUpdate isUpdating={true} isAddButton={false} route={"/" + userid + "/bandhs/" + bookid} stateToSend={{ userid: userid, bookid: bookid, title: title, entries: entries }}/>
             <div className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row">
                 <PhotoForAddOrUpdate photo="" />
 

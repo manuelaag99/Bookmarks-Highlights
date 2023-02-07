@@ -12,11 +12,11 @@ const Card = props => {
     })
 
     return (
-        <div className="card rounded-tag xl:w-3/10 md:w-88 w-full md:h-64 h-72 bg-var-2 pt-2 pb-5 xl:mx-0 xl:mr-[5%] sm:mx-[1%] box-border flex flex-col flex-wrap hover:h-72 duration-500 justify-center mb-14">
+        <div className="card rounded-tag xl:min-w-9/10 md:w-88 w-full md:h-64 h-72 bg-var-2 pt-2 pb-5 xl:mx-auto sm:mx-[1%] box-border flex flex-col flex-wrap hover:h-72 duration-500 justify-center mb-14">
             <CardTitle titleOfCard={props.title} />
             <CardText textOfCard={props.numberOfPhotos} />
             <ImageSlider photolist={DUMPPHOTOSLESSTHANFOUR} />
-            <Link className="w-9/10 mx-auto" to={"/" + props.specificuserid + "/bandhs/" + props.bookid} state={{ userid: props.specificuserid, bookid: props.bookid, title: props.title, listofphotos: props.photos }} >
+            <Link className="w-9/10 mx-auto" to={"/" + props.specificUserId + "/bandhs/" + props.specificBookId} state={{ userid:props.specificUserId, bookid: props.specificBookId, title: props.title, entries: props.photos}} >
                 <Button buttonText="Check my B&Hs" isDefaultButton={true} />
             </Link>
         </div>
