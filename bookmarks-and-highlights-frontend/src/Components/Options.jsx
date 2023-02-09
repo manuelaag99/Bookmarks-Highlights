@@ -9,7 +9,7 @@ const Options = props => {
         setSearchText(() => {
             return searchInput
         })
-        props.searchButton(searchText)
+        // props.searchButton(searchText)
     }
 
     return (

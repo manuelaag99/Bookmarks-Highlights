@@ -10,7 +10,7 @@ const UpdateBandH = props => {
 
     return (
         <div className="flex flex-wrap items-center justify-center w-full min-h-screen mx-auto bg-var-2 shadow-card relative">
-            <TopForAddOrUpdate isUpdating={true} isAddButton={false} route={"/" + userid + "/bandhs/idofbook/" + bookid} stateToSend={{ userid: userid, bookid: bookid, title: title, entries: entries }}/>
+            <TopForAddOrUpdate isUpdating={true} isAddButton={false} route={"/" + userid + "/bandhs/labelid/" + bookid} stateToSend={{ userid: userid, bookid: bookid, title: title, entries: entries }}/>
             <BodyForAddOrUpdate />
         </div>
     )

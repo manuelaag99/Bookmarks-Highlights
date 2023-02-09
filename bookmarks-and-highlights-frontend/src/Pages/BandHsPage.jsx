@@ -22,7 +22,7 @@ const BandHsPage = props => {
                 (entries.length === 1) ? "1 photo in this collection" :
                 "There are no photos in this collection yet"} />
             <Options isProfilePage={false} margins={true} rightText="order by: " />
-            <CardsSection isProfilePage={false} userid={userid} bookid={bookid} title={title} entries={entries} />
+            <CardsSection isNotBandHsPage={false} isBandHsPage={true} userid={userid} bookid={bookid} title={title} entries={entries} />
             <PhotoWindow />
         </div>
     )

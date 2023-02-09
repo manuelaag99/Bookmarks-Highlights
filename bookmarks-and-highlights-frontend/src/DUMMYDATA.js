@@ -9,7 +9,7 @@ const usersData = [
         listOfEntries: [
           {
             title: "The History of Latin America",
-            bookId: "0tk09gjr90gj",
+            labelId: "0tk09gjr90gj",
             collection: [
               {
                 collectionItemId: "5001",
@@ -42,7 +42,7 @@ const usersData = [
           },
           {
             title: "The History of Europe",
-            bookId: "ao78hf8w74efj",
+            labelId: "ao78hf8w74efj",
             collection: [
               {
                 collectionItemId: "1230",
@@ -67,7 +67,7 @@ const usersData = [
         listOfEntries: [
           {
             title: "The History of Latin America",
-            bookId: "0o23e3t2dgdd677",
+            labelId: "0o23e3t2dgdd677",
             collection: [
               {
                 collectionItemId: "6500",
@@ -100,7 +100,7 @@ const usersData = [
           },
           {
             title: "The History of Europe",
-            bookId: "931871h2e813he",
+            labelId: "931871h2e813he",
             collection: [
               {
                 collectionItemId: "4310",
@@ -115,7 +115,7 @@ const usersData = [
           },
           {
             title: "Origins of antisemitism",
-            bookId: "839hr83eh79djj",
+            labelId: "839hr83eh79djj",
             collection: [
               {
                 collectionItemId: "9127",

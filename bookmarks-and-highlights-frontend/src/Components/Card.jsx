@@ -16,7 +16,7 @@ const Card = props => {
             <CardTitle titleOfCard={props.title} />
             <CardText textOfCard={props.numberOfPhotos} />
             <ImageSlider photolist={DUMPPHOTOSLESSTHANFOUR} />
-            <Link className="w-9/10 mx-auto" to={"/" + props.specificUserId + "/bandhs/idofbook/" + props.specificBookId} state={{ userid:props.specificUserId, bookid: props.specificBookId, title: props.title, entries: props.photos}} >
+            <Link className="w-9/10 mx-auto" to={"/" + props.specificUserId + "/bandhs/labelid/" + props.specificBookId} state={{ userid:props.specificUserId, bookid: props.specificBookId, title: props.title, entries: props.photos}} >
                 <Button buttonText="Check my B&Hs" isDefaultButton={true} />
             </Link>
         </div>
