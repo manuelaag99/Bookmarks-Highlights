@@ -25,7 +25,7 @@ const BandHsPhotoCard = props => {
                         <p>{tag}</p>
                     </div>
                 })}
-                <Link to={"/" + props.userid + "/bandhs/idofbook/" + props.bookid + "/update/itemid/" + props.itemid} state={{ userid: props.userid, bookid: props.bookid, title: props.title, entries: props.entries, itemid: props.itemid}}>
+                <Link to={"/" + props.userid + "/bandhs/labelid/" + props.bookid + "/update/itemid/" + props.itemid} state={{ userid: props.userid, bookid: props.bookid, title: props.title, entries: props.entries, itemid: props.itemid}}>
                     <SettingsCommand isProfilePage={false} isBandHsPhotoCard={true} />
                 </Link>
             </div>

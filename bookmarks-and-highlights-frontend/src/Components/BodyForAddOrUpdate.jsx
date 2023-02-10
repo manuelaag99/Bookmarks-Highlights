@@ -5,7 +5,7 @@ import PhotoForAddOrUpdate from "./PhotoForAddOrUpdate";
 
 const BodyForAddOrUpdate = props => {
     return (
-            <div className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-10 flex flex-wrap flex-row absolute top-16">
+            <div className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row">
                 <PhotoForAddOrUpdate photo="" />
 
                 <div className="md:w-2/3 w-3/5 md:h-7/10 h-3/10 pl-6 block md:hidden">
@@ -17,7 +17,7 @@ const BodyForAddOrUpdate = props => {
 
                 <div className="h-7/10 w-full md:w-2/3 pl-3">
                     
-                    <div className="md:w-2/3 w-3/5 md:h-2/10 hidden md:block mb-10">
+                    <div className="md:w-2/3 w-3/5 md:h-2/10 hidden md:block mb-3">
                         <FormForAddOrUpdate pText="Title of the book/article:" placeholderText="i.e. Title (author, year)" />
                     </div>
                     <div className="flex flex-wrap flex-row justify-evenly">                    
@@ -31,6 +31,10 @@ const BodyForAddOrUpdate = props => {
                     <div>
                         <FormForAddOrUpdate pText="tags:" placeholderText="e.g. geography..." />
                     </div>
+
+                    <div className="mt-5">
+                    </div>
+
                 </div>
             </div>
     )

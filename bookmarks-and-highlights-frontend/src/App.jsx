@@ -21,8 +21,8 @@ function App() {
           <Route path="/signup" element={<SignUpPage />}/>
           <Route path="/:userid/myprofile" element={<ProfilePage />}/>
           <Route path="/:userid/myprofile/settings" element={<ProfileSettings />}/>
-          <Route path="/:userid/bandhs/idofbook/:bookid" element={<BandHsPage />}/>
-          <Route path="/:userid/bandhs/idofbook/:bookid/update/itemid/:itemid" element={<UpdateBandH />}/>
+          <Route path="/:userid/bandhs/labelid/:bookid" element={<BandHsPage />}/>
+          <Route path="/:userid/bandhs/labelid/:bookid/update/itemid/:itemid" element={<UpdateBandH />}/>
           <Route path="/:userid/add" element={<AddBandH />}/>
         </Routes>
       </Router>

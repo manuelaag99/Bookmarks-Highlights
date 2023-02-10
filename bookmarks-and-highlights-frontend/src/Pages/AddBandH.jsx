@@ -28,7 +28,7 @@ const AddBandH = props => {
 
                 <div className="h-7/10 w-full md:w-2/3 pl-3">
                     
-                    <div className="md:w-2/3 w-3/5 md:h-2/10 hidden md:block">
+                    <div className="md:w-2/3 w-3/5 md:h-2/10 hidden md:block mb-3">
                         <FormForAddOrUpdate pText="Title of the book/article:" placeholderText="i.e. Title (author, year)" />
                     </div>
                     <div className="flex flex-wrap flex-row justify-evenly">                    
