@@ -5,6 +5,21 @@ import PhotoWindow from "./Portals/PhotoWindow";
 import SettingsCommand from "./SettingsCommand";
 
 const BandHsPhotoCard = props => {
+
+    const [ photoWindow, setPhotoWindow ] = React.useState(false)
+
+    const openPhotoWindow = () => {
+        setPhotoWindow(() => {
+            return true
+        })
+    }
+
+    const closePhotoWindow = () => {
+        setPhotoWindow(() => {
+            return false
+        })
+    }
+
     return (
         <div className="rounded-tag shadow-card xl:w-9/10 md:w-88 w-full h-96 bg-var-2 p-4 box-border flex flex-col flex-wrap hover:h-102 duration-500 justify-center mb-14 sm:mx-5 xl:mx-auto">
             <div className="flex flex-row flex-wrap h-1/10 w-full justify-between font-bold">
@@ -12,11 +27,9 @@ const BandHsPhotoCard = props => {
                 <div>{props.date}</div>
             </div>
             <div className="h-7/10 w-full bg-var-7">
-                <img onClick={()=>{
-                    console.log(props)
-                    return <PhotoWindow windowOpen={true}/>
-                }} 
+                <img onClick={() => setPhotoWindow(() => true)}
                 className="h-full justify-center object-contain cursor-pointer" src={props.photosrc} alt="" />
+                <PhotoWindow open={photoWindow} onClose={() => setPhotoWindow(() => false)} />
             </div>
             <div className="h-2/10 w-full pt-2.5 relative">
                 <p className="inline pr-2">tags: </p>
