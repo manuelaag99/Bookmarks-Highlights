@@ -8,31 +8,29 @@ const reducer = (state, action) => {
                 value: action.val,
                 isValid: true
             }
-            break;
-    
+        case "blur":
+            return {
+                ...state,
+                value: action.val,
+                isValid: false
+            }
         default:
             return state
-            break;
     }
 }
 
 const FormForAddOrUpdate = props => {
-    const [inputState, dispatch] = React.useReducer(reducer, { value: "", isValid: false })
+    const [inputState, dispatch] = React.useReducer(reducer, { value: "", isValid: true })
 
-    const inputChangeHandler = e => {
-        dispatch({ type: "change", val: e.target.value })
-    }
+    const inputChangeHandler = e => dispatch({ type: "change", val: e.target.value })
 
-    const inputBlurHandler = e => {
-
-    }
-
-    console.log(inputState)
+    const inputBlurHandler = e => dispatch({ type: "blur", val: e.target.value })
 
     return (
-        <div className={"h-16 mt-3 " + props.classnames + (inputState.isValid ? " text-red-btn" : null)}>
-            <label className="text-add-or-update-p font-bold block">{props.labelText}</label>
-            <input onChange={inputChangeHandler} onBlur={inputBlurHandler} className="outline-none mt-1 pl-2 h-8 w-95" type={props.inputType} placeholder={props.placeholderText} />
+        <div className={"h-16 mt-3 " + props.classnames}>
+            <label className={"inline text-add-or-update-p font-bold " + (inputState.isValid ? null : "text-red-btn")}>{props.labelText}</label>
+            <i className={"ml-6 text-red-btn " + (inputState.isValid ? "hidden" : "inline")}>wrong</i>
+            <input onChange={inputChangeHandler} onBlur={inputBlurHandler} className="block outline-none mt-1 pl-2 h-8 w-95" type={props.inputType} placeholder={props.placeholderText} />
         </div>
     )
 }

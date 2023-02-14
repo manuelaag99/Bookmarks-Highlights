@@ -15,7 +15,7 @@ const BandHsPhotoCard = props => {
             <PageAndDateSection page={props.page} date={props.date} />
             <div className="h-7/10 w-full bg-var-7">
                 <img onClick={() => setPhotoWindow(() => true)}
-                className="h-full justify-center object-contain cursor-pointer" src={props.photosrc} alt="" />
+                className="h-full justify-center cursor-pointer" src={props.photosrc} alt="" />
                 <PhotoWindow open={photoWindow} image={props.photosrc} onClose={() => setPhotoWindow(() => false)} />
             </div>
             <div className="h-2/10 w-full pt-2.5 relative">
