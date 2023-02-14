@@ -2,7 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom"
 import ClearIcon from '@mui/icons-material/Clear';
 
-const PhotoWindow = (props, onClose) => {
+const PhotoWindow = (props) => {
     const photoWindow = (
         <div>
             <div onClick={props.onClose} className="bg-var-5 opacity-50 fixed top-0 bottom-0 w-screen h-screen"></div>
