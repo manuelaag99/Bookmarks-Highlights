@@ -4,12 +4,11 @@ import SearchIcon from '@mui/icons-material/Search';
 const Options = props => {
     const [ searchText, setSearchText ] = React.useState("")
 
-    const searchInputHandle = (event) => {
-        const searchInput = event.target.value
+    const searchInputHandle = (e) => {
+        const searchInput = e.target.value
         setSearchText(() => {
             return searchInput
         })
-        // props.searchButton(searchText)
     }
 
     return (
@@ -27,7 +26,7 @@ const Options = props => {
                 <div className="w-full h-8 text-right mb-[-12px]">
                     <form id="profile-sorting-cards" action="/myprofile" method="get" >
                         <label className="inline-block">{props.rightText}</label>
-                        <select onChange={(event) => {{props.groupButton(event.target.value)}}} className="bg-var-3 border-none outline-none md:w-1/4 w-1/2 pl-2 pr-0" form="profile-sorting-cards" name="sort-type" id="sort-type">
+                        <select onChange={(e) => {{props.groupButton(e.target.value)}}} className="bg-var-3 border-none outline-none md:w-1/4 w-1/2 pl-2 pr-0" form="profile-sorting-cards" name="sort-type" id="sort-type">
                             <option value="Title">Book/Article Title</option>
                             <option value="Tags">Tags</option>
                         </select>

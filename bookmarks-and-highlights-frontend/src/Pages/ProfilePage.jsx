@@ -31,8 +31,8 @@ const ProfilePage = props => {
     }
 
     const [ groupingByTags, setGroupingByTags] = React.useState(false)
-    const groupButtonHandle = (groupText) => {
-        const lowerCaseGroupValue = event.target.value.toLowerCase()
+    const groupButtonHandle = e => {
+        const lowerCaseGroupValue = e.target.value.toLowerCase()
         if (lowerCaseGroupValue === "tags") {
             // this calls a function that loops through each entry in each book and adds the title to each of them, and then maps this new array to leave out the upper level, leaving arrays of arrays; finally, these are merged using the flat function, into one large array of arrays
             const flatListOfAllEntries = addTitleAndBookIdToEachEntry(selectedUser.listOfEntries).map(({collection}) => collection).flat(1)
@@ -41,7 +41,7 @@ const ProfilePage = props => {
             const listOfAllTagsNoDuplicates = listOfAllTags.filter((item, index) => listOfAllTags.indexOf(item) === index)
             const listOfTagObjects = []
             listOfAllTagsNoDuplicates.map((tag) => {
-                var tag = {title: tag, labelId: "tagName=" + tag , collection: []}
+                let tag = {title: tag, labelId: "tagName=" + tag , collection: []}
                 listOfTagObjects.push(tag)
             })
             listOfTagObjects.map((tag) => {
