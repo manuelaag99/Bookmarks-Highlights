@@ -10,9 +10,9 @@ const TopForAddOrUpdate = props => {
         <Link className="w-15 md:h-1/3 h-full" to={props.route} state={props.stateToSend}>
             <BackBtnForAddOrUpdate/>
         </Link>
-        <div className="md:h-2/3 h-full flex flex-wrap flex-row justify-around md:w-full w-1/2">
-            {props.isUpdating ? <AddUpdateDeleteBtn isDeleteBtn={true} isAddBtn={props.isAddButton} linkRoute={props.isUpdating ? "/bandhs" : "/myprofile"} buttonText="delete" /> : null}
-            <AddUpdateDeleteBtn isDeleteBtn={false} isAddBtn={props.isAddButton} linkRoute={props.isUpdating ? "/bandhs" : "/myprofile"} buttonText={props.isUpdating ? "update" : "add"} />
+        <div className="md:h-2/3 h-full flex flex-wrap flex-row justify-around md:w-full w-6/10">
+            {props.isUpdating ? <AddUpdateDeleteBtn isAbled={true} isDeleteBtn={true} isAddBtn={props.isAddButton} linkRoute={props.isUpdating ? "/bandhs" : "/myprofile"} buttonText="delete" /> : null}
+            <AddUpdateDeleteBtn isAbled={props.isAddOrUpdateBtnAbled} isDeleteBtn={false} isAddBtn={props.isAddButton} linkRoute={props.isUpdating ? "/bandhs" : "/myprofile"} buttonText={props.isUpdating ? "update" : "add"} />
         </div>
     </div>
     )

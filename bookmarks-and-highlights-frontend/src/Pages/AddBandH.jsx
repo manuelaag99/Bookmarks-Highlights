@@ -9,10 +9,17 @@ const AddBandH = props => {
     const location = useLocation();
     const { userid, userinfo } = location.state
 
+    const [ formValidity, setformValidity ] = React.useState(false)
+
+    const checkFormValidity = (stateOfForm) => {
+        console.log(stateOfForm)
+        setformValidity(() => stateOfForm.isValid)
+    }
+
     return (
         <div className="flex flex-wrap items-center justify-center w-full h-screen h- mx-auto bg-var-2 shadow-card relative">
-            <TopForAddOrUpdate isUpdating={false} isAddButton={true} route={"/" + userid + "/myprofile"}/>
-            <BodyForAddOrUpdate isAdd={true} />
+            <TopForAddOrUpdate isAddOrUpdateBtnAbled={formValidity} isUpdating={false} isAddButton={true} route={"/" + userid + "/myprofile"}/>
+            <BodyForAddOrUpdate isFormValid={checkFormValidity} isAdd={true} />
         </div>
     )
 }

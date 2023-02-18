@@ -8,10 +8,17 @@ const UpdateBandH = props => {
     const location = useLocation();
     const { userid, bookid, title, entries, itemid } = location.state;
 
+    const [ formValidity, setformValidity ] = React.useState(false)
+
+    const checkFormValidity = (stateOfForm) => {
+        console.log(stateOfForm)
+        setformValidity(() => stateOfForm.isValid)
+    }
+
     return (
         <div className="flex flex-wrap items-center justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
-            <TopForAddOrUpdate isUpdating={true} isAddButton={false} route={"/" + userid + "/bandhs/labelid/" + bookid} stateToSend={{ userid: userid, bookid: bookid, title: title, entries: entries }}/>
-            <BodyForAddOrUpdate isAdd={false} userid={userid} bookid={bookid} title={title} entries={entries} itemid={itemid} />
+            <TopForAddOrUpdate isAddOrUpdateBtnAbled={formValidity}  isUpdating={true} isAddButton={false} route={"/" + userid + "/bandhs/labelid/" + bookid} stateToSend={{ userid: userid, bookid: bookid, title: title, entries: entries }}/>
+            <BodyForAddOrUpdate isFormValid={checkFormValidity} isAdd={false} userid={userid} bookid={bookid} title={title} entries={entries} itemid={itemid} />
         </div>
     )
 }
