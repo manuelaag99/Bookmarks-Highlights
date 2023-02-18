@@ -9,6 +9,10 @@ const ProfileSettings = props => {
     const location = useLocation();
     const { userid } = location.state;
 
+    const inputHandler = React.useCallback((field, value, isValid) => {
+        const thing = field + value + isValid
+    }, [])
+
     return (
         <div className="flex flex-wrap items-center justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
             <div className="fixed top-0 w-full h-1/10 z-20">
@@ -17,8 +21,8 @@ const ProfileSettings = props => {
                 </Link>
             </div>
             <div className="h-2/5 w-8/10">
-                <FormForAddOrUpdate pText="Display name:" placeholderText="Your name..." />
-                <FormForAddOrUpdate pText="Short bio:" placeholderText="Write less than 100 words" />
+                <FormForAddOrUpdate onInput={inputHandler} pText="Display name:" placeholderText="Your name..." />
+                <FormForAddOrUpdate onInput={inputHandler} pText="Short bio:" placeholderText="Write less than 100 words" />
 
             </div>
             <div className="h-1/6 flex flex-wrap flex-row justify-around w-full">

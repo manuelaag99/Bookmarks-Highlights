@@ -4,34 +4,35 @@ import FormForAddOrUpdate from "./FormForAddOrUpdate";
 import PhotoForAddOrUpdate from "./PhotoForAddOrUpdate";
 import TagsSection from "./TagsSection";
 
-const addOrUpdateFormReducer = (state, action) => {
-    switch (action.type) {
-        case "change":
-            return {
-                ...state,
-                value: action.val,
-                isValid: nonEmptyText(action.val)
-            }
-        default:
-            return state
-    }
-}
+// const addOrUpdateFormReducer = (state, action) => {
+//     switch (action.type) {
+//         case "change":
+//             return {
+//                 ...state,
+//                 value: action.val,
+//                 isValid: nonEmptyText(action.val)
+//             }
+//         default:
+//             return state
+//     }
+// }
 
 const BodyForAddOrUpdate = props => {
-    React.useEffect(addOrUpdateFormReducer, {
-        inputs: {
-            title: "",
-            date: "",
-            page: "",
-            tags: ""
-        },
-        isFormValid: {
+    // React.useEffect(addOrUpdateFormReducer, {
+    //     inputs: {
+    //         title: "",
+    //         date: "",
+    //         page: "",
+    //         tags: ""
+    //     },
+    //     isFormValid: {
             
-        }
-    })
+    //     }
+    // })
     
-    // this hook makes sure that this function is only re-rendered given the state of the specified dependencies
+    // // this hook makes sure that this function is only re-rendered given the state of the specified dependencies
     const inputHandler = React.useCallback((field, value, isValid) => {
+        const thing = field + value + isValid
     }, [])
 
     return (

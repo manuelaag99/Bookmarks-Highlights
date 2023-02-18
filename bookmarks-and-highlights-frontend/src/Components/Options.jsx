@@ -17,7 +17,7 @@ const Options = props => {
                 <form onSubmit={() => {{props.searchButton(searchText)}}} action="" method="get">
                     <p className="inline-block">search </p>
                     <input className="inline-block bg-var-3 outline-none w-1/2 ml-2 pt-1" onChange={searchInputHandle} value={searchText} type="text" placeholder="Title" autoComplete="off"/>
-                    <button onClick={(e) => {e.preventDefault()
+                    <button onClick={(event) => {event.preventDefault()
                         {props.searchButton(searchText)}
                     }}><SearchIcon /></button>
                 </form>
@@ -26,9 +26,9 @@ const Options = props => {
                 <div className="w-full h-8 text-right mb-[-12px]">
                     <form id="profile-sorting-cards" action="/myprofile" method="get" >
                         <label className="inline-block">{props.rightText}</label>
-                        <select onChange={(e) => {{props.groupButton(e.target.value)}}} className="bg-var-3 border-none outline-none md:w-1/4 w-1/2 pl-2 pr-0" form="profile-sorting-cards" name="sort-type" id="sort-type">
-                            <option value="Title">Book/Article Title</option>
-                            <option value="Tags">Tags</option>
+                        <select onChange={(event) => {{props.groupButton(event.target.value)}}} className="bg-var-3 border-none outline-none md:w-1/4 w-1/2 pl-2 pr-0" form="profile-sorting-cards" name="sort-type" id="sort-type">
+                            <option value="bookTitle">Book/Article Title</option>
+                            <option value="tags">Tags</option>
                         </select>
                     </form>
                 </div>
