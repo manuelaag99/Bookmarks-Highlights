@@ -16,7 +16,7 @@ const Options = props => {
             <div className="h-16 w-2/5 flex items-center">
                 <form onSubmit={() => {{props.searchButton(searchText)}}} action="" method="get">
                     <p className="inline-block">search </p>
-                    <input className="inline-block bg-var-3 outline-none w-1/2 ml-2 pt-1" onChange={searchInputHandle} value={searchText} type="text" placeholder="Title" autoComplete="off"/>
+                    <input className="inline-block bg-var-3 outline-none w-1/2 ml-2 pt-1" onChange={searchInputHandle} value={searchText} type="text" autoComplete="off"/>
                     <button onClick={(event) => {event.preventDefault()
                         {props.searchButton(searchText)}
                     }}><SearchIcon /></button>

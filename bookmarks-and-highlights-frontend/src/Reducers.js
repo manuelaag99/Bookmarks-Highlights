@@ -19,3 +19,30 @@ const addOrUpdateIndividualInputReducer = (state, action) => {
 }
 
 export { addOrUpdateIndividualInputReducer }
+
+const addOrUpdateFormReducer = (state, action) => {
+    switch (action.type) {
+        case "change":
+            let formIsValid = true
+            for (const specificInput in state.inputs) {
+                if (specificInput === action.field) {
+                    formIsValid = formIsValid && action.isValid
+                } else {
+                    // this means that, if the gathered info is not the matching field, we should just take the stored value
+                    formIsValid = formIsValid && state.inputs[specificInput].isValid
+                }
+            }
+            return {
+                ...state,
+                inputs: {
+                    ...state.inputs,
+                    [action.field]: { value: action.value, isValid: action.isValid }
+                },
+                isValid: formIsValid
+            }
+        default:
+            return state
+    }
+}
+
+export { addOrUpdateFormReducer };
