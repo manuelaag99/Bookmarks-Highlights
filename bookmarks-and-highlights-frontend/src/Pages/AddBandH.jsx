@@ -9,11 +9,11 @@ const AddBandH = () => {
     const location = useLocation();
     const { userid, userinfo } = location.state
 
-    const [ formSubmission, setFormSubmission ] = React.useState(false)
-    const addOrUpdate = props => {
-        setFormSubmission(() => "submit")
-        console.log(formSubmission)
-    }
+    // const [ formSubmission, setFormSubmission ] = React.useState(false)
+    // const addOrUpdate = props => {
+    //     setFormSubmission(() => "submit")
+    //     console.log(formSubmission)
+    // }
 
     const [ formValidity, setformValidity ] = React.useState(false)
     const checkFormValidity = (stateOfForm) => {

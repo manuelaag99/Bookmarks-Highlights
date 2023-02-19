@@ -58,7 +58,7 @@ const entries = [
         bookId: "684087503948",
         photoUrl: "https://preview.redd.it/5p1njt4sjdx11.jpg?auto=webp&s=e915268a22edc7d8fda95ca143d8543f0cbe498c",
         tags: [
-          "history", "latin america", "colonization", "labor", "population", "family"
+          "history", "latin america", "colonization", "labor", "population", "family", "violence", "racism", "political economy", "segregation", "colonialism", "mexico", "indigenous people"
         ],
         date: "2022/11/30",
         pageNumber: "65",

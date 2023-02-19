@@ -14,7 +14,7 @@ const BandHsPhotoCard = props => {
     const shortenedTags = props.taglist.filter((photo, index) => index < 4)
 
     return (
-        <div className={"rounded-tag shadow-card xl:w-9/10 md:w-88 w-full h-96 bg-var-2 p-4 box-border flex flex-col flex-wrap md:hover:h-102 duration-500 justify-center mb-14 sm:mx-5 xl:mx-auto " + (photoWindow && "overflow-y-hidden")}>
+        <div className={"rounded-tag shadow-card xl:w-9/10 md:w-88 w-full h-96 bg-var-2 p-4 box-border flex flex-col flex-wrap md:hover:h-102 duration-500 justify-center mb-14 sm:mx-5 xl:mx-auto " + (photoWindow && " ")}>
             <PageAndDateSection page={props.page} date={props.date} />
             <div className="h-7/10 w-full bg-var-7">
                 <img onClick={() => setPhotoWindow(() => true)}
@@ -25,7 +25,7 @@ const BandHsPhotoCard = props => {
                 <p className="inline pr-2">tags: </p>
                 <TagsSection tagsArray={shortenedTags} />
                 {(props.taglist.length > 4) && <p onClick={() => setTagsPopUp(() => true)} className="inline w-fit py-1.5 h-12 px-2.5 rounded-tag cursor-pointer mr-1 mb-2 bg-var-7 hover:bg-var-6 duration-300">...</p>}
-                <PopUpWithTags open={tagsPopUp} />
+                <PopUpWithTags open={tagsPopUp} content={props.taglist} onClose={() => setTagsPopUp(() => false)} />
                 <Link to={"/" + props.userid + "/bandhs/labelid/" + props.bookid + "/update/itemid/" + props.itemid} state={{ userid: props.userid, bookid: props.bookid, title: props.title, entries: props.entries, itemid: props.itemid}}>
                     <SettingsCommand isProfilePage={false} isBandHsPhotoCard={true} />
                 </Link>
