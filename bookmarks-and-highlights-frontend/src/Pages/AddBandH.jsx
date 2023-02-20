@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
+import { addOrUpdateFormReducer } from "../Reducers";
 import BodyForAddOrUpdate from "../Components/BodyForAddOrUpdate";
 import TopForAddOrUpdate from "../Components/TopForAddOrUpdate";
 
@@ -9,26 +10,26 @@ const AddBandH = () => {
     const location = useLocation();
     const { userid, userinfo } = location.state
 
-    // const [ formSubmission, setFormSubmission ] = React.useState(false)
-    // const addOrUpdate = props => {
-    //     setFormSubmission(() => "submit")
-    //     console.log(formSubmission)
-    // }
-
     const [ formValidity, setformValidity ] = React.useState(false)
     const checkFormValidity = (stateOfForm) => {
         setformValidity(() => stateOfForm.isValid)
     }
 
-    const submitHandle = (e) => {
-        e.preventDefault()
-        console.log()
-    }
+    // this function establishes the inputs and their validity status
+    const [stateOfForm, dispatch] = React.useReducer(addOrUpdateFormReducer, {
+        inputs: {
+            title: { value: "", isValid: false },
+            date: { value: "", isValid: false },
+            page: { value: "", isValid: false },
+            tags: { value: "", isValid: false }
+        },
+        isValid: false
+    })
 
     return (
-        <div onSubmit={submitHandle} className="flex flex-wrap items-center justify-center w-full h-screen h- mx-auto bg-var-2 shadow-card relative">
-            <TopForAddOrUpdate userid={userid} addUpdateBtn={addOrUpdate} isAddOrUpdateBtnAbled={formValidity} isUpdating={false} isAddButton={true} route={"/" + userid + "/myprofile"}/>
-            <BodyForAddOrUpdate userid={userid} submitForm={formSubmission} isFormValid={checkFormValidity} isAdd={true} />
+        <div className="flex flex-wrap items-center justify-center w-full h-screen h- mx-auto bg-var-2 shadow-card relative">
+            <TopForAddOrUpdate type="submit" form="add-or-update-form" userid={userid} isAddOrUpdateBtnAbled={formValidity} isUpdating={false} isAddButton={true} route={"/" + userid + "/myprofile"}/>
+            <BodyForAddOrUpdate userid={userid} isFormValid={checkFormValidity} isAdd={true} />
         </div>
     )
 }
