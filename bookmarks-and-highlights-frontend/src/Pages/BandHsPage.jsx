@@ -10,7 +10,6 @@ import ProfileTop from "../Components/ProfileTop";
 const BandHsPage = props => {
     const location = useLocation();
     const { userid, bookid, title, entries } = location.state
-    console.log(bookid)
     return (
         <div className="flex flex-wrap justify-center mx-auto md:w-full w-8/10">
             <div className="md:absolute fixed w-full h-1/10 z-20">
