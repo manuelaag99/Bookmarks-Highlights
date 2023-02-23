@@ -28,12 +28,10 @@ const UpdateBandH = () => {
     })
 
     const selectedItem = entries.find(entry => entry.itemId === itemid)
-    console.log(selectedItem)
 
     if (!selectedItem) {
         return <p>Sorry, no matching item was found!</p>
     }
-
     return (
         <div className="flex flex-wrap items-center justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
             <TopForAddOrUpdate type="submit" form="add-or-update-form" userid={userid} isAddOrUpdateBtnAbled={formValidity} isUpdating={true} isAddButton={false} route={"/" + userid + "/bandhs/labelid/" + bookid} stateToSend={{ userid: userid, bookid: bookid, title: title, entries: entries }}/>

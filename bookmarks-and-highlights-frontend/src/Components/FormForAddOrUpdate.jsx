@@ -3,16 +3,13 @@ import React from "react";
 import { addOrUpdateIndividualInputReducer } from "../Reducers";
 
 const FormForAddOrUpdate = props => {
-    const [inputState, dispatch] = React.useReducer(addOrUpdateIndividualInputReducer, { value: (props.initialValue) || "", isValid: false })
+    const [inputState, dispatch] = React.useReducer(addOrUpdateIndividualInputReducer, { value: (props.initialValue) || "", isValid: props.isAddPage ? false : true})
     const inputChangeHandler = e => dispatch({ type: "change", val: e.target.value })
     const inputBlurHandler = () => dispatch({ type: "blur" })
 
     // this destructuring is made so as not to call the entire inputState or props, since this could lead to infinite looping
     const { value, isValid } = inputState
     const { onInput, field } = props
-
-
-    console.log(inputState.value)
 
     // useEffect here makes sure that the function being called from the parent re-runs every time the values are updated 
     React.useEffect(() => onInput(field, value, isValid), [onInput, field, value, isValid])

@@ -32,11 +32,21 @@ const addOrUpdateFormReducer = (state, action) => {
                     formIsValid = formIsValid && state.inputs[specificInput].isValid
                 }
             }
+            let value
+            for (const specificInput in state.inputs) {
+                if (specificInput === action.field) {
+                    if (specificInput === "tags") {
+                        value = action.value.replaceAll(", ", ",").split(",")
+                    } else {
+                        value = action.value
+                    }
+                }
+            }
             return {
                 ...state,
                 inputs: {
                     ...state.inputs,
-                    [action.field]: { value: action.value, isValid: action.isValid }
+                    [action.field]: { value: value, isValid: action.isValid }
                 },
                 isValid: formIsValid
             }
