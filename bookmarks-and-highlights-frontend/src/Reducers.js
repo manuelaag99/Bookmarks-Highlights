@@ -36,7 +36,10 @@ const addOrUpdateFormReducer = (state, action) => {
             for (const specificInput in state.inputs) {
                 if (specificInput === action.field) {
                     if (specificInput === "tags") {
-                        value = action.value.replaceAll(", ", ",").split(",")
+                        value = action.value.trim().split(",").filter((possibleTag) => {
+                            const trimmedTag = possibleTag.trim()
+                            if (trimmedTag !== "") return trimmedTag
+                        })
                     } else {
                         value = action.value
                     }

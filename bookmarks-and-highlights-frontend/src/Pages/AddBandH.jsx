@@ -13,7 +13,6 @@ const AddBandH = () => {
     const [ formValidity, setformValidity ] = React.useState(false)
     const checkFormValidity = (stateOfForm) => {
         setformValidity(() => stateOfForm.isValid)
-        console.log(stateOfForm)
     }
 
     // this function establishes the inputs and their validity status
