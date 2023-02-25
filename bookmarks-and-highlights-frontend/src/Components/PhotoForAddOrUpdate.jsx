@@ -2,8 +2,8 @@ import React from "react";
 
 const PhotoForAddOrUpdate = props => {
     return (
-        <div className="md:w-1/3 w-2/5 md:h-96 h-48 flex flex-wrap justify-center items-center">
-            <div className="box-border p-2 bg-var-5 h-95 w-95">
+        <div className="md:w-1/3 w-2/5 aspect-square flex flex-wrap justify-center items-start">
+            <div className="box-border p-2 bg-var-5 w-full aspect-square">
                 <img src="" alt="" />
             </div>
         </div>

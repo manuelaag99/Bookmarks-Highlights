@@ -14,7 +14,7 @@ const BandHsPhotoCard = props => {
     const shortenedTags = props.taglist.filter((photo, index) => index < 4)
 
     return (
-        <div className={"rounded-tag shadow-card xl:w-9/10 md:w-88 w-full h-96 bg-var-2 p-4 box-border flex flex-col flex-wrap md:hover:h-102 duration-500 justify-center mb-14 sm:mx-5 xl:mx-auto " + (photoWindow && " ")}>
+        <div className={"rounded-tag shadow-card xl:w-9/10 md:w-88 w-full h-96 bg-var-2 p-4 box-border flex flex-col flex-wrap md:hover:h-102 duration-500 justify-center mb-14 sm:mx-5 xl:mx-auto  " + (photoWindow && " ")}>
             <PageAndDateSection page={props.page} date={props.date} />
             <div className="h-7/10 w-full bg-var-7">
                 <img onClick={() => setPhotoWindow(() => true)}
