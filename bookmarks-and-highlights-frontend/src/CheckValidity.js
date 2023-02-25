@@ -7,3 +7,13 @@ const nonEmptyText = (value) => {
 }
 
 export { nonEmptyText };
+
+const minLengthText = (value) => {
+    if (value.length > 8) {
+        return false
+    } else {
+        return true
+    }
+}
+
+export { minLengthText };
