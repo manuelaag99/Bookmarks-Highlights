@@ -15,8 +15,8 @@ const BandHsPhotoCard = props => {
 
     return (
         <div className={"rounded-tag shadow-card xl:w-9/10 md:w-88 w-full h-96 bg-var-2 p-4 box-border flex flex-col flex-wrap md:hover:h-102 duration-500 justify-center mb-14 sm:mx-5 xl:mx-auto  " + (photoWindow && " ")}>
-            <PageAndDateSection page={props.page} date={props.date} />
-            <div className="h-7/10 w-full bg-var-7">
+            <PageAndDateSection hideBookTitle={props.areTheCardsGroupedByBookTitle} bookTitle={props.bookTitle} page={props.page} date={props.date} />
+            <div className={"w-full bg-var-7 " + (props.areTheCardsGroupedByBookTitle ? "h-7/10" : "h-6/10 mt-4 mb-1")}>
                 <img onClick={() => setPhotoWindow(() => true)}
                 className="h-full mx-auto cursor-pointer" src={props.photosrc} alt="" />
                 <PhotoWindow open={photoWindow} image={props.photosrc} onClose={() => setPhotoWindow(() => false)} />
