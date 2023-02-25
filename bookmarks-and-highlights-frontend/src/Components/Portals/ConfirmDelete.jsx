@@ -8,7 +8,7 @@ const ConfirmDelete = props => {
         <div>
             <div onClick={props.onClose} className="w-full h-full fixed top-0 bottom-0 bg-var-5 opacity-20"></div>
             <div className="flex flex-col bg-var-2 shadow-card md:w-6/10 w-8/10 min-h-[20%] fixed top-[30%] left-[10%] md:left-[20%]">
-                <div className="h-16 w-full bg-var-1">
+                <div className="h-8 w-full bg-var-1">
                     <button onClick={props.onClose} className="w-8 h-8 float-right absolute right-0 text-dsk-card-button items-center">
                         <ClearIcon />
                     </button>

@@ -12,7 +12,7 @@ const OAuthAndGoBack = props => {
             <div className="my-4 w-full">
                 <Button classnames=" bg-facebook hover:bg-facebook-hovered text-var-1 " buttonText={props.facebookOAuthText} isDefaultButton={false} isFacebookButton={true} isGoogleButton={false}/>
             </div>
-            <Link className="w-full" to="/home">
+            <Link className="my-4 w-full" to="/home">
                 <Button classnames=" text-var-1 bg-var-4 hover:bg-var-4-hovered mt-0 " buttonText="< Go back" isDefaultButton={false} isFacebookButton={true} isGoogleButton={false}/>
             </Link>
         </div>
