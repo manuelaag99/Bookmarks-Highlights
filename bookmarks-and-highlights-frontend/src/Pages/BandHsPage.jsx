@@ -11,12 +11,7 @@ const BandHsPage = props => {
     const location = useLocation();
     const { userid, bookid, title, entries } = location.state
 
-    let isTitleTheBookTitle
-    if (title === title.toLowerCase()) {
-        isTitleTheBookTitle = false
-    } else {
-        isTitleTheBookTitle = true
-    }
+  let isTitleTheBookTitle = title === title.toLowerCase();
 
     return (
         <div className="flex flex-wrap justify-center mx-auto md:w-full w-8/10">
