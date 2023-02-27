@@ -4,27 +4,20 @@ import { addOrUpdateFormReducer } from "../Reducers";
 import FormForAddOrUpdate from "./FormForAddOrUpdate";
 import PhotoForAddOrUpdate from "./PhotoForAddOrUpdate";
 import TagsSection from "./TagsSection";
+import { useForm } from "../use-form-hook";
 
 const BodyForAddOrUpdate = props => {
-    // this function establishes the inputs and their validity status
-    const [stateOfForm, dispatch] = React.useReducer(addOrUpdateFormReducer, {
-        inputs: {
+    const [stateOfForm, inputHandler] = useForm({
             title: { value: "", isValid: false},
             date: { value: "", isValid: false },
             page: { value: "", isValid: false },
             tags: { value: "", isValid: false }
-        },
-        isValid: false
-    })
-
-    // this hook makes sure that this function is only re-rendered given the state of the specified dependencies
-    const inputHandler = React.useCallback((field, value, isValid) => {
-        dispatch({type: "change", field: field, value: value, isValid: isValid})
-    }, [dispatch])
+        }, false)
 
     // this function checks, with each change to the form, whether it's valid or not, and sends it to the parent component
     const changeHandle = props => {
         props.isFormValid(stateOfForm)
+        console.log(stateOfForm)
     }
     
     const initialTagsState = props.isAdd ? [] : props.itemValues.tags
