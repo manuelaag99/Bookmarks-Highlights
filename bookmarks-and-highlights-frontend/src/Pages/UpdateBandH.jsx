@@ -35,7 +35,7 @@ const UpdateBandH = () => {
     return (
         <div className="flex flex-wrap items-center justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
             <TopForAddOrUpdate type="submit" form="add-or-update-form" userid={userid} isAddOrUpdateBtnAbled={formValidity} isUpdating={true} isAddButton={false} route={"/" + userid + "/bandhs/labelid/" + bookid} stateToSend={{ userid: userid, bookid: bookid, title: title, entries: entries }}/>
-            <BodyForAddOrUpdate isFormValid={checkFormValidity} isAdd={false} itemValues={selectedItem} userid={userid} bookid={bookid} title={title} entries={entries} itemid={itemid} />
+            <BodyForAddOrUpdate isFormValid={checkFormValidity} initialFormValidity={true} isAdd={false} itemValues={selectedItem} userid={userid} bookid={bookid} title={title} entries={entries} itemid={itemid} />
         </div>
     )
 }
