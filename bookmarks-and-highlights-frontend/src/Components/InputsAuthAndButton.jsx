@@ -6,32 +6,20 @@ import InputForAuth from "./InputForAuth";
 import { useForm } from "../use-form-hook";
 
 const InputsAuthAndButton = props => {
-    const [stateOfAuthInputForm, authInputHandler] = useForm({
-        username: {
-            value: "",
-            isValid: false
-        },
-        password: {
-            value: "",
-            isValid: false
-        }
-    }, false)
+    const [stateOfAuthInputForm, authInputHandler] = useForm(props.initialInputs, false)
 
     const [inputButtonValidity, setInputButtonValidity] = React.useState(false)
     const buttonValidity = React.useRef(false)
     const changeHandler = () => {
-        console.log(stateOfAuthInputForm)
-        buttonValidity.current = stateOfAuthInputForm.isValid
-        // setInputButtonValidity(() => stateOfAuthInputForm.isValid)
+        // console.log(stateOfAuthInputForm)
+        // buttonValidity.current = stateOfAuthInputForm.isValid
+        setInputButtonValidity(() => stateOfAuthInputForm.isValid)
     }
     console.log(buttonValidity.current)
+
     const submitHandler = e => {
         e.preventDefault()
         console.log(stateOfAuthInputForm)
-    }
-
-    const changeHandle = props => {
-        props.isFormValid(stateOfAuthInputForm)
     }
 
     return (
@@ -42,9 +30,9 @@ const InputsAuthAndButton = props => {
                 <InputForAuth inputType="password" field="password" onInput={authInputHandler} placeholderText={props.passwordPlaceholder} />
                 {props.type === "Sign up" && <InputForAuth inputType="password" field="confirmPassword" onInput={authInputHandler} placeholderText={props.confirmPasswordPlaceholder} />}
             </div>
-            {/* <Link className="w-9/10 mt-[-20px] mb-5" to={"/" + "0001" + "/myprofile"}>
-                <Button buttonText={props.buttonInput} classnames=" text-var-1 bg-var-4 hover:bg-var-4-hovered " form="sign-in-or-sign-up-form" isAbled={buttonValidity.current} isSignInOrSignUpButton={true} type="submit"  />
-            </Link> */}
+            <Link className="w-9/10 mt-[-20px] mb-5" to={"/" + "0001" + "/myprofile"}>
+                <Button buttonText={props.buttonInput} classnames=" text-var-1 bg-var-4 hover:bg-var-4-hovered " form="sign-in-or-sign-up-form" isAbled={inputButtonValidity} isSignInOrSignUpButton={true} type="submit"  />
+            </Link>
         </form>
     )
 }

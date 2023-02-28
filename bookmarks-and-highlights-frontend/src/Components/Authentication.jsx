@@ -5,10 +5,6 @@ import InputsAuthAndButton from "./InputsAuthAndButton";
 import OAuthAndGoBack from "./OAuthAndGoBack";
 
 const Authentication = props => {
-    const [ formValidity, setformValidity ] = React.useState(false)
-    const checkFormValidity = (stateOfForm) => {
-        setformValidity(() => stateOfForm.isValid)
-    }
 
     return (
         <div className="md:w-1/2 w:full my-12 h-screen">
