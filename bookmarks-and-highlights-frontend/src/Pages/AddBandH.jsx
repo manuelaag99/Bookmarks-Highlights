@@ -15,17 +15,6 @@ const AddBandH = () => {
         setformValidity(() => stateOfForm.isValid)
     }
 
-    // this function establishes the inputs and their validity status
-    const [stateOfForm, dispatch] = React.useReducer(addOrUpdateFormReducer, {
-        inputs: {
-            title: { value: "", isValid: false },
-            date: { value: "", isValid: false },
-            page: { value: "", isValid: false },
-            tags: { value: "", isValid: false }
-        },
-        isValid: false
-    })
-
     return (
         <div className="flex flex-wrap items-center justify-center w-full h-screen h- mx-auto bg-var-2 shadow-card relative">
             <TopForAddOrUpdate type="submit" form="add-or-update-form" userid={userid} isAddOrUpdateBtnAbled={formValidity} isUpdating={false} isAddButton={true} route={"/" + userid + "/myprofile"}/>

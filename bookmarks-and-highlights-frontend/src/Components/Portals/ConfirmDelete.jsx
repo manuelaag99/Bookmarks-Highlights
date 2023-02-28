@@ -15,8 +15,8 @@ const ConfirmDelete = props => {
                 </div>
                 <div className="md:min-h-[30%] h-4/10 w-8/10 mx-auto mt-5 text-center">Are you sure you want to delete this entry? This action can't be undone.</div>
                 <div className="h-4/10 w-full bg-var-2 p-4 my-3 flex flex-row">
-                    <Button buttonClick={props.onDelete} classnames=" w-1/3 bg-red-btn hover:bg-red-hvr duration-300 text-var-1 " buttonText="delete" ></Button>
-                    <Button buttonClick={props.onClose} classnames=" w-1/3 bg-var-4 hover:bg-var-4-hovered duration-300 text-var-1 " buttonText="cancel" ></Button>
+                    <Button isAbled={true} buttonClick={props.onDelete} classnames=" w-1/3 bg-red-btn hover:bg-red-hvr duration-300 text-var-1 " buttonText="delete" ></Button>
+                    <Button isAbled={true} buttonClick={props.onClose} classnames=" w-1/3 bg-var-4 hover:bg-var-4-hovered duration-300 text-var-1 " buttonText="cancel" ></Button>
                 </div>
             </div>
         </div>

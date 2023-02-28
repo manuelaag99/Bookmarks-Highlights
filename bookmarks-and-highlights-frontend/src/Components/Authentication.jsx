@@ -10,7 +10,7 @@ const Authentication = props => {
             <div className="flex flex-col justify-center items-center">
                 <div className="flex flex-wrap xl:w-1/2 w-7/10 mx-auto justify-center">
                     <Breaker breakerText={props.upperText} isSignInPage={true}/>
-                    <InputsAuthAndButton upperInput={props.usernameInput} lowerInput={props.passwordInput} buttonInput={props.authBtn}/>
+                    <InputsAuthAndButton buttonInput={props.authBtn} usernamePlaceholder={props.usernamePlaceholder} emailPlaceholder={props.emailPlaceholder} passwordPlaceholder={props.passwordPlaceholder} confirmPasswordPlaceholder={props.confirmPasswordPlaceholder} type={props.upperText}/>
                     <Breaker breakerText="or" isSignInPage={true}/>
                     <OAuthAndGoBack googleOAuthText={props.googleBtn} facebookOAuthText={props.facebookBtn}/>
                 </div>

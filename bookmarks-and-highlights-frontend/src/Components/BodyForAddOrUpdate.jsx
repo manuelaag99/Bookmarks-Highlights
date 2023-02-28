@@ -1,6 +1,5 @@
 import React from "react";
 
-import { addOrUpdateFormReducer } from "../Reducers";
 import FormForAddOrUpdate from "./FormForAddOrUpdate";
 import PhotoForAddOrUpdate from "./PhotoForAddOrUpdate";
 import TagsSection from "./TagsSection";

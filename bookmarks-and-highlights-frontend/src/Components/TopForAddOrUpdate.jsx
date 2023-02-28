@@ -26,7 +26,7 @@ const TopForAddOrUpdate = props => {
             <BackBtnForAddOrUpdate/>
         </Link>
         <div className="md:h-6/10 h-full flex flex-wrap flex-row justify-around md:w-full w-6/10">
-            {props.isUpdating && <AddUpdateDeleteBtn  classnames=" bg-red-btn hover:bg-red-hvr " buttonClick={openDeleteWindow} isAbled={true} isDeleteBtn={true} isAddBtn={props.isAddButton} linkRoute={props.isUpdating ? "/" + props.userid + "/bandhs" : "/" + props.userid + "/myprofile"} buttonText="delete" />}
+            {props.isUpdating && <AddUpdateDeleteBtn classnames=" bg-red-btn hover:bg-red-hvr " buttonClick={openDeleteWindow} isAbled={true} isDeleteBtn={true} isAddBtn={props.isAddButton} linkRoute={props.isUpdating ? "/" + props.userid + "/bandhs" : "/" + props.userid + "/myprofile"} buttonText="delete" />}
             <AddUpdateDeleteBtn classnames=" bg-var-4 hover:bg-var-4-hovered " buttonClick={props.addUpdateBtn} type={props.type} form={props.form} isAbled={props.isAddOrUpdateBtnAbled} isDeleteBtn={false} isAddBtn={props.isAddButton} linkRoute={props.isUpdating ?  "/" + props.userid + "/bandhs" : "/" + props.userid + "/myprofile"} buttonText={props.isUpdating ? "update" : "add"} />
             <ConfirmDelete open={showDeleteWindow} onDelete={deleteButtonHandle} onClose={closeDeleteWindow} />
         </div>

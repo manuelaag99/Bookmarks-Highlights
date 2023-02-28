@@ -18,27 +18,30 @@ const InputsAuthAndButton = props => {
     }, false)
 
     const [inputButtonValidity, setInputButtonValidity] = React.useState(false)
+    const buttonValidity = React.useRef(false)
+    const changeHandler = () => {
+        console.log(stateOfAuthInputForm)
+        buttonValidity.current = stateOfAuthInputForm.isValid
+        // setInputButtonValidity(() => stateOfAuthInputForm.isValid)
+    }
 
     const submitHandler = e => {
         e.preventDefault()
         console.log(stateOfAuthInputForm)
     }
 
-    const changeHandler = () => {
-        console.log(stateOfAuthInputForm)
-        setInputButtonValidity(() => stateOfAuthInputForm.isValid)
-    }
-
     return (
-        <div className="flex flex-wrap justify-center items-center rounded-tag bg-var-2 h-60 hover:h-64 duration-300 w-full my-4 shadow-card">
-            <form onSubmit={submitHandler} onChange={changeHandler} className="my-0 h-24 w-full flex flex-wrap justify-center">
-                <InputForAuth field="username" onInput={authInputHandler} placeholderText={props.upperInput} />
-                <InputForAuth field="password" onInput={authInputHandler} placeholderText={props.lowerInput} />
-            </form>
-            <Link className="w-9/10" to="/:userid/myprofile">
-                <Button isAbled={inputButtonValidity} classnames=" text-var-1 bg-var-4 hover:bg-var-4-hovered mt-0 " buttonText={props.buttonInput} isDefaultButton={true} isFacebookButton={false} isGoogleButton={false} />
+        <form className="flex flex-wrap justify-center rounded-tag bg-var-2 w-full shadow-card my-5" id="sign-in-or-sign-up-form" onChange={() => {changeHandler}} onSubmit={submitHandler} >
+            <div className="my-5 w-full flex flex-wrap justify-center">
+                <InputForAuth inputType="text" field="username" onInput={authInputHandler} placeholderText={props.usernamePlaceholder} />
+                {props.type === "Sign up" && <InputForAuth inputType="email" field="email" onInput={authInputHandler} placeholderText={props.emailPlaceholder} />}
+                <InputForAuth inputType="password" field="password" onInput={authInputHandler} placeholderText={props.passwordPlaceholder} />
+                {props.type === "Sign up" && <InputForAuth inputType="password" field="confirmPassword" onInput={authInputHandler} placeholderText={props.confirmPasswordPlaceholder} />}
+            </div>
+            <Link className="w-9/10 mt-[-20px] mb-5" to={"/" + "0001" + "/myprofile"}>
+                <Button buttonText={props.buttonInput} classnames=" text-var-1 bg-var-4 hover:bg-var-4-hovered " form="sign-in-or-sign-up-form" isAbled={buttonValidity.current} isSignInOrSignUpButton={true} type="submit"  />
             </Link>
-        </div>
+        </form>
     )
 }
 

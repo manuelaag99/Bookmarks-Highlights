@@ -9,8 +9,8 @@ const SignInPage = props => {
             <div className="flex flex-wrap md:flex-row flex-col">
                 <Authentication 
                 upperText="Sign in" 
-                usernameInput="Enter your username" 
-                passwordInput="Enter your password" 
+                usernamePlaceholder="Enter your username or e-mail"
+                passwordPlaceholder="Enter your password"
                 authBtn="Sign in to B&H!"
                 googleBtn="Sign in with Google" 
                 facebookBtn="Sign in with Facebook"/>
