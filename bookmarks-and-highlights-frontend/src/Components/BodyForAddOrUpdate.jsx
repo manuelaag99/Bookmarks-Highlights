@@ -12,12 +12,6 @@ const BodyForAddOrUpdate = props => {
             page: { value: "", isValid: false },
             tags: { value: "", isValid: false }
         }, false)
-
-    // this function checks, with each change to the form, whether it's valid or not, and sends it to the parent component
-    const changeHandle = props => {
-        props.isFormValid(stateOfForm)
-        console.log(stateOfForm)
-    }
     
     const initialTagsState = props.isAdd ? [] : props.itemValues.tags
     const [ tagsState, setTagsState ] = React.useState(initialTagsState)
@@ -26,6 +20,8 @@ const BodyForAddOrUpdate = props => {
         if (tagsState !== stateOfForm.inputs.tags.value) {
             setTagsState(() => stateOfForm.inputs.tags.value)
         }
+        props.isFormValid(stateOfForm)
+        console.log(stateOfForm)
     }
 
     const submitHandler = e => {
@@ -34,7 +30,7 @@ const BodyForAddOrUpdate = props => {
     }
     
     return (
-        <form id="add-or-update-form" onChange={() => {changeHandle(props)}} onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row">
+        <form id="add-or-update-form" onKeyUp={() => {keyHandle(props)}} onSubmit={submitHandler} className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row">
             <PhotoForAddOrUpdate photo="" />
             <div className="w-3/5 md:h-7/10 h-3/10 pl-6 block md:hidden">
                 <FormForAddOrUpdate isAddPage={props.isAdd} onInput={inputHandler} field="title" initialValue={props.isAdd ? null : props.itemValues.bookTitle} initialValidity={props.initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
