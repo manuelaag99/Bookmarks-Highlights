@@ -17,7 +17,7 @@ const AddBandH = () => {
 
     return (
         <div className="flex flex-wrap items-center justify-center w-full h-screen h- mx-auto bg-var-2 shadow-card relative">
-            <TopForAddOrUpdate type="submit" form="add-or-update-form" userid={userid} isAddOrUpdateBtnAbled={formValidity} isUpdating={false} isAddButton={true} route={"/" + userid + "/myprofile"}/>
+            <TopForAddOrUpdate type="submit" form="add-or-update-form" userid={userid} isAddOrUpdateBtnAbled={formValidity} classnames=" w-8/10 " isUpdating={false} isAddButton={true} route={"/" + userid + "/myprofile"}/>
             <BodyForAddOrUpdate userid={userid} isFormValid={checkFormValidity} initialFormValidity={false} isAdd={true} />
         </div>
     )

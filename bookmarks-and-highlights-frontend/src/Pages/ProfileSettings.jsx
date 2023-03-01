@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import AddUpdateDeleteBtn from "../Components/AddUpdateDeleteBtn";
 import BackBtnForAddOrUpdate from "../Components/BackBtnForAddOrUpdate";
+import Button from "../Components/Button";
 import FormForAddOrUpdate from "../Components/FormForAddOrUpdate";
 
 const ProfileSettings = props => {
@@ -26,8 +26,10 @@ const ProfileSettings = props => {
 
             </div>
             <div className="h-1/6 flex flex-wrap flex-row justify-around w-full">
-                <AddUpdateDeleteBtn isDeleteBtn={false} isAddBtn={false} buttonText="Log out" linkRoute="/home" />
-                <AddUpdateDeleteBtn isDeleteBtn={true} isAddBtn={false} buttonText="Delete my account" linkRoute="/home" />
+                <Button buttonText="Log out" linkRoute="/home" />
+                <Button buttonText="Delete my account" linkRoute="/home" />
+                {/* <AddUpdateDeleteBtn isDeleteBtn={false} isAddBtn={false} buttonText="Log out" linkRoute="/home" />
+                <AddUpdateDeleteBtn isDeleteBtn={true} isAddBtn={false} buttonText="Delete my account" linkRoute="/home" /> */}
             </div>
         </div>
     )
