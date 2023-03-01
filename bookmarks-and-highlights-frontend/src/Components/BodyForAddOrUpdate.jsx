@@ -17,11 +17,8 @@ const BodyForAddOrUpdate = props => {
     const [ tagsState, setTagsState ] = React.useState(initialTagsState)
 
     const keyHandle = () => {
-        if (tagsState !== stateOfForm.inputs.tags.value) {
-            setTagsState(() => stateOfForm.inputs.tags.value)
-        }
+        if (tagsState !== stateOfForm.inputs.tags.value) setTagsState(() => stateOfForm.inputs.tags.value)
         props.isFormValid(stateOfForm)
-        console.log(stateOfForm)
     }
 
     const submitHandler = e => {

@@ -3,6 +3,7 @@ const users = [
         id: "0001",
         displayName: "Manuel Alanis",
         email: "manuelaag99@gmail.com",
+        username: "manuelaag98",
         password: "dhfj893dj9843nd934",
         profilePhotoUrl: "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg",
         shortBio: "I love reading about history"
@@ -11,6 +12,7 @@ const users = [
         id: "0002",
         displayName: "Max López",
         email: "maxlopez@mail.com",
+        username: "soytanmax",
         password: "8934jr084rj0vk4",
         profilePhotoUrl: "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg",
         shortBio: "I love books about self improvement"
@@ -19,6 +21,7 @@ const users = [
         id: "0003",
         displayName: "Abi Mejía",
         email: "abimejia@mail.com",
+        username: "abimejia",
         password: "89rj0io3hr497rh",
         profilePhotoUrl: "https://images.healthshots.com/healthshots/en/uploads/2022/09/14175516/financially-independent-1600x900.jpg",
         shortBio: "I love books about self improvement"
