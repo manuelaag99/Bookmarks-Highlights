@@ -1,6 +1,6 @@
 import React from "react";
 
-const CardTitle = props => {
+export default function CardTitle (props) {
     const shortenedTitle = props.titleOfCard.substring(0, 50)
 
     return (
@@ -9,5 +9,3 @@ const CardTitle = props => {
         </div>
     )
 }
-
-export default CardTitle;

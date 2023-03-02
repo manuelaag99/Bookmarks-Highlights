@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import Button from "../../Components/Button"
 import ClearIcon from '@mui/icons-material/Clear';
 
-const ConfirmDelete = props => {
+export default function ConfirmDelete (props) {
     const confirmDelete = (
         <div>
             <div onClick={props.onClose} className="w-full h-full fixed top-0 bottom-0 bg-var-5 opacity-20"></div>
@@ -28,5 +28,3 @@ const ConfirmDelete = props => {
         null
     }
 }
-
-export default ConfirmDelete;

@@ -2,7 +2,7 @@ import React from "react";
 
 import { addOrUpdateIndividualInputReducer } from "../Reducers";
 
-const InputForAuth = props => {
+export default function InputForAuth (props) {
     const [inputState, dispatch] = React.useReducer(addOrUpdateIndividualInputReducer, { value: (props.initialValue) || "", isValid: false })
     const inputChangeHandler = e => dispatch({ type: "change", val: e.target.value })
     const inputBlurHandler = () => dispatch({ type: "blur" })
@@ -21,5 +21,3 @@ const InputForAuth = props => {
         </>
         )
 }
-
-export default InputForAuth;

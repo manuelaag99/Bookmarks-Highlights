@@ -1,7 +1,6 @@
 import React from "react";
 
-const ImageSlider = props => {
-
+export default function ImageSlider (props) {
     return (
         <div className="h-16 w-5/6 m-auto md:mb-4 mb-7 flex flex-row items-center justify-start overflow-x-clip">
             {props.photolist.map((photo, index) => {
@@ -12,5 +11,3 @@ const ImageSlider = props => {
         </div>
     )
 }
-
-export default ImageSlider;

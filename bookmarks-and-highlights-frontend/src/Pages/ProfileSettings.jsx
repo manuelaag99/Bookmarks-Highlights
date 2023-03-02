@@ -5,7 +5,7 @@ import BackBtnForAddOrUpdate from "../Components/BackBtnForAddOrUpdate";
 import Button from "../Components/Button";
 import FormForAddOrUpdate from "../Components/FormForAddOrUpdate";
 
-const ProfileSettings = props => {
+export default function ProfileSettings () {
     const location = useLocation();
     const { userid } = location.state;
 
@@ -34,5 +34,3 @@ const ProfileSettings = props => {
         </div>
     )
 }
-
-export default ProfileSettings;

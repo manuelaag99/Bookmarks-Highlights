@@ -5,7 +5,7 @@ import Breaker from "../Components/Breaker";
 import Button from "../Components/Button";
 import LogoForAuth from "../Components/LogoForAuth";
 
-const SignInOrSignUpPage = () => {
+export default function SignInOrSignUpPage () {
     return (
         <div>
             <div className="flex flex-wrap md:flex-row flex-col">
@@ -25,5 +25,3 @@ const SignInOrSignUpPage = () => {
         </div>
     )
 }
-
-export default SignInOrSignUpPage;

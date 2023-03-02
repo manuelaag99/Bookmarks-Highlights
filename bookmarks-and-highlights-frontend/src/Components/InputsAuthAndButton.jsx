@@ -7,7 +7,7 @@ import { useForm } from "../use-form-hook";
 
 import { users, entries } from "../MOCKDATA";
 
-const InputsAuthAndButton = props => {
+export default function InputsAuthAndButton (props) {
     const [stateOfAuthInputForm, authInputHandler] = useForm(props.initialInputs, false)
     
     const [inputButtonValidity, setInputButtonValidity] = React.useState(false)
@@ -37,5 +37,3 @@ const InputsAuthAndButton = props => {
         </form>
     )
 }
-
-export default InputsAuthAndButton;

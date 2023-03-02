@@ -1,6 +1,6 @@
 import React from "react";
 
-const TagsSection = props => {
+export default function TagsSection (props) {
     return (
         <div className="inline">
             {props.tagsArray.map((tag, index) => {
@@ -9,5 +9,3 @@ const TagsSection = props => {
         </div>
     )
 }
-
-export default TagsSection;

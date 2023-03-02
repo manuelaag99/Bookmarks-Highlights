@@ -2,7 +2,7 @@ import React from "react";
 
 import { addOrUpdateIndividualInputReducer } from "../Reducers";
 
-const FormForAddOrUpdate = props => {
+export default function FormForAddOrUpdate (props) {
     const [inputState, dispatch] = React.useReducer(addOrUpdateIndividualInputReducer, { value: (props.initialValue) || "", isValid: (props.initialValidity) })
     const inputChangeHandler = e => dispatch({ type: "change", val: e.target.value })
     const inputBlurHandler = () => dispatch({ type: "blur" })
@@ -22,5 +22,3 @@ const FormForAddOrUpdate = props => {
         </div>
     )
 }
-
-export default FormForAddOrUpdate;

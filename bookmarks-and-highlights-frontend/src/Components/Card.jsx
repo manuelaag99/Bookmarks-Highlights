@@ -6,10 +6,8 @@ import CardText from "./CardText";
 import CardTitle from "./CardTitle";
 import ImageSlider from "./ImageSlider";
 
-const Card = props => {
-    const DUMPPHOTOSLESSTHANFOUR = props.photos.filter((photo, index) => {
-        return index < 4
-    })
+export default function Card (props) {
+    const DUMPPHOTOSLESSTHANFOUR = props.photos.filter((photo, index) => index < 4)
 
     return (
         <div className="card rounded-tag xl:min-w-9/10 md:w-88 w-full md:h-64 h-72 bg-var-2 pt-2 pb-5 xl:mx-auto sm:mx-[1%] box-border flex flex-col flex-wrap hover:h-72 duration-500 justify-center mb-14">
@@ -22,5 +20,3 @@ const Card = props => {
         </div>
     )
 }
-
-export default Card;

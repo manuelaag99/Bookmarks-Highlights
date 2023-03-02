@@ -11,7 +11,7 @@ import { arrangeCardGroups, arrangeCardGroupsWhenLabelIsArray } from "../Arrange
 
 import { users, entries } from "../MOCKDATA";
 
-const ProfilePage = props => {
+export default function ProfilePage () {
     const { userid } = useParams();
     const selectedUser = users.find(user => user.id === userid)
     const userEntries = entries.filter(entry => entry.userId === selectedUser.id)
@@ -64,5 +64,3 @@ const ProfilePage = props => {
         </div>
     )
 }
-
-export default ProfilePage;

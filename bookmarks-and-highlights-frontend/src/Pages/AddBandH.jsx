@@ -6,7 +6,7 @@ import BodyForAddOrUpdate from "../Components/BodyForAddOrUpdate";
 import TopForAddOrUpdate from "../Components/TopForAddOrUpdate";
 
 // this one is very similar to /UpdateBandH so I might simplify this code or put them together once I've worked out the API 
-const AddBandH = () => {
+export default function AddBandH () {
     const location = useLocation();
     const { userid, userinfo } = location.state
 
@@ -22,5 +22,3 @@ const AddBandH = () => {
         </div>
     )
 }
-
-export default AddBandH;

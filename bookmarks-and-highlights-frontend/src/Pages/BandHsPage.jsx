@@ -7,7 +7,7 @@ import Options from "../Components/Options";
 import PhotoWindow from "../Components/Portals/PhotoWindow";
 import ProfileTop from "../Components/ProfileTop";
 
-const BandHsPage = props => {
+export default function BandHsPage () {
     const location = useLocation();
     const { userid, bookid, title, entries } = location.state
 
@@ -35,5 +35,3 @@ const BandHsPage = props => {
         </div>
     )
 }
-
-export default BandHsPage;

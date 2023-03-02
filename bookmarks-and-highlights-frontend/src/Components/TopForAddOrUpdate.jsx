@@ -5,7 +5,7 @@ import BackBtnForAddOrUpdate from "./BackBtnForAddOrUpdate";
 import Button from "./Button";
 import ConfirmDelete from "./Portals/ConfirmDelete";
 
-const TopForAddOrUpdate = props => {
+export default function TopForAddOrUpdate (props) {
     const [ showDeleteWindow, setShowDeleteWindow ] = React.useState(false)
     const closeDeleteWindow = () => {
         setShowDeleteWindow(() => false)
@@ -33,5 +33,3 @@ const TopForAddOrUpdate = props => {
     </div>
     )
 }
-
-export default TopForAddOrUpdate;

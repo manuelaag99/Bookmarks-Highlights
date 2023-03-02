@@ -1,9 +1,7 @@
 import React from "react";
 
-const BreakerLine = props => {
+export default function BreakerLine () {
     return (
         <div className="h-0.5 bg-var-6 md:w-4/12 w-4/12"></div>
     )
 }
-
-export default BreakerLine;

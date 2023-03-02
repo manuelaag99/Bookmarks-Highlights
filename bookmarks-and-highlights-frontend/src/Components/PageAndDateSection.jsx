@@ -1,6 +1,6 @@
 import React from "react";
 
-const PageAndDateSection = props => {
+export default function PageAndDateSection (props) {
     let bookTitle
     if (props.bookTitle.length > 50) {
         bookTitle = props.bookTitle
@@ -15,5 +15,3 @@ const PageAndDateSection = props => {
         </div>
     )
 }
-
-export default PageAndDateSection;

@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import BodyForAddOrUpdate from "../Components/BodyForAddOrUpdate";
 import TopForAddOrUpdate from "../Components/TopForAddOrUpdate";
 
-const UpdateBandH = () => {
+export default function UpdateBandH () {
     const location = useLocation();
     const { userid, bookid, title, entries, itemid } = location.state;
 
@@ -26,5 +26,3 @@ const UpdateBandH = () => {
         </div>
     )
 }
-
-export default UpdateBandH;

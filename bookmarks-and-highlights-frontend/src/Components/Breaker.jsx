@@ -2,7 +2,7 @@ import React from "react";
 
 import BreakerLine from "./BreakerLine";
 
-const Breaker = props => {
+export default function Breaker (props) {
     return (
         <div className={"profile-breaker flex items-end opacity-40 md:w-10/12 mx-auto h-8 " + (props.isSignInPage ? "w-full " : "w-full ") + (props.isSignInOrSignUpPage ? " my-3" : null)}>
             <div className="w-full h-8 flex items-center justify-between">
@@ -15,5 +15,3 @@ const Breaker = props => {
         </div>
     )
 }
-
-export default Breaker;

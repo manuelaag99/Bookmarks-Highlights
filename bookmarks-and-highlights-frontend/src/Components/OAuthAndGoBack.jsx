@@ -3,7 +3,7 @@ import React from "react";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
-const OAuthAndGoBack = props => {
+export default function OAuthAndGoBack (props) {
     return (
         <div className="flex flex-wrap w-full">
             <div className="my-4 w-full">
@@ -18,5 +18,3 @@ const OAuthAndGoBack = props => {
         </div>
     )
 }
-
-export default OAuthAndGoBack;

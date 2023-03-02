@@ -1,11 +1,7 @@
 import React from "react";
 
-const EmptyLine = props => {
+export default function EmptyLine () {
     return (
-        <div className="h-8 w-full">
-
-        </div>
+        <div className="h-8 w-full"></div>
     )
 }
-
-export default EmptyLine;

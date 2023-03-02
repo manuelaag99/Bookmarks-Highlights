@@ -2,7 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import ClearIcon from '@mui/icons-material/Clear';
 
-const PopUpWithTags = props => {
+export default function PopUpWithTags (props) {
     const popUp = (
         <div>
             <div className="w-full h-full fixed top-0 bottom-0 bg-var-5 opacity-20"></div>
@@ -27,5 +27,3 @@ const PopUpWithTags = props => {
         null
     }
 }
-
-export default PopUpWithTags;

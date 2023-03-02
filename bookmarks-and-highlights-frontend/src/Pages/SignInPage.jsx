@@ -3,7 +3,7 @@ import React from "react";
 import Authentication from "../Components/Authentication";
 import LogoForAuth from "../Components/LogoForAuth";
 
-const SignInPage = props => {
+export default function SignInPage () {
     return (
         <div>
             <div className="flex flex-wrap md:flex-row flex-col">
@@ -19,5 +19,3 @@ const SignInPage = props => {
         </div>
     )
 }
-
-export default SignInPage;

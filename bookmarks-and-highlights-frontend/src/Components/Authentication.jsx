@@ -4,7 +4,7 @@ import Breaker from "./Breaker";
 import InputsAuthAndButton from "./InputsAuthAndButton";
 import OAuthAndGoBack from "./OAuthAndGoBack";
 
-const Authentication = props => {
+export default function Authentication (props) {
 
     return (
         <div className="md:w-1/2 w:full my-12 h-screen">
@@ -19,5 +19,3 @@ const Authentication = props => {
         </div>
     )
 }
-
-export default Authentication;

@@ -3,8 +3,7 @@ import React from "react";
 import BandHLogo from "./BandHLogo";
 import Tagline from "./Tagline";
 
-
-const LogoAndTagline = props => {
+export default function LogoAndTagline () {
     return (
         <div className="flex flex-wrap justify-center">
             <BandHLogo />
@@ -12,5 +11,3 @@ const LogoAndTagline = props => {
         </div>
     )
 }
-
-export default LogoAndTagline;

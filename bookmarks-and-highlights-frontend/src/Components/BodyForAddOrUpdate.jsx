@@ -5,7 +5,7 @@ import PhotoForAddOrUpdate from "./PhotoForAddOrUpdate";
 import TagsSection from "./TagsSection";
 import { useForm } from "../use-form-hook";
 
-const BodyForAddOrUpdate = props => {
+export default function BodyForAddOrUpdate (props) {
     const [stateOfForm, inputHandler] = useForm({
             title: { value: "", isValid: false},
             date: { value: "", isValid: false },
@@ -48,5 +48,3 @@ const BodyForAddOrUpdate = props => {
         </form>
     )
 }
-
-export default BodyForAddOrUpdate;

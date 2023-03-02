@@ -1,7 +1,7 @@
 import React from "react";
 import SearchIcon from '@mui/icons-material/Search';
 
-const Options = props => {
+export default function Options (props) {
     const [ searchText, setSearchText ] = React.useState("")
 
     const searchInputHandle = (e) => {
@@ -36,5 +36,3 @@ const Options = props => {
         </div>
     )
 }
-
-export default Options;

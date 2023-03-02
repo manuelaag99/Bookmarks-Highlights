@@ -1,6 +1,6 @@
 import React from "react";
 
-const CardTopInfo = props => {
+export default function CardTopInfo (props) {
     return (
         <div className="flex flex-wrap flex-row md:justify-start justify-center items-center md:ml-7 w-9/10 mx-auto md:my-0 my-5">
             <div className="w-full block min-h-[1rem] max-h-56">
@@ -12,5 +12,3 @@ const CardTopInfo = props => {
         </div>
     )
 }
-
-export default CardTopInfo;

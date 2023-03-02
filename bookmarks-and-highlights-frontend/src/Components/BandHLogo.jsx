@@ -1,6 +1,6 @@
 import React from "react";
 
-const BandHLogo = props => {
+export default function BandHLogo () {
     return (
         <div className="flex justify-center relative items-end h-36 w-96">
             <p className="inline-block text-logo-big-ltr font-bold absolute bottom-0 left-[7.2rem]">B</p>
@@ -9,5 +9,3 @@ const BandHLogo = props => {
         </div>
     )
 }
-
-export default BandHLogo;

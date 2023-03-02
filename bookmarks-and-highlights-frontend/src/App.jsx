@@ -10,8 +10,7 @@ import SignUpPage from "./Pages/SignUpPage";
 import UpdateBandH from "./Pages/UpdateBandH";
 import ProfileSettings from "./Pages/ProfileSettings";
 
-
-function App() {
+export default function App() {
   return (
     <div>
       <Router>
@@ -30,5 +29,3 @@ function App() {
     </div>
   )
 }
-
-export default App

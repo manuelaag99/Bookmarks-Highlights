@@ -7,7 +7,7 @@ import PopUpWithTags from "./Portals/PopUpWithTags";
 import SettingsCommand from "./SettingsCommand";
 import TagsSection from "./TagsSection";
 
-const BandHsPhotoCard = props => {
+export default function BandHsPhotoCard (props) {
     const [ photoWindow, setPhotoWindow ] = React.useState(false)
     const [ tagsPopUp, setTagsPopUp ] = React.useState(false)
 
@@ -33,5 +33,3 @@ const BandHsPhotoCard = props => {
         </div>
     )
 }
-
-export default BandHsPhotoCard;
