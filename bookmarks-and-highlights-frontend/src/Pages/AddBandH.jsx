@@ -1,7 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-import { addOrUpdateFormReducer } from "../Reducers";
 import BodyForAddOrUpdate from "../Components/BodyForAddOrUpdate";
 import TopForAddOrUpdate from "../Components/TopForAddOrUpdate";
 
@@ -11,13 +10,11 @@ export default function AddBandH () {
     const { userid, userinfo } = location.state
 
     const [ formValidity, setformValidity ] = React.useState(false)
-    const checkFormValidity = (stateOfForm) => {
-        setformValidity(() => stateOfForm.isValid)
-    }
+    const checkFormValidity = (stateOfForm) => setformValidity(() => stateOfForm.isValid)
 
     return (
         <div className="flex flex-wrap items-center justify-center w-full h-screen h- mx-auto bg-var-2 shadow-card relative">
-            <TopForAddOrUpdate type="submit" form="add-or-update-form" userid={userid} isAddOrUpdateBtnAbled={formValidity} classnames=" w-8/10 " isUpdating={false} isAddButton={true} route={"/" + userid + "/myprofile"}/>
+            <TopForAddOrUpdate type="submit" form="add-or-update-form" userid={userid} isAddOrUpdateBtnAbled={formValidity} classnames=" w-8/10 " isUpdating={false} route={"/" + userid + "/myprofile"}/>
             <BodyForAddOrUpdate userid={userid} isFormValid={checkFormValidity} initialFormValidity={false} isAdd={true} />
         </div>
     )

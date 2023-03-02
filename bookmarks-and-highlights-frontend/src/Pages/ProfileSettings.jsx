@@ -28,8 +28,6 @@ export default function ProfileSettings () {
             <div className="h-1/6 flex flex-wrap flex-row justify-around w-full">
                 <Button buttonText="Log out" linkRoute="/home" />
                 <Button buttonText="Delete my account" linkRoute="/home" />
-                {/* <AddUpdateDeleteBtn isDeleteBtn={false} isAddBtn={false} buttonText="Log out" linkRoute="/home" />
-                <AddUpdateDeleteBtn isDeleteBtn={true} isAddBtn={false} buttonText="Delete my account" linkRoute="/home" /> */}
             </div>
         </div>
     )

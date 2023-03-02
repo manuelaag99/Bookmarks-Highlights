@@ -1,4 +1,4 @@
-const nonEmptyText = (value) => {
+export function nonEmptyText (value) {
     if (value === "") {
         return false
     } else {
@@ -6,14 +6,18 @@ const nonEmptyText = (value) => {
     }
 }
 
-export { nonEmptyText };
-
-const minLengthText = (value) => {
-    if (value.length > 8) {
+export function minLengthText (value, requiredLength) {
+    if (value.length > requiredLength) {
         return false
     } else {
         return true
     }
 }
 
-export { minLengthText };
+export function areBothTextsTheSame (textOne, textTwo) {
+    if (textOne === textTwo) {
+        return true
+    } else {
+        return false
+    }
+}

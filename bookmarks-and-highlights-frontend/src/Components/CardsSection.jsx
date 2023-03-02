@@ -9,7 +9,7 @@ export default function CardsSection (props) {
             {props.isNotBandHsPage ? (props.cardsInfo.map((bookOrArticleCard, index) => {
                 return <Card key={index} specificUserId={props.userid} specificBookId={bookOrArticleCard.labelId} title={bookOrArticleCard.title} numberOfPhotos={bookOrArticleCard.collection.length} photos={bookOrArticleCard.collection}/>
                 })) : (props.entries.map((note, index) => {
-                    return <BandHsPhotoCard key={index} areTheCardsGroupedByBookTitle={props.isItByBookTitle} userid={props.userid} bookid={props.bookid} title={props.title} entries={props.entries} bookTitle={note.bookTitle} itemid={note.itemId} taglist={note.tags} photosrc={note.photoUrl} page={note.pageNumber} date={note.date}/>
+                    return <BandHsPhotoCard key={index} showBookTitles={props.showBookTitles} userid={props.userid} bookid={props.bookid} title={props.title} entries={props.entries} bookTitle={note.bookTitle} itemid={note.itemId} taglist={note.tags} photosrc={note.photoUrl} page={note.pageNumber} date={note.date}/>
                 }))}
         </div>
     )

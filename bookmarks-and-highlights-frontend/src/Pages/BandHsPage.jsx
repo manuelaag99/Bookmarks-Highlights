@@ -11,12 +11,14 @@ export default function BandHsPage () {
     const location = useLocation();
     const { userid, bookid, title, entries } = location.state
 
-    let isTitleTheBookTitle
+    let areCardsArrangedByBookTitle
     if (title === title.toLowerCase()) {
-        isTitleTheBookTitle = false
+        areCardsArrangedByBookTitle = false
     } else {
-        isTitleTheBookTitle = true
+        areCardsArrangedByBookTitle = true
     }
+
+    console.log(areCardsArrangedByBookTitle)
 
     return (
         <div className="flex flex-wrap justify-center mx-auto md:w-full w-8/10">
@@ -29,8 +31,8 @@ export default function BandHsPage () {
                 bio={(entries.length > 1) ? entries.length + " photos in this collection" : 
                 (entries.length === 1) ? "1 photo in this collection" :
                 "There are no photos in this collection yet"} />
-            <Options isProfilePage={false} margins={true} rightText="order by: " />
-            <CardsSection isItByBookTitle={isTitleTheBookTitle} isNotBandHsPage={false} isBandHsPage={true} userid={userid} bookid={bookid} title={title} entries={entries} />
+            <Options classnames="md:mb-3 mb-1.5 md:mt-12 mt-6" rightText="order by: " />
+            <CardsSection showBookTitles={!areCardsArrangedByBookTitle} isNotBandHsPage={false} isBandHsPage={true} userid={userid} bookid={bookid} title={title} entries={entries} />
             <PhotoWindow />
         </div>
     )
