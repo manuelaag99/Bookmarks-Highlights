@@ -34,6 +34,7 @@ module.exports = {
       "dsk-profile-name": "1.3rem",
       "dsk-profile-bio": "1rem",
       "dsk-breaker": "1.15rem",
+      "mob-breaker": "1rem",
       "dsk-options": "1rem",
       "dsk-card-title": "1.1rem",
       "mob-card-title": "1.3rem",

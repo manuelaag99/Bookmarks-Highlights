@@ -12,7 +12,7 @@ export default function Authentication (props) {
                 <div className="flex flex-wrap xl:w-1/2 w-7/10 mx-auto justify-center">
                     <Breaker breakerText={props.upperText} isSignInPage={true}/>
                     <InputsAuthAndButton buttonInput={props.authBtn} initialInputs={props.initialInputsForForm} usernamePlaceholder={props.usernamePlaceholder} emailPlaceholder={props.emailPlaceholder} passwordPlaceholder={props.passwordPlaceholder} confirmPasswordPlaceholder={props.confirmPasswordPlaceholder} type={props.upperText}/>
-                    <Breaker breakerText="or" isSignInPage={true}/>
+                    <Breaker breakerText="or" classnames="w-full" />
                     <OAuthAndGoBack googleOAuthText={props.googleBtn} facebookOAuthText={props.facebookBtn}/>
                 </div>
             </div>                        

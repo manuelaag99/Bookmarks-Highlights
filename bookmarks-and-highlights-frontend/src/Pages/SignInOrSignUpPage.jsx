@@ -14,7 +14,7 @@ export default function SignInOrSignUpPage () {
                         <Link className="w-full" to="/signin">
                             <Button buttonText="Sign in" classnames=" text-var-1 bg-var-4 hover:bg-var-4-hovered mt-0 " isDefaultButton={true} isFacebookButton={false} isGoogleButton={false} isAbled={true} />
                         </Link>
-                        <Breaker breakerText="or" isSignInPage={false} isSignInOrSignUpPage={true}/>
+                        <Breaker breakerText="or" classnames="my-3" />
                         <Link className="w-full" to="/signup">
                             <Button buttonText="Sign up" classnames=" text-var-1 bg-var-4 hover:bg-var-4-hovered mt-0 " isDefaultButton={true} isFacebookButton={false} isGoogleButton={false} isAbled={true} />
                         </Link>

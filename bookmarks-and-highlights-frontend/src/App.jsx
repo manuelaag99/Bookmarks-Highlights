@@ -10,7 +10,7 @@ import SignUpPage from "./Pages/SignUpPage";
 import UpdateBandH from "./Pages/UpdateBandH";
 import ProfileSettings from "./Pages/ProfileSettings";
 
-export default function App() {
+export default function App () {
   return (
     <div>
       <Router>

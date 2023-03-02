@@ -16,7 +16,7 @@ export default function InputForAuth (props) {
 
     return (
         <>
-            <input autoComplete="off" className="mb-5 border-solid border-2 outline-none rounded-tag block h-12 w-9/10 text-center" onBlur={inputBlurHandler} onChange={inputChangeHandler} placeholder={props.placeholderText} type={props.inputType} />
+            <input autoComplete="off" className="mb-5 px-2 border-solid border-2 outline-none rounded-tag block h-12 w-9/10 text-center" onBlur={inputBlurHandler} onChange={inputChangeHandler} placeholder={props.placeholderText} type={props.inputType} />
             <p className={"mt-[-18px] text-red-btn " + ((!inputState.isValid && inputState.isTouched) ? "inline" : "hidden")}>wrong</p>
         </>
         )
