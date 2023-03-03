@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import AddCommand from "../Components/Portals/AddCommand"
+import { arrangeCardGroups, arrangeCardGroupsWhenLabelIsArray } from "../ArrangeCardGroups";
+import { AuthContext } from "../context/auth-context";
 import Breaker from "../Components/Breaker";
 import CardsSection from "../Components/CardsSection";
 import EmptyLine from "../Components/EmptyLine";
 import Options from "../Components/Options";
 import ProfileTop from "../Components/ProfileTop";
-import { arrangeCardGroups, arrangeCardGroupsWhenLabelIsArray } from "../ArrangeCardGroups";
 
 import { users, entries } from "../MOCKDATA";
 
 export default function ProfilePage () {
+    const auth = useContext(AuthContext)
+    console.log(auth.isLoggedIn)
     const { userid } = useParams();
     const selectedUser = users.find(user => user.id === userid)
     const userEntries = entries.filter(entry => entry.userId === selectedUser.id)
