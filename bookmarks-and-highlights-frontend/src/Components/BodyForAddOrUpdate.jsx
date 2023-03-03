@@ -3,7 +3,7 @@ import React from "react";
 import FormForAddOrUpdate from "./FormForAddOrUpdate";
 import PhotoForAddOrUpdate from "./PhotoForAddOrUpdate";
 import TagsSection from "./TagsSection";
-import { useForm } from "../use-form-hooks";
+import { useForm } from "../custom-hooks";
 
 export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFormValidity, isAdd, isFormValid, itemValues, title, userid }) {
     const [stateOfForm, inputHandler] = useForm({

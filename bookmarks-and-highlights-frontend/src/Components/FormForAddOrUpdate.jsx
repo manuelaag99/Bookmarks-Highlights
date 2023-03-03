@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useInput } from "../use-form-hooks";
+import { useInput } from "../custom-hooks";
 
 export default function FormForAddOrUpdate ({ classnames, errorText, field, initialValidity, initialValue, inputType, labelText, onInput, placeholderText }) {
     const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: (initialValue || ""), isValid: initialValidity })

@@ -1,3 +1,7 @@
+// export function checkInput (value) {
+//     if ()
+// }
+
 export function nonEmptyText (value) {
     if (value === "") {
         return false

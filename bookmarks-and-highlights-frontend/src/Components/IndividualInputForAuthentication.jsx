@@ -1,8 +1,8 @@
 import React from "react";
 
-import { useInput } from "../use-form-hooks";
+import { useInput } from "../custom-hooks";
 
-export default function IndividualInputForAuthentication ({ field, inputType, onInput, placeholderText }) {
+export default function IndividualInputForAuthentication ({ errorText, field, inputType, onInput, placeholderText }) {
     const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: "" , isValid: false })
     const { value, isValid } = inputState
 
@@ -11,8 +11,8 @@ export default function IndividualInputForAuthentication ({ field, inputType, on
 
     return (
         <>
-            <input autoComplete="off" className="mb-5 px-2 border-solid border-2 outline-none rounded-tag block h-12 w-9/10 text-center" onBlur={inputBlurHandler} onChange={inputChangeHandler} placeholder={placeholderText} type={inputType} />
-            <p className={"mt-[-18px] text-red-btn " + ((!inputState.isValid && inputState.isTouched) ? "inline" : "hidden")}>wrong</p>
+            <input autoComplete="off" className={"mb-5 px-2 border-solid border-2 outline-none rounded-tag block h-12 w-9/10 text-center " + ((!inputState.isValid && inputState.isTouched) && "border-red-btn" )} onBlur={inputBlurHandler} onChange={inputChangeHandler} placeholder={placeholderText} type={inputType} />
+            <p className={"mt-[-18px] text-red-btn " + ((!inputState.isValid && inputState.isTouched) ? "inline" : "hidden")}>{errorText}</p>
         </>
         )
 }

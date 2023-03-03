@@ -1,6 +1,6 @@
 import { nonEmptyText } from "./CheckValidity";
 
-const addOrUpdateIndividualInputReducer = (state, action) => {
+export function addOrUpdateIndividualInputReducer (state, action) {
     switch (action.type) {
         case "change":
             return {
@@ -18,9 +18,7 @@ const addOrUpdateIndividualInputReducer = (state, action) => {
     }
 }
 
-export { addOrUpdateIndividualInputReducer }
-
-const addOrUpdateFormReducer = (state, action) => {
+export function addOrUpdateFormReducer (state, action) {
     switch (action.type) {
         case "change":
             let formIsValid = true
@@ -57,5 +55,3 @@ const addOrUpdateFormReducer = (state, action) => {
             return state
     }
 }
-
-export { addOrUpdateFormReducer };
