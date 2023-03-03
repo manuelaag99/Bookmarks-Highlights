@@ -1,11 +1,21 @@
 import React from "react";
 import { addOrUpdateFormReducer } from "./Reducers";
+import { addOrUpdateIndividualInputReducer } from "./Reducers";
 
-const useForm = (initialInputs, initialValidity) => {
+const useInput = (initialInput) => {
+    const [inputState, dispatch] = React.useReducer(addOrUpdateIndividualInputReducer, initialInput)
+    const inputChangeHandler = e => dispatch({ type: "change", val: e.target.value })
+    const inputBlurHandler = () => dispatch({ type: "blur" })
+
+    return [inputState, inputChangeHandler, inputBlurHandler]
+}
+export { useInput }
+
+const useForm = (initialFormInputs, initialFormValidity) => {
     // this function establishes the inputs and their validity status
     const [stateOfForm, dispatch] = React.useReducer(addOrUpdateFormReducer, {
-        inputs: initialInputs,
-        isValid: initialValidity
+        inputs: initialFormInputs,
+        isValid: initialFormValidity
     })
 
     // this hook makes sure that this function is only re-rendered given the state of the specified dependencies
@@ -15,5 +25,4 @@ const useForm = (initialInputs, initialValidity) => {
 
     return [stateOfForm, inputHandler]
 }
-
 export { useForm }

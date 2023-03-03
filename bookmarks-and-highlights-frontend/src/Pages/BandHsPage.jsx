@@ -18,8 +18,6 @@ export default function BandHsPage () {
         areCardsArrangedByBookTitle = true
     }
 
-    console.log(areCardsArrangedByBookTitle)
-
     return (
         <div className="flex flex-wrap justify-center mx-auto md:w-full w-8/10">
             <div className="md:absolute fixed w-full h-16 z-20">

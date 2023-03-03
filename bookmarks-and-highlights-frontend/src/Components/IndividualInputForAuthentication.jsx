@@ -1,14 +1,9 @@
 import React from "react";
 
-import { addOrUpdateIndividualInputReducer } from "../Reducers";
+import { useInput } from "../use-form-hooks";
 
-export default function InputForAuth ({ field, inputType, onInput, placeholderText }) {
-    
-    const [inputState, dispatch] = React.useReducer(addOrUpdateIndividualInputReducer, { value: "", isValid: false })
-    const inputChangeHandler = e => dispatch({ type: "change", val: e.target.value })
-    const inputBlurHandler = () => dispatch({ type: "blur" })
-
-    // this destructuring is made so as not to call the entire inputState or props, since this could lead to infinite looping
+export default function IndividualInputForAuthentication ({ field, inputType, onInput, placeholderText }) {
+    const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: "" , isValid: false })
     const { value, isValid } = inputState
 
     // useEffect here makes sure that the function being called from the parent re-runs every time the values are updated 
