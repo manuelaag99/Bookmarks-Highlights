@@ -32,7 +32,7 @@ let users = [
 ];
 
 const createAndLogInToUser = function (req, res) {
-    req.body = { displayName, email, username, password, profilePhotoUrl, shortBio };
+    const { displayName, email, username, password, profilePhotoUrl, shortBio } = req.body;
     if (users.find(user => user.email === email)) {
         throw new HttpError("Sorry, there is already an account registered with this e-mail!", 422);
     };
@@ -54,16 +54,14 @@ const getAllUsers = function (req, res) {
 };
 
 const loginToExistingUser = function (req, res) {
-    req.body = { username, email, password };
-    res.json(req.body);
-    const selectedUser = users.find(user => user.username === username) || users.find(user => user.email === email);
+    const { username, email, password } = req.body
+    const selectedUser = users.find(user => user.username === username);
     if (selectedUser) {
         if (selectedUser.password === password) {
-            return "Successfully logged in!"
+            res.json({ selectedUser })
         } else throw new HttpError("The password and the user credential do not match", 401);
     } else throw new HttpError("Could not find a user corresponding to the provided credentials", 401);
 };
-
 
 exports.createAndLogInToUser = createAndLogInToUser;
 exports.getAllUsers = getAllUsers;
