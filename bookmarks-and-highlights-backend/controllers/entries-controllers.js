@@ -1,6 +1,7 @@
 const HttpError = require("../models/http-error");
+const { v4: uuidv4 } = require('uuid');
 
-const entries = [
+let entries = [
     {
       userId: "0001",
       bookTitle: "The History of Latin America (Wilson, 2008)",
@@ -124,31 +125,74 @@ const entries = [
 
 ]
 
-const getUserEntriesById = function (req, res) {
-    const userid = req.params.userid
-    const userEntries = entries.filter(entry => {
-        return entry.userId === userid
-    })
+const createEntry = function (req, res) {
+  const { userId, bookTitle, bookId, photoUrl, tags, date, pageNumber } = req.body
+  const newEntry = {
+    userId,
+    bookTitle,
+    bookId,
+    photoUrl,
+    tags,
+    date,
+    pageNumber,
+    itemId: uuidv4()
+  };
+  entries.push(newEntry);
 
-    if (!userEntries) {
-        throw new HttpError("Sorry, we could not find a user with that information", 404)
-    }
+  res.status(201).json({entry: newEntry});
+};
 
-    res.json(userEntries)
-}
+const deleteEntry = function (req, res) {
+  const selectedItemId = req.params.itemId;
+  entries = entries.filter(entry => entry.itemId !== selectedItemId);
+
+  res.status(200).json({message: "Successfully deleted this item."});
+};
+
+const getUserEntriesByUserId = function (req, res) {
+  const userid = req.params.userid
+  const userEntries = entries.filter(entry => {
+      return entry.userId === userid
+  });
+
+  if (!userEntries || userEntries.length === 0) {
+    throw new HttpError("Sorry, we could not find a user with that information", 404)
+  };
+
+  res.json(userEntries);
+};
 
 const getEntryByItemId = function (req, res) {
-    const itemid = req.params.itemId
-    const selectedItem = entries.find(entry => {
-        return entry.itemId == itemid
-    })
+  const itemId = req.params.itemId;
+  const selectedItem = entries.find(entry => {
+      return entry.itemId == itemId
+  });
 
-    if (!selectedItem) {
-        throw new HttpError("Sorry, we could not find an entry with that information", 404)
-    }
-    
-    res.json(itemid)
-}
+  if (!selectedItem) {
+      throw new HttpError("Sorry, we could not find an entry with that information", 404)
+  };
+  
+  res.json(itemId);
+};
 
-exports.getUserEntriesById = getUserEntriesById;
+const updateEntry = function (req, res) {
+  const { bookTitle, photoUrl, tags, date, pageNumber } = req.body
+  const selectedItemId = req.params.itemId;
+  const indexOfEntryToUpdate = entries.findIndex(entry => entry.itemId === selectedItemId);
+  const updatedEntry = {...entries.find(entry => entry.itemId === selectedItemId)};
+  updatedEntry.bookTitle = bookTitle;
+  updatedEntry.photoUrl = photoUrl;
+  updatedEntry.tags = tags;
+  updatedEntry.date = date;
+  updatedEntry.pageNumber = pageNumber;
+
+  entries[indexOfEntryToUpdate] = updatedEntry;
+
+  res.status(200).json({entry: updatedEntry});
+};
+
+exports.createEntry = createEntry;
+exports.deleteEntry = deleteEntry;
+exports.getUserEntriesByUserId = getUserEntriesByUserId;
 exports.getEntryByItemId = getEntryByItemId;
+exports.updateEntry = updateEntry;
