@@ -5,7 +5,7 @@ import Button from "./Button";
 import IndividualInputForAuthentication from "./IndividualInputForAuthentication";
 import { useForm } from "../custom-hooks";
 
-import { users, entries } from "../../../MOCKDATA";
+import { users, entries } from "../MOCKDATA";
 
 export default function InputsAndButtonFormForAuthentication ({ buttonInput, confirmPasswordPlaceholder, emailPlaceholder, initialInputs, passwordPlaceholder, type, usernamePlaceholder }) {
     const [stateOfAuthInputForm, authInputHandler] = useForm(initialInputs, false)
