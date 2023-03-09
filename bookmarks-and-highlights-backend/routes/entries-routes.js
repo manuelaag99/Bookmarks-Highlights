@@ -1,16 +1,21 @@
 const express = require("express");
+const { check } = require("express-validator");
 
 const entriesControllers = require("../controllers/entries-controllers");
 const router = express.Router();
 
-router.get("/user/:userid", entriesControllers.getUserEntriesByUserId);
+router.post("/user/:userid/createBook", entriesControllers.createBook);
 
-router.get("/:itemId", entriesControllers.getEntryByItemId);
+router.get("/user/:userid/books", entriesControllers.getUserBooks);
 
-router.post("/", entriesControllers.createEntry)
+router.get("/user/:userid/all", entriesControllers.getUserEntriesByUserId);
 
-router.patch("/:itemId", entriesControllers.updateEntry);
+router.get("/user/:userid/:itemId", entriesControllers.getEntryByItemId);
+// [check("userId", "bookTitle", "bookId", "photoUrl", "tags", "date", "pageNumber")],
+router.post("/user/:userid/add", entriesControllers.createEntry);
 
-router.delete("/:itemId", entriesControllers.deleteEntry);
+router.patch("/user/:userid/update/:itemId", entriesControllers.updateEntry);
 
-module.exports = router
+router.delete("/user/:userid/delete/:itemId", entriesControllers.deleteEntry);
+
+module.exports = router;

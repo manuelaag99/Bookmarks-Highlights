@@ -10,7 +10,7 @@ import EmptyLine from "../Components/EmptyLine";
 import Options from "../Components/Options";
 import ProfileTop from "../Components/ProfileTop";
 
-import { users, entries } from "../MOCKDATA";
+import { users, entries } from "../../../MOCKDATA";
 
 export default function ProfilePage () {
     const auth = useContext(AuthContext)

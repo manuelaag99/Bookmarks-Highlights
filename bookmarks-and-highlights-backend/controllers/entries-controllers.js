@@ -1,5 +1,6 @@
 const HttpError = require("../models/http-error");
 const { v4: uuidv4 } = require('uuid');
+let { entries } = require("../../MOCKDATA");
 
 let entries = [
     {
@@ -122,13 +123,25 @@ let entries = [
       pageNumber: "100",
       itemId: "95847758485321"
     }
+];
 
-]
+const createBook = function (req, res) {
+  const { bookTitle } = req.body;
+  const selectedUserId = req.params.userid;
+  const userEntries = entries.filter(entry => entry.userId === selectedUserId);
+  const newBook = {
+    bookTitle,
+    bookId: uuidv4()
+  };
+  res.json(newBook);
+}
 
 const createEntry = function (req, res) {
-  const { userId, bookTitle, bookId, photoUrl, tags, date, pageNumber } = req.body
+  const { bookTitle, bookId, photoUrl, tags, date, pageNumber } = req.body;
+  const selectedUserId = req.params.userid;
+  const userEntries = entries.filter(entry => entry.userId === selectedUserId);
   const newEntry = {
-    userId,
+    userId: selectedUserId,
     bookTitle,
     bookId,
     photoUrl,
@@ -149,30 +162,34 @@ const deleteEntry = function (req, res) {
   res.status(200).json({message: "Successfully deleted this item."});
 };
 
-const getUserEntriesByUserId = function (req, res) {
-  const userid = req.params.userid
-  const userEntries = entries.filter(entry => {
-      return entry.userId === userid
-  });
-
-  if (!userEntries || userEntries.length === 0) {
-    throw new HttpError("Sorry, we could not find a user with that information", 404)
-  };
-
-  res.json(userEntries);
-};
-
 const getEntryByItemId = function (req, res) {
   const itemId = req.params.itemId;
-  const selectedItem = entries.find(entry => {
-      return entry.itemId == itemId
-  });
-
-  if (!selectedItem) {
-      throw new HttpError("Sorry, we could not find an entry with that information", 404)
-  };
-  
+  const selectedItem = entries.find(entry => entry.itemId == itemId);
+  if (!selectedItem) throw new HttpError("Sorry, we could not find an entry with that information", 404);
   res.json(itemId);
+};
+
+const getUserBooks = function (req, res) {
+  const userid = req.params.userid;
+  const userEntries = entries.filter(entry => entry.userId === userid);
+  const userBooks = userEntries.map(({bookTitle, bookId}) => ({bookTitle, bookId}));
+  const unique = []
+  const userBooksNoDuplicates = userBooks.filter(book => {
+    const isDuplicate = unique.includes(book.bookTitle);
+    if (!isDuplicate) {
+      unique.push(book.bookTitle);
+      return true
+    };
+    return false;
+  });
+  res.json(userBooksNoDuplicates);
+}
+
+const getUserEntriesByUserId = function (req, res) {
+  const userid = req.params.userid;
+  const userEntries = entries.filter(entry => entry.userId === userid);
+  if (!userEntries || userEntries.length === 0) throw new HttpError("Sorry, we could not find a user with that information", 404);
+  res.json(userEntries);
 };
 
 const updateEntry = function (req, res) {
@@ -191,8 +208,10 @@ const updateEntry = function (req, res) {
   res.status(200).json({entry: updatedEntry});
 };
 
+exports.createBook = createBook;
 exports.createEntry = createEntry;
 exports.deleteEntry = deleteEntry;
-exports.getUserEntriesByUserId = getUserEntriesByUserId;
 exports.getEntryByItemId = getEntryByItemId;
+exports.getUserBooks = getUserBooks;
+exports.getUserEntriesByUserId = getUserEntriesByUserId;
 exports.updateEntry = updateEntry;

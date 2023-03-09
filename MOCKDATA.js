@@ -1,4 +1,4 @@
-const users = [
+let users = [
     {
         id: "0001",
         displayName: "Manuel Alanis",
@@ -30,7 +30,7 @@ const users = [
 
 export { users }
 
-const entries = [
+let entries = [
     {
       userId: "0001",
       bookTitle: "The History of Latin America (Wilson, 2008)",
