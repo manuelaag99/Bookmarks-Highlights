@@ -29,7 +29,7 @@ const getUserInfo = function (req, res) {
     const userid = req.params.userid;
     const selectedUser = users.find(user => user.id === userid);
     res.json(selectedUser);
-  }
+};
 
 const loginToExistingUser = function (req, res) {
     const { username, email, password } = req.body;
@@ -42,6 +42,8 @@ const loginToExistingUser = function (req, res) {
 };
 
 const updateProfile = function (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) throw new HttpError("Invalid inputs, please check your data", 422);
     const userid = req.params.userid;
     const selectedUserIndex = users.findIndex(user => user.id === userid);
     const selectedUser = users.find(user => user.id === userid);
@@ -56,7 +58,7 @@ const updateProfile = function (req, res) {
     updatedUserInfo.shortBio = shortBio;
     users[selectedUserIndex] = updatedUserInfo;
     res.json(users);
-}
+};
 
 exports.createAndLogInToUser = createAndLogInToUser;
 exports.getAllUsers = getAllUsers;

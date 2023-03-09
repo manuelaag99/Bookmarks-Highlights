@@ -17,6 +17,12 @@ router.post(
     check("password").isLength({ min: 10 }).isStrongPassword(),
     usersControllers.createAndLogInToUser);
 
-router.patch("/:userid/updateProfile", usersControllers.updateProfile);
+router.patch(
+    "/:userid/updateProfile",
+    check("displayName").not().isEmpty(),
+    check("email").isEmail(),
+    check("username").isLength({ min: 5 }),
+    check("password").isLength({ min: 10 }).isStrongPassword(),
+    usersControllers.updateProfile);
 
 module.exports = router;
