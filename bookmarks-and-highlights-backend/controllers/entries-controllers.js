@@ -2,6 +2,7 @@ const HttpError = require("../models/http-error");
 const { v4: uuidv4 } = require('uuid');
 let { entries } = require("../MOCKDATA");
 const { validationResult } = require("express-validator");
+const Entry = require("../models/entry");
 
 const createBook = function (req, res) {
   const { bookTitle } = req.body;
@@ -11,24 +12,28 @@ const createBook = function (req, res) {
     bookId: uuidv4()
   };
   res.json(newBook);
-}
+};
 
-const createEntry = function (req, res) {
+const createEntry = async (req, res, next) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty()) throw new HttpError("Invalid inputs, please check your data", 422);
+  if (!errors.isEmpty()) {throw new HttpError("Invalid inputs, please check your data", 422);}
   const { bookTitle, bookId, photoUrl, tags, date, pageNumber } = req.body;
   const selectedUserId = req.params.userid;
-  const newEntry = {
+  const newEntry = new Entry({
     userId: selectedUserId,
     bookTitle,
     bookId,
     photoUrl,
     tags,
     date,
-    pageNumber,
-    itemId: uuidv4()
-  };
-  entries.push(newEntry);
+    pageNumber
+  });
+  try {
+    await newEntry.save();
+  } catch {
+    const error = new HttpError("Could not add entry to database!", 500);
+    return next(error);
+  }
   res.status(201).json({entry: newEntry});
 };
 
@@ -59,7 +64,7 @@ const getUserBooks = function (req, res) {
     return false;
   });
   res.json(userBooksNoDuplicates);
-}
+};
 
 const getUserEntriesByUserId = function (req, res) {
   const userid = req.params.userid;
@@ -79,6 +84,8 @@ const updateEntry = function (req, res) {
   updatedEntry.date = date;
   updatedEntry.pageNumber = pageNumber;
   entries[indexOfEntryToUpdate] = updatedEntry;
+
+
   res.status(200).json({entry: updatedEntry});
 };
 

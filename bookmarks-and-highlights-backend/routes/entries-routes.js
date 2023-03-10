@@ -16,10 +16,10 @@ router.get("/user/:userid/:itemId", entriesControllers.getEntryByItemId);
 
 router.post(
     "/user/:userid/add",
-    [check("bookTitle").isLength({ min: 5 }),
+    check("bookTitle").isLength({ min: 5 }),
     check("photoUrl").not().isEmpty(),
     check("pageNumber").isNumeric(),
-    check("date").isDate()], 
+    check("date").isDate(), 
     entriesControllers.createEntry);
 
 router.patch(

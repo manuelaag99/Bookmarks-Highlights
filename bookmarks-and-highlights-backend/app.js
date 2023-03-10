@@ -1,5 +1,7 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const entriesRoutes = require("./routes/entries-routes");
 const HttpError = require("./models/http-error");
@@ -24,6 +26,8 @@ app.use((error, req, res, next) => {
     res.json({message: error.message || "An unknown error occurred"})
 });
 
-app.listen(3000, function (req, res) {
+mongoose.set("strictQuery", false);
+mongoose.connect(
+    "mongodb+srv://" + process.env.MONGODBUSERNAME +  ":" + process.env.MONGODBPASSWORD + "@cluster0.flg1i8i.mongodb.net/bandhsdb?retryWrites=true&w=majority").then(() => app.listen(3000, function (req, res) {
     console.log("Your server is running on port 3000")
-});
+})).catch(err => console.log(err));
