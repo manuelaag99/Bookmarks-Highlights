@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post(
     "/user/:userid/createBook",
+    check("bookTitle").isLength({ min: 5 }),
     entriesControllers.createBook);
 
 router.get("/user/:userid/books", entriesControllers.getUserBooks);
