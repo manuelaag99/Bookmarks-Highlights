@@ -22,7 +22,6 @@ router.patch(
     check("displayName").not().isEmpty(),
     check("email").isEmail(),
     check("username").isLength({ min: 5 }),
-    check("password").isLength({ min: 10 }).isStrongPassword(),
     usersControllers.updateProfile);
 
 module.exports = router;
