@@ -27,7 +27,8 @@ const createAndLogInToUser = async (req, res, next) => {
             username,
             password,
             profilePhotoUrl,
-            shortBio
+            shortBio,
+            entries: []
         });
     } catch (err) {
         return next (new HttpError("Sorry, could not create the new user!", 422));

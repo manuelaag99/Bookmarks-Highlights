@@ -8,7 +8,8 @@ const userSchema = new Schema({
     username: { type: "String", required: true, minLength: 5 },
     password: { type: "String", required: true },
     profilePhotoUrl: { type: "String", required: false },
-    shortBio: { type: "String", required: false }
+    shortBio: { type: "String", required: false },
+    entries: [{ type: mongoose.Types.ObjectId, required: true, ref: "Entry"}]
 });
 const User = new mongoose.model("User", userSchema);
 

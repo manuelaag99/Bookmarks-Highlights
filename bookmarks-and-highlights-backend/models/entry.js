@@ -8,7 +8,8 @@ const entrySchema = new Schema({
     photoUrl: { type: "String", required: true },
     tags: { type: ["String"], required: false },
     date: { type: "Date", required: true },
-    pageNumber: { type: "String", required: true }
+    pageNumber: { type: "String", required: true },
+    creator: { type: mongoose.Types.ObjectId, required: true, ref: "User"}
 });
 const Entry = new mongoose.model("Entry", entrySchema);
 

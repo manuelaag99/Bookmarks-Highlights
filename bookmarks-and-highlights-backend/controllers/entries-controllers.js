@@ -2,6 +2,8 @@ const HttpError = require("../models/http-error");
 const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require("express-validator");
 const Entry = require("../models/entry");
+const mongoose = require("mongoose");
+const User = require("../models/user");
 
 const createBook = function (req, res) { //TO-DO!!!
     const errors = validationResult(req);
@@ -19,7 +21,7 @@ const createEntry = async (req, res, next) => {
     const selectedUserId = req.params.userid;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {throw new HttpError("Invalid inputs, please check your data", 422);}
-    const { bookTitle, bookId, photoUrl, tags, date, pageNumber } = req.body;
+    const { bookTitle, bookId, photoUrl, tags, date, pageNumber, creator } = req.body;
 
 
     let newEntry;
@@ -31,17 +33,36 @@ const createEntry = async (req, res, next) => {
             photoUrl,
             tags,
             date,
-            pageNumber
+            pageNumber,
+            creator
         });
     } catch (err) {
+        console.log(err)
         return next(new HttpError("Invalid inputs, please check your data!", 500));
     };
 
+    let user;
     try {
-        await newEntry.save();
+        user = await User.findById(creator);
     } catch (err) {
+        return next (new HttpError("Sorry, could not create new entry!", 500));
+    };
+
+    if (!user) {
+        return next (new HttpError("Could not find a user for the provided ID.", 404));
+    };
+
+    try {
+        const currentSession = await mongoose.startSession();
+        currentSession.startTransaction();
+        await newEntry.save({ session: currentSession });
+        user.entries.push(newEntry);
+        await user.save({ session: currentSession });
+        await currentSession.commitTransaction();
+    } catch (err) {
+        console.log(err);
         return next(new HttpError("Could not add entry to database!", 500));
-    }
+    };
 
     res.status(201).json({ entry: newEntry });
 };
@@ -51,9 +72,21 @@ const deleteEntry = async (req, res, next) => {
 
     let selectedEntry;
     try {
-        selectedEntry = await Entry.findByIdAndDelete(selectedItemId)
+        selectedEntry = await Entry.findById(selectedItemId).populate("creator");
     } catch (err) {
         return next (new HttpError("Sorry, could not find the specified entry!", 500));
+    };
+
+    try {
+        const currentSession = await mongoose.startSession();
+        currentSession.startTransaction();
+        await selectedEntry.deleteOne({ session: currentSession });
+        selectedEntry.creator.entries.pull(selectedEntry);
+        await selectedEntry.creator.save({ session: currentSession });
+        await currentSession.commitTransaction();
+    } catch (err) {
+        console.log(err)
+        return next (new HttpError("Sorry, could not delete this entry!", 500));
     }
 
     res.status(200).json({message: "Successfully deleted this item."});
