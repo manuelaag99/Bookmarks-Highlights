@@ -17,8 +17,29 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
 
     let selectedUser
 
-    const submitHandler = e => {
+    const submitHandler = async e => {
         e.preventDefault()
+        if (type === "Sign up") {
+            try {
+                const response = await fetch("http://localhost:3000/api/users/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "Application/json"
+                    },
+                    body: JSON.stringify({
+                        email: stateOfAuthInputForm.inputs.email.value,
+                        username: stateOfAuthInputForm.inputs.username.value,
+                        password: stateOfAuthInputForm.inputs.password.value
+                    })
+                });
+
+                const responseData = await response.json();
+                console.log(response);
+                console.log(responseData);
+            } catch (err) {
+                console.log(err);
+            }
+        }
         console.log(stateOfAuthInputForm)
         selectedUser = users.find(user => user.username === stateOfAuthInputForm.inputs.username.value) || users.find(user => user.email === stateOfAuthInputForm.inputs.username.value)
     }
@@ -31,9 +52,9 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                 <IndividualInputForAuthentication errorText="Please write a valid password" inputType="password" field="password" onInput={authInputHandler} placeholderText={passwordPlaceholder} />
                 {type === "Sign up" && <IndividualInputForAuthentication errorText="The passwords do not match" inputType="password" field="confirmPassword" onInput={authInputHandler} placeholderText={confirmPasswordPlaceholder} />}
             </div>
-            <Link className="w-9/10 mt-[-20px] mb-5" to={"/" + (selectedUser ? selectedUser.id : null) + "/myprofile"}>
+            {/* <Link className="w-9/10 mt-[-20px] mb-5" to={"/" + (selectedUser ? selectedUser.id : null) + "/myprofile"}> */}
                 <Button buttonText={buttonInput} classnames=" text-var-1 bg-var-4 hover:bg-var-4-hovered " form="sign-in-or-sign-up-form" isAbled={inputButtonValidity} isSignInOrSignUpButton={true} type="submit"  />
-            </Link>
+            {/* </Link> */}
         </form>
     )
 }

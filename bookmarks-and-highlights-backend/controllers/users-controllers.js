@@ -6,7 +6,7 @@ const User = require("../models/user");
 const createAndLogInToUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) throw new HttpError("Invalid inputs, please check your data", 422);
-    const { displayName, email, username, password, profilePhotoUrl, shortBio } = req.body;
+    const { email, username, password } = req.body;
 
     let existingUser;
     try {
@@ -22,12 +22,9 @@ const createAndLogInToUser = async (req, res, next) => {
     let newUser;
     try {
         newUser = await User({
-            displayName,
             email,
             username,
             password,
-            profilePhotoUrl,
-            shortBio,
             entries: []
         });
     } catch (err) {
