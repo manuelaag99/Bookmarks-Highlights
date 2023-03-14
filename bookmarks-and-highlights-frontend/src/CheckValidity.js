@@ -1,6 +1,3 @@
-// export function checkInput (value) {
-//     if ()
-// }
 
 export function nonEmptyText (value) {
     if (value === "") {
@@ -11,7 +8,7 @@ export function nonEmptyText (value) {
 }
 
 export function minLengthText (value, requiredLength) {
-    if (value.length > requiredLength) {
+    if (value.length < requiredLength) {
         return false
     } else {
         return true

@@ -10,7 +10,7 @@ export default function Authentication ({ authBtnText, confirmPasswordPlaceholde
             <div className="flex flex-col justify-center items-center">
                 <div className="flex flex-wrap xl:w-1/2 w-7/10 mx-auto justify-center">
                     <Breaker breakerText={upperText} />
-                    <InputsAndButtonFormForAuthentication buttonInput={authBtnText} initialInputs={initialInputsForForm} usernamePlaceholder={usernamePlaceholder} emailPlaceholder={emailPlaceholder} passwordPlaceholder={passwordPlaceholder} confirmPasswordPlaceholder={confirmPasswordPlaceholder} type={upperText}/>
+                    <InputsAndButtonFormForAuthentication buttonInput={authBtnText} initialInputsForForm={initialInputsForForm} usernamePlaceholder={usernamePlaceholder} emailPlaceholder={emailPlaceholder} passwordPlaceholder={passwordPlaceholder} confirmPasswordPlaceholder={confirmPasswordPlaceholder} type={upperText}/>
                     <Breaker breakerText="or" classnames="w-full" />
                     <OAuthAndGoBack googleOAuthText={googleBtnText} facebookOAuthText={facebookBtnText}/>
                 </div>

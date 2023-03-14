@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import FormForAddOrUpdate from "./FormForAddOrUpdate";
 import PhotoForAddOrUpdate from "./PhotoForAddOrUpdate";
@@ -14,7 +14,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         }, false)
     
     const initialTagsState = isAdd ? [] : itemValues.tags
-    const [ tagsState, setTagsState ] = React.useState(initialTagsState)
+    const [ tagsState, setTagsState ] = useState(initialTagsState)
 
     const keyHandle = () => {
         if (tagsState !== stateOfForm.inputs.tags.value) setTagsState(() => stateOfForm.inputs.tags.value)

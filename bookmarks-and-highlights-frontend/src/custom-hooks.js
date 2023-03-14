@@ -2,11 +2,12 @@ import React from "react";
 import { addOrUpdateFormReducer } from "./Reducers";
 import { addOrUpdateIndividualInputReducer } from "./Reducers";
 
-const useInput = (initialInput) => {
-    const [inputState, dispatch] = React.useReducer(addOrUpdateIndividualInputReducer, initialInput)
-    const inputChangeHandler = e => dispatch({ type: "change", val: e.target.value })
+const useInput = (initialInput, formState) => {
+    const [inputState, dispatch] = React.useReducer(addOrUpdateIndividualInputReducer , initialInput)
+    const inputChangeHandler = e => {
+        dispatch({ type: "change", val: e.target.value, placeholder: e.target.placeholder, formState: formState });
+    }
     const inputBlurHandler = () => dispatch({ type: "blur" })
-
     return [inputState, inputChangeHandler, inputBlurHandler]
 }
 export { useInput }

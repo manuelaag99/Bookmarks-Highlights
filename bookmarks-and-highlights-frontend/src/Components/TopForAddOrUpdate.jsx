@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import BackBtnForAddOrUpdate from "./BackBtnForAddOrUpdate";
@@ -6,7 +6,7 @@ import Button from "./Button";
 import ConfirmDelete from "./Portals/ConfirmDelete";
 
 export default function TopForAddOrUpdate ({ classnames, form, isAddOrUpdateBtnAbled, isUpdating, route, stateToSend, type, userid }) {
-    const [ showDeleteWindow, setShowDeleteWindow ] = React.useState(false)
+    const [ showDeleteWindow, setShowDeleteWindow ] = useState(false)
     const closeDeleteWindow = () => setShowDeleteWindow(() => false)
     const openDeleteWindow = () => setShowDeleteWindow(() => true)
 

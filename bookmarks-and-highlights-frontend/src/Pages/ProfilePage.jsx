@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import AddCommand from "../Components/Portals/AddCommand"
@@ -21,10 +21,10 @@ export default function ProfilePage () {
     
     const defaultCards = arrangeCardGroups("bookTitle", userEntries)
 
-    const [ cards, setCards ] = React.useState(defaultCards)
-    const [ cardsToDisplay, setCardsToDisplay ] = React.useState(cards)
+    const [ cards, setCards ] = useState(defaultCards)
+    const [ cardsToDisplay, setCardsToDisplay ] = useState(cards)
     
-    const [ searchQuery, setSearchQuery ] = React.useState("")
+    const [ searchQuery, setSearchQuery ] = useState("")
     const searchButtonHandle = (searchText) => {
         setSearchQuery((searchText) => searchText)
         const lowerCaseSearchText = searchText.toLowerCase()
@@ -35,7 +35,7 @@ export default function ProfilePage () {
         }
     }
 
-    const [ groupingOfCards, setgroupingOfCards ] = React.useState("bookTitle")
+    const [ groupingOfCards, setgroupingOfCards ] = useState("bookTitle")
     const groupButtonHandle = event => {
         const selectedLabel = event.toLowerCase()
         setgroupingOfCards(() => selectedLabel)

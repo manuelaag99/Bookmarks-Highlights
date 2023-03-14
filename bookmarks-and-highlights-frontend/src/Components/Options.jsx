@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchIcon from '@mui/icons-material/Search';
 
 export default function Options ({ classnames, groupButton, rightText, searchButton }) {
-    const [ searchText, setSearchText ] = React.useState("")
+    const [ searchText, setSearchText ] = useState("")
 
     const searchInputHandle = (e) => {
         const searchInput = e.target.value

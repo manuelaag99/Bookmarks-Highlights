@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import PageAndDateSection from "./PageAndDateSection";
@@ -8,8 +8,8 @@ import SettingsCommand from "./SettingsCommand";
 import TagsSection from "./TagsSection";
 
 export default function BandHsPhotoCard ({ bookTitle, bookid, date, entries, itemid, page, photosrc, showBookTitles, taglist, title, userid }) {
-    const [ photoWindow, setPhotoWindow ] = React.useState(false)
-    const [ tagsPopUp, setTagsPopUp ] = React.useState(false)
+    const [ photoWindow, setPhotoWindow ] = useState(false)
+    const [ tagsPopUp, setTagsPopUp ] = useState(false)
 
     const shortenedTags = taglist.filter((photo, index) => index < 4)
 

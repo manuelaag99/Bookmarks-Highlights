@@ -1,12 +1,20 @@
-import { nonEmptyText } from "./CheckValidity";
+import { areBothTextsTheSame, minLengthText, nonEmptyText } from "./CheckValidity";
 
 export function addOrUpdateIndividualInputReducer (state, action) {
     switch (action.type) {
         case "change":
+            let checkValidity;
+            console.log(console.log(action.formState));
+            if (action.placeholder === "Confirm your password") {
+                checkValidity = nonEmptyText(action.val);
+                // TO-DO checkValidity = areBothTextsTheSame(action.formState.password.value, action.formState.confirmPassword.value); 
+            } else {
+                checkValidity = nonEmptyText(action.val);
+            }
             return {
                 ...state,
                 value: action.val,
-                isValid: nonEmptyText(action.val)
+                isValid: checkValidity
             }
         case "blur":
             return {
