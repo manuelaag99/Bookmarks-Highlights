@@ -9,7 +9,7 @@ export default function SignUpPage () {
     return (
         <div>
             <div className="flex flex-wrap md:flex-row flex-col">
-                <Authentication authBtnText="Sign up to B&H!" confirmPasswordPlaceholder="Confirm your password" emailPlaceholder="Enter your e-mail" facebookBtnText="Sign up with Facebook" googleBtnText="Sign up with Google" initialInputsForForm={initialInputsForSignUp} passwordPlaceholder="Enter your password" upperText="Sign up" usernamePlaceholder="Enter your username" />
+                <Authentication authBtnText="Sign up to B&H!" confirmPasswordPlaceholder="Confirm your password" emailPlaceholder="Enter your e-mail" facebookBtnText="Sign up with Facebook" googleBtnText="Sign up with Google" initialInputsForForm={initialInputsForSignUp} passwordPlaceholder="Create a password" upperText="Sign up" usernamePlaceholder="Create a username" />
                 <LogoForAuth/>
             </div>
         </div>

@@ -66,11 +66,11 @@ const getUserInfo = async (req, res, next) => {
 };
 
 const loginToExistingUser = async (req, res, next) => {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
 
     let selectedUser;
     try {
-        selectedUser = await User.findOne({ username: username } || { email: email });
+        selectedUser = await User.findOne({ email: email });
     } catch {
         return next (new HttpError("Sorry, could not find a user corresponding to the provided credentials!", 422));
     };
