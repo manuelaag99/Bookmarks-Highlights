@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import BackBtnForAddOrUpdate from "../Components/BackBtnForAddOrUpdate";
@@ -10,7 +10,7 @@ export default function ProfileSettings () {
     const location = useLocation();
     const { userid } = location.state;
 
-    const inputHandler = React.useCallback((field, value, isValid) => {
+    const inputHandler = useCallback((field, value, isValid) => {
         const thing = field + value + isValid
     }, [])
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { AuthContext } from "./context/auth-context";
@@ -15,11 +15,11 @@ import ProfileSettings from "./Pages/ProfileSettings";
 export default function App () {
   const [ isUserLoggedIn, setIsUserLoggedIn ] = useState(false)
 
-  const logIn = React.useCallback(() => {
+  const logIn = useCallback(() => {
     setIsUserLoggedIn(() => true)
   }, [])
 
-  const logOut = React.useCallback(() => {
+  const logOut = useCallback(() => {
     setIsUserLoggedIn(() => false)
   }, [])
 
