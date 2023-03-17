@@ -15,13 +15,9 @@ import ProfileSettings from "./Pages/ProfileSettings";
 export default function App () {
   const [ isUserLoggedIn, setIsUserLoggedIn ] = useState(false)
 
-  const logIn = useCallback(() => {
-    setIsUserLoggedIn(() => true)
-  }, [])
+  const logIn = useCallback(() => setIsUserLoggedIn(() => true), [])
 
-  const logOut = useCallback(() => {
-    setIsUserLoggedIn(() => false)
-  }, [])
+  const logOut = useCallback(() => setIsUserLoggedIn(() => false), [])
 
   return (
     <>

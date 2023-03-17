@@ -34,7 +34,6 @@ const useHttpHook = () => {
 
     const activeHttpRequest = useRef([]);
 
-
     const sendHttpRequest = useCallback(async (url, method = "GET", body = null, headers = {} ) => {
         try {
             setLoading(true)
@@ -47,21 +46,32 @@ const useHttpHook = () => {
                 signal: httpAbortCtrl.signal
             });
             const responseData = await response.json();
+
+            activeHttpRequest.current = activeHttpRequest.current.filter(reqCtrl => reqCtrl !== httpAbortCtrl);
+
             if (!response.ok) {
                 setError(true);
                 throw new Error(responseData.message);
             };
-
+            console.log(responseData.user.id)
+            setLoading(false);
             return responseData;
         } catch (err) {
             setError(err.message || "Something went wrong, please try again!");
+            setLoading(false);
+            throw err;
         }
-        setLoading(false);
     }, []);
 
     const clearError = () => {
         setError(null);
     };
+
+    useEffect(() => {
+        return () => {
+            activeHttpRequest.current.forEach(abortCtrl => abortCtrl.abort());
+        }
+    }, []);
 
     return { loading, error, sendHttpRequest, clearError };
 }
