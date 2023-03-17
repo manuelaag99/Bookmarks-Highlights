@@ -1,11 +1,13 @@
-import React, {useState} from "react";
+import React, { useParams, useState } from "react";
 
 import FormForAddOrUpdate from "./FormForAddOrUpdate";
 import PhotoForAddOrUpdate from "./PhotoForAddOrUpdate";
 import TagsSection from "./TagsSection";
-import { useForm } from "../custom-hooks";
+import { useForm, useHttpHook } from "../custom-hooks";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFormValidity, isAdd, isFormValid, itemValues, title, userid }) {
+    const { loading, error, sendHttpRequest, clearError } = useHttpHook();
     const [stateOfForm, inputHandler] = useForm({
             title: { value: "", isValid: false},
             date: { value: "", isValid: false },
@@ -21,9 +23,20 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         isFormValid(stateOfForm)
     }
 
-    const submitHandler = e => {
+    const submitHandler = async e => {
         e.preventDefault()
         console.log(stateOfForm)
+        const responseData = sendHttpRequest(
+            "http://localhost:3000/api/entries/user/" + userid + "/add",
+            "POST",
+            JSON.stringify({
+                title: stateOfForm.inputs.title.value,
+                date: stateOfForm.inputs.date.value,
+                page: stateOfForm.inputs.page.value,
+                tags: stateOfForm.inputs.tags.value,
+                creator: userid
+            }),
+            { "Content-Type": "Application/json" })
     }
     
     return (

@@ -33,18 +33,20 @@ export default function ProfilePage () {
         };
         fetchUserInfo();
     }, [sendHttpRequest]);
-    console.log(selectedUser);
 
-    //const selectedUser = users.find(user => user.id === userid)
-    const userEntries = entries.filter(entry => entry.userId === selectedUser.id) 
-    
+    let userEntries;
+    if (selectedUser) {
+        userEntries = entries.filter(entry => entry.userId === selectedUser.id);
+    }
 
     const defaultCards = arrangeCardGroups("bookTitle", userEntries)
 
     const [ cards, setCards ] = useState(defaultCards)
+    const [ groupingOfCards, setgroupingOfCards ] = useState("bookTitle");
     const [ cardsToDisplay, setCardsToDisplay ] = useState(cards)
-    
     const [ searchQuery, setSearchQuery ] = useState("")
+
+    
     const searchButtonHandle = (searchText) => {
         setSearchQuery((searchText) => searchText);
         const lowerCaseSearchText = searchText.toLowerCase();
@@ -55,7 +57,6 @@ export default function ProfilePage () {
         }
     }
 
-    const [ groupingOfCards, setgroupingOfCards ] = useState("bookTitle");
     const groupButtonHandle = event => {
         const selectedLabel = event.toLowerCase();
         setgroupingOfCards(() => selectedLabel);
@@ -77,6 +78,7 @@ export default function ProfilePage () {
     if (!selectedUser) {
         <Loading open={loading} />
     } else {
+
         return (
             <div className="flex flex-wrap justify-center md:w-full w-8/10 mx-auto">
                 <ErrorMessage open={error} error={error} onClose={clearError} />
