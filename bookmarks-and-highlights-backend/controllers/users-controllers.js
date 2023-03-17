@@ -62,7 +62,7 @@ const getUserInfo = async (req, res, next) => {
         return next (new HttpError("Sorry, could not retrieve this user's info!", 422))
     }
 
-    res.json({ selectedUser });
+    res.json({ user: selectedUser.toObject({ getters: true }) });
 };
 
 const loginToExistingUser = async (req, res, next) => {

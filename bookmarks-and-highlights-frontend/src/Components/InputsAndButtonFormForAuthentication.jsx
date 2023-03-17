@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../context/auth-context";
 import Button from "./Button";
@@ -9,7 +9,6 @@ import Loading from "./Portals/Loading";
 import { useForm, useHttpHook } from "../custom-hooks";
 
 import { users, entries } from "../MOCKDATA";
-import LogoAndTagline from "./LogoAndTagline";
 
 export default function InputsAndButtonFormForAuthentication ({ buttonInput, confirmPasswordPlaceholder, emailPlaceholder, initialInputsForForm, passwordPlaceholder, type, usernamePlaceholder }) {
     const auth = useContext(AuthContext);
@@ -22,13 +21,13 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
         setInputButtonValidity(() => stateOfAuthInputForm.isValid)
     };
 
-    let selectedUser; // TO-DO 
+    let responseData;
 
     const submitHandler = async e => {
         e.preventDefault();
         if (type === "Sign up") {
             try {
-                selectedUser = await sendHttpRequest(
+                responseData = await sendHttpRequest(
                     "http://localhost:3000/api/users/signup",
                     "POST",
                     JSON.stringify({
@@ -37,10 +36,11 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                         password: stateOfAuthInputForm.inputs.password.value
                     }),
                     { "Content-Type": "Application/json" })
-            } catch {};
+                auth.login();
+            } catch (err) {};
         } else if (type === "Sign in") {
             try {
-                selectedUser = await sendHttpRequest(
+                responseData = await sendHttpRequest(
                     "http://localhost:3000/api/users/login",
                     "POST",
                     JSON.stringify({
@@ -48,10 +48,10 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                         password: stateOfAuthInputForm.inputs.password.value
                     }),
                     { "Content-Type": "Application/json" })
-                    // login.auth()
-            } catch {};
+                    auth.login();
+            } catch (err) {};
         };
-        navigate("/" + selectedUser.user.id + "/myprofile");
+        navigate("/" + responseData.user.id + "/myprofile");
     };
 
     return (

@@ -53,12 +53,13 @@ const useHttpHook = () => {
                 setError(true);
                 throw new Error(responseData.message);
             };
-            console.log(responseData.user.id)
+            console.log(responseData)
             setLoading(false);
             return responseData;
         } catch (err) {
             setError(err.message || "Something went wrong, please try again!");
             setLoading(false);
+            console.log(err)
             throw err;
         }
     }, []);
@@ -67,11 +68,11 @@ const useHttpHook = () => {
         setError(null);
     };
 
-    useEffect(() => {
-        return () => {
-            activeHttpRequest.current.forEach(abortCtrl => abortCtrl.abort());
-        }
-    }, []);
+    // useEffect(() => {
+    //     return () => {
+    //         activeHttpRequest.current.forEach(abortCtrl => abortCtrl.abort());
+    //     }
+    // }, []);
 
     return { loading, error, sendHttpRequest, clearError };
 }
