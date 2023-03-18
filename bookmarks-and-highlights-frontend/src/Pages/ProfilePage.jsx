@@ -18,12 +18,10 @@ import { users, entries } from "../MOCKDATA";
 export default function ProfilePage () {
     const auth = useContext(AuthContext);
     console.log(auth.isLoggedIn);
-
-    const [selectedUser, setSelectedUser] = useState(null);
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
-
     const { userid } = useParams();
 
+    const [selectedUser, setSelectedUser] = useState();
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {

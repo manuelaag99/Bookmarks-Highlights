@@ -68,13 +68,13 @@ const useHttpHook = () => {
         setError(null);
     };
 
-    // useEffect(() => {
-    //     return () => {
-    //         activeHttpRequest.current.forEach(abortCtrl => abortCtrl.abort());
-    //     }
-    // }, []);
+    useEffect(() => {
+        return () => {
+            activeHttpRequest.current.forEach(abortCtrl => abortCtrl.abort());
+        }
+    }, []);
 
     return { loading, error, sendHttpRequest, clearError };
-}
+};
 
 export { useHttpHook };

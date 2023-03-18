@@ -21,8 +21,8 @@ const createEntry = async (req, res, next) => {
     const selectedUserId = req.params.userid;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {throw new HttpError("Invalid inputs, please check your data", 422);}
-    const { bookTitle, bookId, photoUrl, tags, date, pageNumber, creator } = req.body;
-
+    const { bookTitle, bookId, tags, date, pageNumber, creator } = req.body;
+// ADD PHOTOURL ONCE IT WORKS 
 
     let newEntry;
     try {
@@ -30,7 +30,6 @@ const createEntry = async (req, res, next) => {
             userId: selectedUserId,
             bookTitle,
             bookId,
-            photoUrl,
             tags,
             date,
             pageNumber,
@@ -92,6 +91,28 @@ const deleteEntry = async (req, res, next) => {
     res.status(200).json({message: "Successfully deleted this item."});
 };
 
+const getAllBooks = async (req, res, next) => {
+    let allEntries;
+    try {
+        allEntries = await Entry.findMany();
+    } catch (err) {
+        return next(new HttpError("Could not find entries!", 500));
+    }
+
+    const allBooks = allEntries.map(({ bookTitle, bookId }) => ({ bookTitle, bookId }));
+    const unique = []
+    const allBooksNoDuplicates = allBooks.filter(book => {
+        const isDuplicate = unique.includes(book.bookTitle);
+        if (!isDuplicate) {
+            unique.push(book.bookTitle);
+            return true
+        };
+        return false;
+    });
+
+    res.json({ allBooksNoDuplicates: allBooksNoDuplicates.map(book => book.toObject({ getters: true })) });
+};
+
 const getEntryByItemId = async (req, res, next) => {
     const itemId = req.params.itemId;
 
@@ -107,30 +128,6 @@ const getEntryByItemId = async (req, res, next) => {
     }
 
     res.json({ selectedEntry: selectedEntry.toObject({ getters: true }) });
-};
-
-const getUserBooks = async (req, res, next) => {
-    const userid = req.params.userid;
-  
-    let userEntries;
-    try {
-        userEntries = await Entry.find({ userId: userid }).exec();
-    } catch (err) {
-        return next(new HttpError("Could not find entries!", 500));
-    }
-
-    const userBooks = userEntries.map(({ bookTitle, bookId }) => ({ bookTitle, bookId }));
-    const unique = []
-    const userBooksNoDuplicates = userBooks.filter(book => {
-        const isDuplicate = unique.includes(book.bookTitle);
-        if (!isDuplicate) {
-            unique.push(book.bookTitle);
-            return true
-        };
-        return false;
-    });
-
-    res.json({ userBooksNoDuplicates: userBooksNoDuplicates.map(book => book.toObject({ getters: true })) });
 };
 
 const getUserEntriesByUserId = async (req, res, next) => {
@@ -179,7 +176,7 @@ const updateEntry = async (req, res, next) => {
 exports.createBook = createBook;
 exports.createEntry = createEntry;
 exports.deleteEntry = deleteEntry;
+exports.getAllBooks = getAllBooks;
 exports.getEntryByItemId = getEntryByItemId;
-exports.getUserBooks = getUserBooks;
 exports.getUserEntriesByUserId = getUserEntriesByUserId;
 exports.updateEntry = updateEntry;
