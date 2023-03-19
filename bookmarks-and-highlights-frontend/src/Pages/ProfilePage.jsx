@@ -23,7 +23,12 @@ export default function ProfilePage () {
 
     const [selectedUser, setSelectedUser] = useState();
     const [selectedUserEntries, setSelectedUserEntries] = useState();
+    const [ cards, setCards ] = useState()
+    const [ cardsToDisplay, setCardsToDisplay ] = useState(cards)
+    const [ groupingOfCards, setgroupingOfCards ] = useState("bookTitle");
+    const [ searchQuery, setSearchQuery ] = useState("")
 
+    let defaultCards;
     useEffect(() => {
         const fetchUserEntries = async () => {
             try {
@@ -36,17 +41,16 @@ export default function ProfilePage () {
         fetchUserEntries();
     }, [sendHttpRequest]);
 
+    useEffect(() => {
+        setCards(selectedUserEntries);
+        defaultCards = arrangeCardGroups("bookTitle", selectedUserEntries);
+        setCardsToDisplay(defaultCards)
+    }, [selectedUserEntries])
+
     // console.log(selectedUser)
     console.log(selectedUserEntries);
-
-    const defaultCards = arrangeCardGroups("bookTitle", selectedUserEntries)
-
-    const [ cards, setCards ] = useState(defaultCards)
-    const [ groupingOfCards, setgroupingOfCards ] = useState("bookTitle");
-    const [ cardsToDisplay, setCardsToDisplay ] = useState(cards)
-    const [ searchQuery, setSearchQuery ] = useState("")
-
-    console.log(defaultCards)
+    console.log(cards);
+    console.log(cardsToDisplay);
     const searchButtonHandle = (searchText) => {
         setSearchQuery((searchText) => searchText);
         const lowerCaseSearchText = searchText.toLowerCase();
@@ -60,15 +64,15 @@ export default function ProfilePage () {
     const groupButtonHandle = event => {
         const selectedLabel = event.toLowerCase();
         setgroupingOfCards(() => selectedLabel);
-        if (userEntries.length === 0) {
+        if (selectedUserEntries.length === 0) {
             return "empty"
         } else {
             if (event !== "tags") {
-                const newGroups = arrangeCardGroups(event, userEntries);
+                const newGroups = arrangeCardGroups(event, selectedUserEntries);
                 setCards(() => newGroups);
                 setCardsToDisplay(() => newGroups);
             } else {
-                const newGroups = arrangeCardGroupsWhenLabelIsArray(event, userEntries);
+                const newGroups = arrangeCardGroupsWhenLabelIsArray(event, selectedUserEntries);
                 setCards(() => newGroups);
                 setCardsToDisplay(() => newGroups);
             }
@@ -78,7 +82,6 @@ export default function ProfilePage () {
     if (!selectedUser) {
         <Loading open={loading} />
     } else {
-
         return (
             <div className="flex flex-wrap justify-center md:w-full w-8/10 mx-auto">
                 <ErrorMessage open={error} error={error} onClose={clearError} />
