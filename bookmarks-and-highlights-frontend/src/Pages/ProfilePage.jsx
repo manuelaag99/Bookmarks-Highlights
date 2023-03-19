@@ -13,8 +13,6 @@ import Options from "../Components/Options";
 import ProfileTop from "../Components/ProfileTop";
 import { useHttpHook } from "../custom-hooks";
 
-import { users, entries } from "../MOCKDATA";
-
 export default function ProfilePage () {
     const auth = useContext(AuthContext);
     console.log(auth.isLoggedIn);
@@ -47,10 +45,6 @@ export default function ProfilePage () {
         setCardsToDisplay(defaultCards)
     }, [selectedUserEntries])
 
-    // console.log(selectedUser)
-    console.log(selectedUserEntries);
-    console.log(cards);
-    console.log(cardsToDisplay);
     const searchButtonHandle = (searchText) => {
         setSearchQuery((searchText) => searchText);
         const lowerCaseSearchText = searchText.toLowerCase();
@@ -89,7 +83,7 @@ export default function ProfilePage () {
                 <EmptyLine />
                 <Breaker breakerText="MY BOOKMARKS & HIGHLIGHTS" />
                 <Options searchButton={searchButtonHandle} groupButton={groupButtonHandle} rightText="group by: " />
-                <CardsSection isNotBandHsPage={true} isBandHsPage={false} isGroupedByTags={false} userInfo={selectedUser} cardsInfo={cardsToDisplay} userid={selectedUser.id} />
+                <CardsSection isProfilePage={true} cardsInfo={cardsToDisplay} userid={selectedUser.id} />
                 <Link to={"/" + selectedUser.id + "/add"} state={{ userid: selectedUser.id, userinfo: selectedUser }}>
                     <AddCommand userId={selectedUser.id} />
                 </Link>

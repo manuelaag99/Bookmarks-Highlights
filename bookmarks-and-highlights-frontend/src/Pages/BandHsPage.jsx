@@ -30,7 +30,7 @@ export default function BandHsPage () {
                 (entries.length === 1) ? "1 photo in this collection" :
                 "There are no photos in this collection yet"} />
             <Options classnames="md:mb-3 mb-1.5 md:mt-12 mt-6" rightText="order by: " />
-            <CardsSection showBookTitles={!areCardsArrangedByBookTitle} isNotBandHsPage={false} isBandHsPage={true} userid={userid} bookid={bookid} title={title} entries={entries} />
+            <CardsSection showBookTitles={!areCardsArrangedByBookTitle} isProfilePage={false} userid={userid} bookid={bookid} title={title} entries={entries} />
             <PhotoWindow />
         </div>
     )
