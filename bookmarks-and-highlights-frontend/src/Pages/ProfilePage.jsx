@@ -22,29 +22,31 @@ export default function ProfilePage () {
     const { userid } = useParams();
 
     const [selectedUser, setSelectedUser] = useState();
+    const [selectedUserEntries, setSelectedUserEntries] = useState();
+
     useEffect(() => {
-        const fetchUserInfo = async () => {
+        const fetchUserEntries = async () => {
             try {
-                const responseData = await sendHttpRequest("http://localhost:3000/api/users/" + userid + "/info");
-                setSelectedUser(responseData.user)
+                const userEntriesData = await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/all");
+                setSelectedUserEntries(userEntriesData.userEntries);
+                const userInfoData = await sendHttpRequest("http://localhost:3000/api/users/" + userid + "/info");
+                setSelectedUser(userInfoData.user);
             } catch (err) {}
         };
-        fetchUserInfo();
+        fetchUserEntries();
     }, [sendHttpRequest]);
 
-    let userEntries;
-    if (selectedUser) {
-        userEntries = entries.filter(entry => entry.userId === selectedUser.id);
-    }
+    // console.log(selectedUser)
+    console.log(selectedUserEntries);
 
-    const defaultCards = arrangeCardGroups("bookTitle", userEntries)
+    const defaultCards = arrangeCardGroups("bookTitle", selectedUserEntries)
 
     const [ cards, setCards ] = useState(defaultCards)
     const [ groupingOfCards, setgroupingOfCards ] = useState("bookTitle");
     const [ cardsToDisplay, setCardsToDisplay ] = useState(cards)
     const [ searchQuery, setSearchQuery ] = useState("")
 
-    
+    console.log(defaultCards)
     const searchButtonHandle = (searchText) => {
         setSearchQuery((searchText) => searchText);
         const lowerCaseSearchText = searchText.toLowerCase();
@@ -53,7 +55,7 @@ export default function ProfilePage () {
         } else {
             setCardsToDisplay(() => cards.filter((card) => card.title.toLowerCase().includes(lowerCaseSearchText)));
         }
-    }
+    };
 
     const groupButtonHandle = event => {
         const selectedLabel = event.toLowerCase();
@@ -71,7 +73,7 @@ export default function ProfilePage () {
                 setCardsToDisplay(() => newGroups);
             }
         }
-    }
+    };
 
     if (!selectedUser) {
         <Loading open={loading} />
@@ -84,7 +86,7 @@ export default function ProfilePage () {
                 <EmptyLine />
                 <Breaker breakerText="MY BOOKMARKS & HIGHLIGHTS" />
                 <Options searchButton={searchButtonHandle} groupButton={groupButtonHandle} rightText="group by: " />
-                {/* <CardsSection isNotBandHsPage={true} isBandHsPage={false} isGroupedByTags={false} userInfo={selectedUser} cardsInfo={cardsToDisplay} userid={selectedUser.id} /> */}
+                <CardsSection isNotBandHsPage={true} isBandHsPage={false} isGroupedByTags={false} userInfo={selectedUser} cardsInfo={cardsToDisplay} userid={selectedUser.id} />
                 <Link to={"/" + selectedUser.id + "/add"} state={{ userid: selectedUser.id, userinfo: selectedUser }}>
                     <AddCommand userId={selectedUser.id} />
                 </Link>

@@ -53,13 +53,12 @@ const useHttpHook = () => {
                 setError(true);
                 throw new Error(responseData.message);
             };
-            console.log(responseData)
             setLoading(false);
+            console.log(responseData);
             return responseData;
         } catch (err) {
             setError(err.message || "Something went wrong, please try again!");
             setLoading(false);
-            console.log(err)
             throw err;
         }
     }, []);
