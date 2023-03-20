@@ -2,10 +2,10 @@ import React, { useCallback, useEffect, useReducer, useRef, useState } from "rea
 import { addOrUpdateFormReducer } from "./Reducers";
 import { addOrUpdateIndividualInputReducer } from "./Reducers";
 
-const useInput = (initialInput, formState) => {
-    const [inputState, dispatch] = useReducer(addOrUpdateIndividualInputReducer , initialInput)
+const useInput = (initialInput) => {
+    const [inputState, dispatch] = useReducer(addOrUpdateIndividualInputReducer, initialInput)
     const inputChangeHandler = e => {
-        dispatch({ type: "change", val: e.target.value, placeholder: e.target.placeholder, formState: formState });
+        dispatch({ type: "change", val: e.target.value, placeholder: e.target.placeholder});
     }
     const inputBlurHandler = () => dispatch({ type: "blur" })
     return [inputState, inputChangeHandler, inputBlurHandler]
@@ -35,8 +35,8 @@ const useHttpHook = () => {
     const activeHttpRequest = useRef([]);
 
     const sendHttpRequest = useCallback(async (url, method = "GET", body = null, headers = {} ) => {
+        setLoading(true)
         try {
-            setLoading(true)
             const httpAbortCtrl = new AbortController();
             activeHttpRequest.current.push(httpAbortCtrl);
             const response = await fetch(url, {
