@@ -13,18 +13,17 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     const navigate = useNavigate();
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
     const [stateOfForm, inputHandler] = useForm({
-            title: { value: "", isValid: false},
+            title: { value: "", isValid: false },
             date: { value: "", isValid: false },
             page: { value: "", isValid: false },
             tags: { value: "", isValid: false }
         }, false)
     
     const initialTagsState = isAdd ? [] : itemValues.tags;
-    const [ tagsState, setTagsState ] = useState(initialTagsState);
+    const [tagsState, setTagsState] = useState(initialTagsState);
     const keyHandle = () => {
         if (tagsState !== stateOfForm.inputs.tags.value) setTagsState(() => stateOfForm.inputs.tags.value);
         isFormValid(stateOfForm);
-        console.log(stateOfForm.inputs);
     };
 
     const [userEntries, setUserEntries] = useState();
@@ -50,7 +49,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         e.preventDefault()
         console.log(stateOfForm)
         try {
-            const responseData = sendHttpRequest(
+            const responseData = await sendHttpRequest(
                 "http://localhost:3000/api/entries/user/" + userid + "/add",
                 "POST",
                 JSON.stringify({

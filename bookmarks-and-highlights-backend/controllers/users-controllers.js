@@ -86,8 +86,8 @@ const updateProfile = async (req, res, next) => {
     const userid = req.params.userid;
     const errors = validationResult(req);
     if (!errors.isEmpty()) throw new HttpError("Invalid inputs, please check your data", 422);
-    const { displayName, email, username, profilePhotoUrl, shortBio } = req.body;
-
+    const { displayName, shortBio, username } = req.body;
+//ADD PROFILEPHOTOURL WHEN I HAVE IT
     let selectedUser;
     try {
         selectedUser = await User.findById(userid);
@@ -100,10 +100,9 @@ const updateProfile = async (req, res, next) => {
     };
 
     selectedUser.displayName = displayName;
-    selectedUser.email = email;
-    selectedUser.username = username;
-    selectedUser.profilePhotoUrl = profilePhotoUrl;
+    // selectedUser.profilePhotoUrl = profilePhotoUrl;
     selectedUser.shortBio = shortBio;
+    selectedUser.username = username;
 
     try {
         await selectedUser.save()
@@ -111,7 +110,7 @@ const updateProfile = async (req, res, next) => {
         return next (new HttpError("Sorry, could not update the user's data!", 401));
     };
 
-    res.json({ user: selectedUser });
+    res.json({ user: selectedUser.toObject({ getters: true }) });
 };
 
 exports.createAndLogInToUser = createAndLogInToUser;

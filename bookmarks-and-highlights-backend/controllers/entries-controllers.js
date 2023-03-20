@@ -63,7 +63,7 @@ const createEntry = async (req, res, next) => {
         return next(new HttpError("Could not add entry to database!", 500));
     };
 
-    res.status(201).json({ entry: newEntry });
+    res.status(201).json({ entry: newEntry.toObject({ getters: true }) });
 };
 
 const deleteEntry = async (req, res, next) => {

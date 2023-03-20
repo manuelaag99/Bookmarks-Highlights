@@ -21,14 +21,14 @@ export default function ProfilePage () {
 
     const [selectedUser, setSelectedUser] = useState();
     const [selectedUserEntries, setSelectedUserEntries] = useState();
-    const [ cards, setCards ] = useState()
-    const [ cardsToDisplay, setCardsToDisplay ] = useState(cards)
-    const [ groupingOfCards, setgroupingOfCards ] = useState("bookTitle");
-    const [ searchQuery, setSearchQuery ] = useState("")
+    const [cards, setCards] = useState()
+    const [cardsToDisplay, setCardsToDisplay] = useState(cards)
+    const [groupingOfCards, setgroupingOfCards] = useState("bookTitle");
+    const [searchQuery, setSearchQuery] = useState("")
 
     let defaultCards;
     useEffect(() => {
-        const fetchUserEntries = async () => {
+        const fetchData = async () => {
             try {
                 const userEntriesData = await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/all");
                 setSelectedUserEntries(userEntriesData.userEntries);
@@ -36,14 +36,16 @@ export default function ProfilePage () {
                 setSelectedUser(userInfoData.user);
             } catch (err) {}
         };
-        fetchUserEntries();
-    }, [sendHttpRequest]);
+        fetchData();
+    }, [sendHttpRequest, userid]);
 
     useEffect(() => {
-        setCards(selectedUserEntries);
-        defaultCards = arrangeCardGroups("bookTitle", selectedUserEntries);
-        setCardsToDisplay(defaultCards)
-    }, [selectedUserEntries])
+        if (selectedUserEntries) {
+            setCards(selectedUserEntries);
+            defaultCards = arrangeCardGroups("bookTitle", selectedUserEntries);
+            setCardsToDisplay(defaultCards);
+        }
+    }, [selectedUserEntries]);
 
     const searchButtonHandle = (searchText) => {
         setSearchQuery((searchText) => searchText);
@@ -73,7 +75,7 @@ export default function ProfilePage () {
         }
     };
 
-    if (!selectedUser) {
+    if (!selectedUser || !selectedUserEntries) {
         <Loading open={loading} />
     } else {
         return (
@@ -87,7 +89,7 @@ export default function ProfilePage () {
                 <Link to={"/" + selectedUser.id + "/add"} state={{ userid: selectedUser.id, userinfo: selectedUser }}>
                     <AddCommand userId={selectedUser.id} />
                 </Link>
-                <Loading open={loading} />
+                {loading && <Loading open={loading} />}
             </div>
         )
     }
