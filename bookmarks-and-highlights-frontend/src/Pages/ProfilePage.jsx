@@ -15,7 +15,7 @@ import { useHttpHook } from "../custom-hooks";
 
 export default function ProfilePage () {
     const auth = useContext(AuthContext);
-    console.log(auth.isLoggedIn);
+    //console.log(auth.isLoggedIn);
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
     const { userid } = useParams();
 

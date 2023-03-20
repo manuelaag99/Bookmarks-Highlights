@@ -18,7 +18,7 @@ export default function CardsSection ({ bookid, cardsInfo, entries, isProfilePag
                 {isProfilePage ? (cardsInfo.map((bookOrArticleCard, index) => {
                     return <Card key={index} specificUserId={userid} specificBookId={bookOrArticleCard.labelId} title={bookOrArticleCard.title} numberOfPhotos={bookOrArticleCard.collection.length} photos={bookOrArticleCard.collection}/>
                     })) : (entries.map((note, index) => {
-                        return <BandHsPhotoCard key={index} showBookTitles={showBookTitles} userid={userid} bookid={bookid} title={title} entries={entries} bookTitle={note.bookTitle} itemid={note.itemId} taglist={note.tags} photosrc={note.photoUrl} page={note.pageNumber} date={note.date}/>
+                        return <BandHsPhotoCard key={index} showBookTitles={showBookTitles} userid={userid} bookid={bookid} title={title} entries={entries} bookTitle={note.bookTitle} itemid={note.id} taglist={note.tags} photosrc={note.photoUrl} page={note.pageNumber} date={note.date}/>
                     }))}
             </div>
         )

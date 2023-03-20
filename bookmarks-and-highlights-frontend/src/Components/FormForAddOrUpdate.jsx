@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-import { useInput } from "../custom-hooks";
+import { useHttpHook, useInput } from "../custom-hooks";
 
 export default function FormForAddOrUpdate ({ classnames, errorText, field, initialValidity, initialValue, inputType, labelText, listOfBooks, onInput, placeholderText }) {
     const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: initialValue, isValid: initialValidity });
@@ -9,12 +9,16 @@ export default function FormForAddOrUpdate ({ classnames, errorText, field, init
     // useEffect here makes sure that the function being called from the parent re-runs every time the values are updated 
     useEffect(() => onInput(field, value, isValid), [onInput, field, value, isValid])
 
-    
-    // if (listOfBooks) {
-    //     console.log(listOfBooks);
-    // } else {
-    //     console.log("There are no books in the database.")
-    // }
+    // const [savedTags, setSavedTags] = useState();
+    // useEffect(() => {
+    //     const fetchuserTags = async () => {
+    //         try {
+    //             const responseData = useHttpHook("");
+    //             setSavedTags(responseData.tags);
+    //         } catch (err) {}
+    //     }
+    //     // fetchuserTags();
+    // });
 
     return (
         <div className={"h-16 mt-3 " + classnames}>

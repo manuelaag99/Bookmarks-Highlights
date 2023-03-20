@@ -8,10 +8,13 @@ import SettingsCommand from "./SettingsCommand";
 import TagsSection from "./TagsSection";
 
 export default function BandHsPhotoCard ({ bookTitle, bookid, date, entries, itemid, page, photosrc, showBookTitles, taglist, title, userid }) {
-    const [ photoWindow, setPhotoWindow ] = useState(false)
-    const [ tagsPopUp, setTagsPopUp ] = useState(false)
+    const [photoWindow, setPhotoWindow] = useState(false)
+    const [tagsPopUp, setTagsPopUp] = useState(false)
 
-    const shortenedTags = taglist.filter((photo, index) => index < 4)
+    let shortenedTags;
+    if (taglist) {
+        shortenedTags = taglist.filter((photo, index) => index < 4)
+    }
 
     return (
         <div className={"rounded-tag shadow-card xl:w-9/10 md:w-88 w-full h-96 bg-var-2 p-4 box-border flex flex-col flex-wrap md:hover:h-102 duration-500 justify-center mb-14 sm:mx-5 xl:mx-auto  " + (photoWindow && " ")}>
