@@ -7,7 +7,6 @@ const entriesRoutes = require("./routes/entries-routes");
 const HttpError = require("./models/http-error");
 const usersRoutes = require("./routes/users-routes");
 
-
 const app = express();
 
 app.use(bodyParser.json());

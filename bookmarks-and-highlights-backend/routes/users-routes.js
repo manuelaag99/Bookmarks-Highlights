@@ -20,7 +20,6 @@ router.post(
 router.patch(
     "/:userid/updateProfile",
     check("displayName").not().isEmpty(),
-    check("email").isEmail(),
     check("username").isLength({ min: 5 }),
     usersControllers.updateProfile);
 

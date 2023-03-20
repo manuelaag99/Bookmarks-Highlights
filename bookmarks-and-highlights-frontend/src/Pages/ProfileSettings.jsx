@@ -13,7 +13,7 @@ export default function ProfileSettings () {
     const location = useLocation();
     const { userid } = location.state;
 
-    const { loading, error, sendHttpRequest, clearError } = useHttpHook;
+    const { loading, error, sendHttpRequest, clearError } = useHttpHook();
 
     const [stateOfForm, inputHandler] = useForm({
         username: { value: "", isValid: false },
@@ -25,10 +25,10 @@ export default function ProfileSettings () {
     const formChangeHandler = () => setUpdateButtonValidity(stateOfForm.isValid);
 
     const submitHandler = async e => {
-        e.preventDefault()
+        e.preventDefault();
         console.log(stateOfForm)
         try {
-            const responseData = await sendHttpRequest(
+            await sendHttpRequest(
                 "http://localhost:3000/api/users/" + userid + "/updateProfile",
                 "PATCH",
                 JSON.stringify({
@@ -36,10 +36,10 @@ export default function ProfileSettings () {
                     displayName: stateOfForm.inputs.displayName.value,
                     shortBio: stateOfForm.inputs.shortBio.value
                 }),
-                { "Content-Type": "Application/json" })
-            console.log(responseData)
+                { "Content-Type": "Application/json" }
+                )
+            navigate("/" + userid + "/myprofile");
         } catch (err) {}
-        navigate("/" + userid + "/myprofile");
     };
     
     return (

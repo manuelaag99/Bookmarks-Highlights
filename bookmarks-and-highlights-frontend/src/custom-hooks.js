@@ -56,7 +56,7 @@ const useHttpHook = () => {
             return responseData;
         } catch (err) {
             console.log(err)
-            setError(err.message || "Something went wrong, please try again!");
+            setError(error.message || "Something went wrong, please try again!");
             setLoading(false);
             throw err;
         }

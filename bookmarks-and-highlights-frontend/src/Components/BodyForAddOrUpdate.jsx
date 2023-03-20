@@ -61,7 +61,9 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                     creator: userid
                 }),
                 { "Content-Type": "Application/json" })
-        } catch (err) {}
+        } catch (err) {
+            console.log(err)
+        }
         navigate("/" + userid + "/myprofile");
     };
     
