@@ -30,13 +30,18 @@ export default function ProfilePage () {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userEntriesData = await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/all");
-                setSelectedUserEntries(userEntriesData.userEntries);
                 const userInfoData = await sendHttpRequest("http://localhost:3000/api/users/" + userid + "/info");
                 setSelectedUser(userInfoData.user);
             } catch (err) {}
         };
         fetchData();
+        const fetchEntriesData = async () => {
+            try {
+                const userEntriesData = await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/all");
+                setSelectedUserEntries(userEntriesData.userEntries);
+            } catch (err) {}
+        };
+        fetchEntriesData();
     }, [sendHttpRequest, userid]);
 
     useEffect(() => {
@@ -75,8 +80,10 @@ export default function ProfilePage () {
         }
     };
 
-    if (!selectedUser || !selectedUserEntries) {
-        <Loading open={loading} />
+    if (!selectedUser) {
+        return (
+            <Loading open={loading} />
+        )
     } else {
         return (
             <div className="flex flex-wrap justify-center md:w-full w-8/10 mx-auto">
@@ -89,7 +96,7 @@ export default function ProfilePage () {
                 <Link to={"/" + selectedUser.id + "/add"} state={{ userid: selectedUser.id, userinfo: selectedUser }}>
                     <AddCommand userId={selectedUser.id} />
                 </Link>
-                {loading && <Loading open={loading} />}
+                <Loading open={loading} />
             </div>
         )
     }

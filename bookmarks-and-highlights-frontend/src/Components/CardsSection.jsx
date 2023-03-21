@@ -7,7 +7,7 @@ import Card from "./Card";
 export default function CardsSection ({ bookid, cardsInfo, entries, isProfilePage, showBookTitles, title, userid }) {
     const navigate = useNavigate();
     const addHandle = () => {
-        navigate("/" + userid + "add");
+        navigate("/" + userid + "/add");
     }
 
     if (isProfilePage && !cardsInfo) {
