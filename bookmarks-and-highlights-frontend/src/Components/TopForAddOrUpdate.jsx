@@ -1,22 +1,34 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import BackBtnForAddOrUpdate from "./BackBtnForAddOrUpdate";
 import Button from "./Button";
 import ConfirmDelete from "./Portals/ConfirmDelete";
+import ErrorMessage from "./Portals/ErrorMessage";
+import Loading from "./Portals/Loading";
+import { useHttpHook } from "../custom-hooks";
 
-export default function TopForAddOrUpdate ({ classnames, formForSubmitButtonform, isAddOrUpdateBtnAbled, isUpdating, route, stateToSend, typeForSubmitButton, userid }) {
+export default function TopForAddOrUpdate ({ classnames, formForSubmitButtonform, isAddOrUpdateBtnAbled, isUpdating, itemid, route, stateToSend, typeForSubmitButton, userid }) {   
+    const navigate = useNavigate();
+
     const [ showDeleteWindow, setShowDeleteWindow ] = useState(false)
     const closeDeleteWindow = () => setShowDeleteWindow(() => false)
     const openDeleteWindow = () => setShowDeleteWindow(() => true)
 
-    const deleteButtonHandle = () => {
+    const { loading, error, sendHttpRequest, clearError } = useHttpHook();
+
+    const deleteButtonHandle = async () => {
         console.log("deleted!")
         closeDeleteWindow()
+        try {
+            await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/delete/" + itemid, "DELETE");
+            navigate("/" + userid + "/myprofile");
+        } catch (err) {}
     }
 
     return (
     <div className="flex flex-wrap md:flex-col flex-row w-full absolute top-0 md:h-1/4 h-16 justify-between">
+        <ErrorMessage open={error} error={error} onClose={clearError} />
         <Link className="md:w-1/12 w-1/10 md:h-16 h-full" to={route} state={stateToSend}>
             <BackBtnForAddOrUpdate/>
         </Link>
@@ -25,6 +37,7 @@ export default function TopForAddOrUpdate ({ classnames, formForSubmitButtonform
             <Button classnames={" bg-var-4 hover:bg-var-4-hovered text-var-1 md:text-dsk-addBandHbtns text-mob-addBandHbtns min-h-2/3 my-auto " + classnames} type={typeForSubmitButton} form={formForSubmitButtonform} isAbled={isAddOrUpdateBtnAbled} linkRoute={isUpdating ?  "/" + userid + "/bandhs" : "/" + userid + "/myprofile"} buttonText={isUpdating ? "update" : "add"} />
             <ConfirmDelete open={showDeleteWindow} onDelete={deleteButtonHandle} onClose={closeDeleteWindow} />
         </div>
+        <Loading open={loading} />
     </div>
     )
 }
