@@ -91,7 +91,7 @@ export default function ProfilePage () {
                 <ProfileTop isProfilePage={true} needsPhoto={true} userid={selectedUser.id} name={selectedUser.displayName} bio={selectedUser.shortBio} photoUrl={selectedUser.profilePhotoUrl} stateToSend={{ userid: selectedUser.id }} />
                 <EmptyLine />
                 <Breaker breakerText="MY BOOKMARKS & HIGHLIGHTS" />
-                <Options searchButton={searchButtonHandle} groupButton={groupButtonHandle} rightText="group by: " />
+                {selectedUserEntries && <Options searchButton={searchButtonHandle} groupButton={groupButtonHandle} rightText="group by: " />}
                 <CardsSection isProfilePage={true} cardsInfo={cardsToDisplay} userid={selectedUser.id} />
                 <Link to={"/" + selectedUser.id + "/add"} state={{ userid: selectedUser.id, userinfo: selectedUser }}>
                     <AddCommand userId={selectedUser.id} />

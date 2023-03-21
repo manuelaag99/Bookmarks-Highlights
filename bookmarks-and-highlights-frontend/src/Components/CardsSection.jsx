@@ -12,12 +12,12 @@ export default function CardsSection ({ bookid, cardsInfo, entries, isProfilePag
 
     if (isProfilePage && !cardsInfo) {
         return (
-            <div className="my-10 text-var-6 opacity-40" onClick={addHandle}>
+            <div className="my-20 text-var-6 opacity-40" onClick={addHandle}>
                 <p>Sorry, you do not have any bookmark or hightlight! Add one by clicking here or the "+" button</p>
             </div>)
     } else if (!isProfilePage && !entries) {
         return (
-            <div className="my-10 text-var-6 opacity-40" onClick={addHandle}>
+            <div className="my-20 text-var-6 opacity-40" onClick={addHandle}>
                 <p>Sorry, you have no entries for this book! Add one by clicking here or the "+" button</p>
             </div>)
     } else {
