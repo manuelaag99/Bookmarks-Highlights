@@ -1,16 +1,24 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import BandHsPhotoCard from "./BandHsPhotoCard";
 import Card from "./Card";
 
 export default function CardsSection ({ bookid, cardsInfo, entries, isProfilePage, showBookTitles, title, userid }) {
+    const navigate = useNavigate();
+    const addHandle = () => {
+        navigate("/" + userid + "add");
+    }
+
     if (isProfilePage && !cardsInfo) {
-        return (<div className="my-10 text-var-6 opacity-40">
-                <p>Sorry, there are no entries yet for this user!</p>
+        return (
+            <div className="my-10 text-var-6 opacity-40" onClick={addHandle}>
+                <p>Sorry, you do not have any bookmark or hightlight! Add one by clicking here or the "+" button</p>
             </div>)
     } else if (!isProfilePage && !entries) {
-        return (<div className="my-10 text-var-6 opacity-40">
-                <p>Sorry, there are no entries yet for this user!</p>
+        return (
+            <div className="my-10 text-var-6 opacity-40" onClick={addHandle}>
+                <p>Sorry, you have no entries for this book! Add one by clicking here or the "+" button</p>
             </div>)
     } else {
         return (

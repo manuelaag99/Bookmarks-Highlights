@@ -26,12 +26,14 @@ export default function UpdateBandH () {
         fetchUserEntries();
     }, [sendHttpRequest, userid, itemid]);
 
-    if (!userEntry) return <p>Sorry, no matching item was found!</p>
+    if (!userEntry) return (<div className="my-10 text-var-6 opacity-40">
+        <p>Sorry, there are no entries yet for this user!</p>
+    </div>)
 
     return (
         <div className="flex flex-wrap items-center justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
             <ErrorMessage open={error} error={error} onClose={clearError} />
-            <TopForAddOrUpdate type="submit" form="add-or-update-form" userid={userid} isAddOrUpdateBtnAbled={formValidity} classnames=" w-1/3 " isUpdating={true} route={"/" + userid + "/bandhs/labelid/" + bookid} stateToSend={{ userid: userid, bookid: bookid, title: title, entries: entries }}/>
+            <TopForAddOrUpdate typeForSubmitButton="submit" formForSubmitButtonform="add-or-update-form" userid={userid} isAddOrUpdateBtnAbled={formValidity} classnames=" w-1/3 " isUpdating={true} route={"/" + userid + "/bandhs/labelid/" + bookid} stateToSend={{ userid: userid, bookid: bookid, title: title, entries: entries }}/>
             <BodyForAddOrUpdate isFormValid={checkFormValidity} initialValues={userEntry} initialFormValidity={true} isAdd={false} userid={userid} bookid={bookid} title={title} entries={entries} itemid={itemid} />
             <Loading open={loading} />
         </div>
