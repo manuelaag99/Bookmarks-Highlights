@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import ErrorMessage from "./Portals/ErrorMessage";
 import FormForAddOrUpdate from "./FormForAddOrUpdate";
+import FormWithListForAddOrUpdate from "./FormWithListForAddOrUpdate";
 import Loading from "./Portals/Loading";
 import PhotoForAddOrUpdate from "./PhotoForAddOrUpdate";
 import TagsSection from "./TagsSection";
@@ -22,16 +23,15 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
 
     useEffect(() => {
         setFormData(initialValues)
-    }, [initialValues])
+    }, [initialValues]);
 
     const initialTagsState = isAdd ? [] : initialValues.tags;
     const [tagsState, setTagsState] = useState(initialTagsState);
     const keyHandle = () => {
         if (tagsState !== stateOfForm.inputs.tags.value) setTagsState(() => stateOfForm.inputs.tags.value);
         isFormValid(stateOfForm);
+        console.log(stateOfForm);
     };
-    // const [listOfBooks, setListOfBooks] = useState();
-
 
     const submitHandler = async e => {
         e.preventDefault()
@@ -70,27 +70,45 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         }
     };
 
+    const [openBookList, setOpenBookList] = useState(false);
+    const shouldBookListOpen = () => setOpenBookList(true);
+    const shouldBookListClose = () => setOpenBookList(false);
+
+
+    const [titleValue, setTitleValue] = useState();
+    const selectListItem = (listValue) => {
+        console.log(listValue);
+        stateOfForm.inputs.title.value = listValue;
+        stateOfForm.inputs.title.isValid = true;
+        console.log(stateOfForm)
+        setTitleValue(listValue)
+    };
+
+    const clickHandle = () => {
+        setOpenBookList(false);
+    };
+
     return (
-        <form id="add-or-update-form" onKeyUp={() => {keyHandle()}} onSubmit={submitHandler} className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row">
+        <form id="add-or-update-form" onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row z-0">
             <ErrorMessage open={error} error={error} onClose={clearError} />
-            <PhotoForAddOrUpdate photo="" />
-            <div className="w-3/5 md:h-7/10 h-3/10 pl-6 block md:hidden">
-                <FormForAddOrUpdate onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.bookTitle || null} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
+            <div onClick={clickHandle} className="w-2/5 md:w-[12%] items-center">
+                <PhotoForAddOrUpdate photo="" />
+            </div>
+            <div className="w-3/5 md:w-[88%] h-3/10 pl-6 block ">
+                {/* <FormForAddOrUpdate classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : stateOfForm.inputs.title.value || null} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" /> */}
+                <FormWithListForAddOrUpdate valueFromList={titleValue} isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.title} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
+            </div>
+            <div onClick={clickHandle} className="h-7/10 w-full pl-3">
+                <div className="flex flex-wrap flex-row justify-start">
+                    <FormForAddOrUpdate onInput={inputHandler} field="date" initialValue={isAdd ? "" : initialValues.date || null} initialValidity={initialFormValidity} errorText="error!" labelText="date:" placeholderText="DD/MM/YYYY" classnames="w-2/3 " inputType="date" />
+                    <FormForAddOrUpdate onInput={inputHandler} field="page" initialValue={isAdd ? "" : initialValues.pageNumber || null} initialValidity={initialFormValidity} errorText="error!" labelText="page #:" placeholderText="e.g. 31, 105" classnames="w-3/10 " inputType="number" />
                 </div>
-                <div className="h-7/10 w-full md:w-2/3 pl-3">
-                    <div className="md:w-full hidden md:block mb-3">
-                        <FormForAddOrUpdate onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.bookTitle || null} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
-                    </div>
-                    <div className="flex flex-wrap flex-row justify-start">
-                        <FormForAddOrUpdate onInput={inputHandler} field="date" initialValue={isAdd ? "" : initialValues.date || null} initialValidity={initialFormValidity} errorText="error!" labelText="date:" placeholderText="DD/MM/YYYY" classnames="w-2/3 " inputType="date" />
-                        <FormForAddOrUpdate onInput={inputHandler} field="page" initialValue={isAdd ? "" : initialValues.pageNumber || null} initialValidity={initialFormValidity} errorText="error!" labelText="page #:" placeholderText="e.g. 31, 105" classnames="w-3/10 " inputType="number" />
-                    </div>
-                    <FormForAddOrUpdate onInput={inputHandler} field="tags" initialValue={isAdd ? "" : initialTagsState.toString().replaceAll(",", ", ") || null} initialValidity={initialFormValidity} errorText="error!" labelText="tags:" placeholderText="e.g. geography..." classnames="w-full mt-6 " />
-                    <div className="mt-6">
-                        <TagsSection tagsArray={tagsState} />
-                    </div>
+                <FormForAddOrUpdate onInput={inputHandler} field="tags" initialValue={isAdd ? "" : initialTagsState.toString().replaceAll(",", ", ") || null} initialValidity={initialFormValidity} errorText="error!" labelText="tags:" placeholderText="e.g. geography..." inputType="text" classnames=" w-full mt-6 relative " />
+                <div className="mt-6">
+                    <TagsSection tagsArray={tagsState} />
                 </div>
-                <Loading open={loading} />
-            </form>
-        )
-}
+            </div>
+            <Loading open={loading} />
+        </form>
+    );
+};

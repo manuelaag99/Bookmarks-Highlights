@@ -20,6 +20,12 @@ export function addOrUpdateIndividualInputReducer (state, action) {
                 ...state,
                 isTouched: true
             }
+        case "list option":
+            return {
+                ...state,
+                value: action.val,
+                isValid: true //CHECK
+            }
         default:
             return state
     }
@@ -44,7 +50,7 @@ export function addOrUpdateFormReducer (state, action) {
                         if (action.value) {
                             value = action.value.trim().split(",").filter((possibleTag) => {
                                 const trimmedTag = possibleTag.trim()
-                                if (trimmedTag !== "") return trimmedTag
+                                if (trimmedTag !== "") return trimmedTag.trim()
                             })
                         }
                     } else {
