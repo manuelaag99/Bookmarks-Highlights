@@ -74,14 +74,13 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     const shouldBookListOpen = () => setOpenBookList(true);
     const shouldBookListClose = () => setOpenBookList(false);
 
-
     const [titleValue, setTitleValue] = useState();
     const selectListItem = (listValue) => {
         console.log(listValue);
         stateOfForm.inputs.title.value = listValue;
         stateOfForm.inputs.title.isValid = true;
-        console.log(stateOfForm)
-        setTitleValue(listValue)
+        console.log(stateOfForm);
+        setTitleValue(listValue);
     };
 
     const clickHandle = () => {
@@ -95,7 +94,6 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                 <PhotoForAddOrUpdate photo="" />
             </div>
             <div className="w-3/5 md:w-[88%] h-3/10 pl-6 block ">
-                {/* <FormForAddOrUpdate classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : stateOfForm.inputs.title.value || null} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" /> */}
                 <FormWithListForAddOrUpdate valueFromList={titleValue} isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.title} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
             </div>
             <div onClick={clickHandle} className="h-7/10 w-full pl-3">
