@@ -23,10 +23,6 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, fiel
     };
 
     const [dynamicValue, setDynamicValue] = useState("");
-    // useEffect(() => {
-    //     chooseFromListHandler(valueFromList);
-    //     setDynamicValue(valueFromList);
-    // }, [valueFromList]);
     useEffect(() => {
         setDynamicValue(value);
     }, [value]);
