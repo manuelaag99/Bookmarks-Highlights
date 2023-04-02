@@ -13,8 +13,8 @@ export default function IndividualInputForAuthentication ({ errorText, field, fo
     return (
         <>
             <input autoComplete="off" className={"mb-5 px-2 border-solid border-2 outline-none rounded-tag block h-12 w-9/10 text-center " + ((!inputState.isValid && inputState.isTouched) && "border-red-btn" )} onBlur={inputBlurHandler} onFocus={inputFocusHandler} onChange={inputChangeHandler} placeholder={placeholderText} type={inputType} />
-            <p className={"mt-[-18px] text-red-btn " + ((!inputState.isValid && inputState.isTouched) ? "inline" : "hidden")}>{errorText}</p>
-            {inputState.isActive && !inputState.isTouched && <WindowForInputInfo windowInfoText={windowInfoText}/>}
+            <p className={"mt-[-18px] text-red-btn text-center px-4 " + ((!inputState.isValid && inputState.isTouched) ? "inline" : "hidden")}>{errorText}</p>
+            {inputState.isActive && !inputState.isTouched && windowInfoText && <WindowForInputInfo windowInfoText={windowInfoText}/>}
         </>
     )
 }
