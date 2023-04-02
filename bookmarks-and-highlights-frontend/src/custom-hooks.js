@@ -74,7 +74,7 @@ const useHttpHook = () => {
         }
     }, []);
 
-    return { loading, error, sendHttpRequest, clearError };
+    return { loading, error, sendHttpRequest, clearError, setError };
 };
 
 export { useHttpHook };

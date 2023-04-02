@@ -11,7 +11,7 @@ import { useForm, useHttpHook } from "../custom-hooks";
 export default function InputsAndButtonFormForAuthentication ({ buttonInput, confirmPasswordPlaceholder, emailPlaceholder, initialInputsForForm, passwordPlaceholder, type, usernamePlaceholder }) {
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
-    const { loading, error, sendHttpRequest, clearError } = useHttpHook();
+    const { loading, error, sendHttpRequest, clearError, setError } = useHttpHook();
     const [stateOfAuthInputForm, authInputHandler] = useForm(initialInputsForForm, false);
     
     const [inputButtonValidity, setInputButtonValidity] = useState(false)
@@ -49,6 +49,8 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                 navigate("/" + responseData.user.id + "/myprofile");
             } else {
                 console.log("they don't match")
+                setError("The passwords do not match!")
+
             }
         } else if (type === "Sign in") {
             try {
