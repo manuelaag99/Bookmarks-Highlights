@@ -18,12 +18,14 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
     const changeHandler = () => setInputButtonValidity(() => stateOfAuthInputForm.isValid);
 
     useEffect(() => {
-        if (stateOfAuthInputForm.inputs.password.value === stateOfAuthInputForm.inputs.confirmPassword.value) {
-            console.log("they match")
-        } else {
-            console.log("They dont match")
+        if (stateOfAuthInputForm.inputs.password.value) {
+            if (stateOfAuthInputForm.inputs.password.value === stateOfAuthInputForm.inputs.confirmPassword.value) {
+                console.log("they match")
+            } else {
+                console.log("They dont match")
+            }
         }
-    }, [stateOfAuthInputForm.inputs.confirmPassword.value]);
+    }, [stateOfAuthInputForm]);
 
     let responseData;
     const submitHandler = async e => {
@@ -44,6 +46,7 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                         { "Content-Type": "Application/json" })
                     auth.login();
                 } catch (err) {};
+                navigate("/" + responseData.user.id + "/myprofile");
             } else {
                 console.log("they don't match")
             }
@@ -59,8 +62,8 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                     { "Content-Type": "Application/json" })
                     auth.login();
             } catch (err) {};
+            navigate("/" + responseData.user.id + "/myprofile");
         };
-        navigate("/" + responseData.user.id + "/myprofile");
     };
 
     return (

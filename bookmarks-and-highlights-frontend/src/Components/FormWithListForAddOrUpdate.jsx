@@ -17,12 +17,14 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, fiel
     const clickHandle = e => {
         const listValue = e.target.innerText;
         selectTitle(listValue);
-        chooseFromListHandler(valueFromList);
-        setDynamicValue(listValue);
         focusOutHandler();
     };
 
     const [dynamicValue, setDynamicValue] = useState("");
+    useEffect(() => {
+        chooseFromListHandler(valueFromList);
+        setDynamicValue(valueFromList);
+    }, [valueFromList]);
     useEffect(() => {
         setDynamicValue(value);
     }, [value]);

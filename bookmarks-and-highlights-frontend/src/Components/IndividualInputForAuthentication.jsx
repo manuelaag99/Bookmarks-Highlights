@@ -4,7 +4,7 @@ import { useInput } from "../custom-hooks";
 import WindowForInputInfo from "./WindowForInputInfo";
 
 export default function IndividualInputForAuthentication ({ errorText, field, formState, inputType, onInput, placeholderText, windowInfoText }) {
-    const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: "" , isValid: false }, formState);
+    const [inputState, inputChangeHandler, inputBlurHandler, inputFocusHandler, chooseFromListHandler] = useInput({ value: "" , isValid: false, isTouched: false }, formState);
     const { value, isValid } = inputState;
 
     // useEffect here makes sure that the function being called from the parent re-runs every time the values are updated 
@@ -12,9 +12,9 @@ export default function IndividualInputForAuthentication ({ errorText, field, fo
 
     return (
         <>
-            <input autoComplete="off" className={"mb-5 px-2 border-solid border-2 outline-none rounded-tag block h-12 w-9/10 text-center " + ((!inputState.isValid && inputState.isTouched) && "border-red-btn" )} onBlur={inputBlurHandler} onChange={inputChangeHandler} placeholder={placeholderText} type={inputType} />
+            <input autoComplete="off" className={"mb-5 px-2 border-solid border-2 outline-none rounded-tag block h-12 w-9/10 text-center " + ((!inputState.isValid && inputState.isTouched) && "border-red-btn" )} onBlur={inputBlurHandler} onFocus={inputFocusHandler} onChange={inputChangeHandler} placeholder={placeholderText} type={inputType} />
             <p className={"mt-[-18px] text-red-btn " + ((!inputState.isValid && inputState.isTouched) ? "inline" : "hidden")}>{errorText}</p>
-            {!inputState.isTouched && <WindowForInputInfo windowInfoText={windowInfoText}/>}
+            {inputState.isActive && !inputState.isTouched && <WindowForInputInfo windowInfoText={windowInfoText}/>}
         </>
     )
 }

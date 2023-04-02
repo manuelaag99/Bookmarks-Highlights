@@ -20,6 +20,12 @@ export function addOrUpdateIndividualInputReducer (state, action) {
                 ...state,
                 isTouched: true
             }
+        case "focus":
+            return {
+                ...state,
+                isTouched: false,
+                isActive: true
+            }
         case "list option":
             return {
                 ...state,

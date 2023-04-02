@@ -8,8 +8,9 @@ const useInput = (initialInput) => {
         dispatch({ type: "change", val: e.target.value, placeholder: e.target.placeholder });
     }
     const inputBlurHandler = () => dispatch({ type: "blur" })
+    const inputFocusHandler = () => dispatch({ type: "focus" })
     const chooseFromListHandler = (valueFromList) => dispatch({ type: "list option", val: valueFromList })
-    return [inputState, inputChangeHandler, inputBlurHandler, chooseFromListHandler]
+    return [inputState, inputChangeHandler, inputBlurHandler, inputFocusHandler, chooseFromListHandler]
 }
 export { useInput };
 
