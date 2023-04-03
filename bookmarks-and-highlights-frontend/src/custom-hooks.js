@@ -48,7 +48,7 @@ const useHttpHook = () => {
                 signal: httpAbortCtrl.signal
             });
             const responseData = await response.json();
-            // console.log(responseData);
+            console.log(responseData);
             activeHttpRequest.current = activeHttpRequest.current.filter(reqCtrl => reqCtrl !== httpAbortCtrl);
 
             if (!response.ok) {
@@ -58,7 +58,7 @@ const useHttpHook = () => {
             return responseData;
         } catch (err) {
             console.log(err)
-            setError(error.message || "Something went wrong, please try again!");
+            setError(err.message || "Something went wrong, please try again!");
             setLoading(false);
             throw err;
         }

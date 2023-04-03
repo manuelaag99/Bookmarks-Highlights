@@ -5,7 +5,7 @@ const User = require("../models/user");
 
 const createAndLogInToUser = async (req, res, next) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) throw new HttpError("Invalid inputs, please check your data", 422);
+    if (!errors.isEmpty()) return next (new HttpError("Invalid inputs, please check your data", 422));
     const { email, username, password } = req.body;
 
     let existingUser;
@@ -67,7 +67,6 @@ const getUserInfo = async (req, res, next) => {
 
 const loginToExistingUser = async (req, res, next) => {
     const { email, password } = req.body;
-
     let selectedUser;
     try {
         selectedUser = await User.findOne({ email: email });
