@@ -47,11 +47,9 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                         { "Content-Type": "Application/json" })
                     auth.login();
                 } catch (err) {};
-                navigate("/" + responseData.user.id + "/myprofile");
             } else {
                 console.log("they don't match")
                 setError("The passwords do not match!")
-
             }
         } else if (type === "Sign in") {
             try {
@@ -65,8 +63,10 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                     { "Content-Type": "Application/json" })
                     auth.login();
             } catch (err) {};
-            navigate("/" + responseData.user.id + "/myprofile");
         };
+        if (!error) {
+            navigate("/" + responseData.user.id + "/myprofile");
+        }
     };
 
     return (

@@ -64,14 +64,10 @@ const useHttpHook = () => {
         }
     }, []);
 
-    const clearError = () => {
-        setError(null);
-    };
+    const clearError = () => setError(null);
 
     useEffect(() => {
-        return () => {
-            activeHttpRequest.current.forEach(abortCtrl => abortCtrl.abort());
-        }
+        return () => activeHttpRequest.current.forEach(abortCtrl => abortCtrl.abort());
     }, []);
 
     return { loading, error, sendHttpRequest, clearError, setError };
