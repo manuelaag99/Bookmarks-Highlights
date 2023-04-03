@@ -17,15 +17,17 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
     const [inputButtonValidity, setInputButtonValidity] = useState(false)
     const changeHandler = () => setInputButtonValidity(() => stateOfAuthInputForm.isValid);
 
-    useEffect(() => {
-        if (stateOfAuthInputForm.inputs.password.value) {
-            if (stateOfAuthInputForm.inputs.password.value === stateOfAuthInputForm.inputs.confirmPassword.value) {
-                console.log("they match")
-            } else {
-                console.log("They dont match")
+    if (type === "Sign up") {
+        useEffect(() => {
+            if (stateOfAuthInputForm.inputs.password.value) {
+                if (stateOfAuthInputForm.inputs.password.value === stateOfAuthInputForm.inputs.confirmPassword.value) {
+                    console.log("they match")
+                } else {
+                    console.log("They dont match")
+                }
             }
-        }
-    }, [stateOfAuthInputForm]);
+        }, [stateOfAuthInputForm]);
+    };
 
     let responseData;
     const submitHandler = async e => {
@@ -33,7 +35,6 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
         if (type === "Sign up") {
             if (stateOfAuthInputForm.inputs.password.value === stateOfAuthInputForm.inputs.confirmPassword.value) {
                 console.log("they match");
-                
                 try {
                     responseData = await sendHttpRequest(
                         "http://localhost:3000/api/users/signup",
