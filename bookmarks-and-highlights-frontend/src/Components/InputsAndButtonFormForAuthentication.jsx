@@ -17,13 +17,16 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
     const [inputButtonValidity, setInputButtonValidity] = useState(false)
     const changeHandler = () => setInputButtonValidity(() => stateOfAuthInputForm.isValid);
 
+    const [passwordConfirmationStatus, setPasswordConfirmationStatus] = useState(true);
     if (type === "Sign up") {
         useEffect(() => {
             if (stateOfAuthInputForm.inputs.password.value) {
                 if (stateOfAuthInputForm.inputs.password.value === stateOfAuthInputForm.inputs.confirmPassword.value) {
                     console.log("they match")
+                    setPasswordConfirmationStatus(true);
                 } else {
                     console.log("They dont match")
+                    setPasswordConfirmationStatus(false);
                 }
             }
         }, [stateOfAuthInputForm]);
@@ -77,7 +80,7 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                     {type === "Sign up" && <IndividualInputForAuthentication windowInfoText="Write at least 6 characters" errorText="Write a valid username (at least 6 characters)" inputType="text" field="username" formState={stateOfAuthInputForm.inputs} onInput={authInputHandler} placeholderText={usernamePlaceholder} />}
                     <IndividualInputForAuthentication errorText="Please write a valid e-mail" inputType="email" field="email" formState={stateOfAuthInputForm.inputs} onInput={authInputHandler} placeholderText={emailPlaceholder} />
                     <IndividualInputForAuthentication windowInfoText={(type === "Sign up") && "Use special characters, capital letters, and numbers"} errorText="Please write a valid password" inputType="password" field="password" formState={stateOfAuthInputForm.inputs} onInput={authInputHandler} placeholderText={passwordPlaceholder} />
-                    {type === "Sign up" && <IndividualInputForAuthentication windowInfoText="Make sure this matches your password" errorText="The passwords do not match" inputType="password" field="confirmPassword" formState={stateOfAuthInputForm.inputs} onInput={authInputHandler} placeholderText={confirmPasswordPlaceholder} />}
+                    {type === "Sign up" && <IndividualInputForAuthentication showError={!passwordConfirmationStatus} windowInfoText="Make sure this matches your password" errorText="The passwords do not match" inputType="password" field="confirmPassword" formState={stateOfAuthInputForm.inputs} onInput={authInputHandler} placeholderText={confirmPasswordPlaceholder} />}
                 </div>
                 <Button buttonText={buttonInput} classnames="w-9/10 mt-[-20px] mb-5 text-var-1 bg-var-4 hover:bg-var-4-hovered " form="sign-in-or-sign-up-form" isAbled={inputButtonValidity} isSignInOrSignUpButton={true} type="submit"  />
             </form>
