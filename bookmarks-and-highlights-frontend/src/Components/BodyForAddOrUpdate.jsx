@@ -75,17 +75,15 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     const shouldBookListClose = () => setOpenBookList(false);
 
     const [titleValue, setTitleValue] = useState();
-    const selectListItem = (listValue) => {
-        console.log(listValue);
-        stateOfForm.inputs.title.value = listValue;
+    const selectListItem = (book) => {
+        console.log(book);
+        stateOfForm.inputs.title.value = book.bookTitle;
         stateOfForm.inputs.title.isValid = true;
         console.log(stateOfForm);
-        setTitleValue(listValue);
+        setTitleValue(book.bookTitle);
     };
 
-    const clickHandle = () => {
-        setOpenBookList(false);
-    };
+    const clickHandle = () => setOpenBookList(false);
 
     return (
         <form id="add-or-update-form" onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row z-0">
