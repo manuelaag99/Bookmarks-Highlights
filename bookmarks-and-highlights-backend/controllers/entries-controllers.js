@@ -5,18 +5,6 @@ const Entry = require("../models/entry");
 const mongoose = require("mongoose");
 const User = require("../models/user");
 
-const createBook = function (req, res) { //TO-DO!!!
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {throw new HttpError("Invalid input, please check your data", 422);}
-    const { bookTitle } = req.body;
-
-    const newBook = {
-      bookTitle,
-      bookId: uuidv4()
-    };
-    res.json(newBook);
-};
-
 const createEntry = async (req, res, next) => {
     const selectedUserId = req.params.userid;
     const errors = validationResult(req);
@@ -91,28 +79,6 @@ const deleteEntry = async (req, res, next) => {
     res.status(200).json({message: "Successfully deleted this item."});
 };
 
-const getAllBooks = async (req, res, next) => {
-    let allEntries;
-    try {
-        allEntries = await Entry.findMany();
-    } catch (err) {
-        return next(new HttpError("Could not find entries!", 500));
-    }
-
-    const allBooks = allEntries.map(({ bookTitle, bookId }) => ({ bookTitle, bookId }));
-    const unique = []
-    const allBooksNoDuplicates = allBooks.filter(book => {
-        const isDuplicate = unique.includes(book.bookTitle);
-        if (!isDuplicate) {
-            unique.push(book.bookTitle);
-            return true
-        };
-        return false;
-    });
-
-    res.json({ allBooksNoDuplicates: allBooksNoDuplicates.map(book => book.toObject({ getters: true })) });
-};
-
 const getEntryByItemId = async (req, res, next) => {
     const itemId = req.params.itemId;
 
@@ -173,10 +139,8 @@ const updateEntry = async (req, res, next) => {
     res.status(200).json({entry: selectedEntry.toObject({ getters: true })});
 };
 
-exports.createBook = createBook;
 exports.createEntry = createEntry;
 exports.deleteEntry = deleteEntry;
-exports.getAllBooks = getAllBooks;
 exports.getEntryByItemId = getEntryByItemId;
 exports.getUserEntriesByUserId = getUserEntriesByUserId;
 exports.updateEntry = updateEntry;
