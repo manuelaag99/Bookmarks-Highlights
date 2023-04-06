@@ -10,6 +10,8 @@ export function addOrUpdateIndividualInputReducer (state, action) {
                 checkValidity = minLengthText(action.val, 6);
             } else if (action.placeholder === "Create a password") {
                 checkValidity = isTextAPassword(action.val);
+            } else {
+                checkValidity = nonEmptyText(action.val);
             }
             return {
                 ...state,
