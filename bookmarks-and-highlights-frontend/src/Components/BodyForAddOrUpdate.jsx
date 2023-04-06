@@ -21,10 +21,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     }, false)
     const [stateOfForm, inputHandler] = useForm(formData)
 
-    useEffect(() => {
-        setFormData(initialValues)
-    }, [initialValues]);
-
+    useEffect(() => setFormData(initialValues), [initialValues]);
 
     const [existingBooks, setExistingBooks] = useState();
     useEffect(() => {
@@ -77,7 +74,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                         tags: stateOfForm.inputs.tags.value,
                         creator: userid
                     }),
-                    { "Content-Type": "Application/json" })
+                    { "Content-Type": "Application/json" });
                     navigate("/" + userid + "/myprofile");
             } catch (err) {}
         }

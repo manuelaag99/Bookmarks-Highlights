@@ -19,6 +19,13 @@ const createBook = async (req, res, next) => {
         return next(new HttpError("Invalid inputs, please check your data!", 500));
     };
 
+    try {
+        await newBook.save();
+    } catch (err) {
+        console.log(err)
+        return next (new HttpError("Sorry, could not save the new book!", 422));
+    };
+
     res.status(201).json({ newBook: newBook.toObject({ getters: true }) });
 };
 

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import { useInput } from "../custom-hooks";
+import { useInput, useHttpHook } from "../custom-hooks";
 
 export default function FormWithListForAddOrUpdate({ classnames, errorText, existingBooks, field, initialValidity, initialValue, inputType, isBookListOpen, labelText, listOfBooks, onInput, placeholderText, selectTitle, shouldBookListClose, shouldBookListOpen, valueFromList }) {
+    const { loading, error, sendHttpRequest, clearError } = useHttpHook();
+    
     const DUMMYOPTIONS = [{ bookTitle: "The History of Europe", bookId: "85jt95rh4897h5948rj3i" }, { bookTitle: "The History of Africa", bookId: "903ekj24d2f6f42a0l000" }];
     const [listQuery, setListQuery] = useState([]);
     useEffect(() => setListQuery(DUMMYOPTIONS), []);
-    console.log(existingBooks)
+    // console.log(existingBooks)
 
     const [inputState, inputChangeHandler, inputBlurHandler, chooseFromListHandler] = useInput({ value: initialValue, isValid: initialValidity });
     const { value, isValid } = inputState;
@@ -40,7 +42,26 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
         };
     };
     useEffect(() => filterList(), [dynamicValue]);
-    
+
+    const [book, setBook] = useState()
+    const postNewBook = async e => {
+        e.preventDefault();
+        console.log("click")
+        let newBook;
+        try {
+            newBook = await sendHttpRequest(
+                "http://localhost:3000/api/books/createBook",
+                "POST",
+                JSON.stringify({
+                    bookTitle: value
+            }),
+            { "Content-Type": "Application/json" });
+            setBook(newBook);
+        } catch (err) {
+            console.log(err)
+        };
+    };
+    console.log(book)
 
     return (
         <div className={"h-16 mt-3 " + classnames}>
@@ -51,7 +72,7 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
                 {listQuery && listQuery.map((book, index) => <p key={index} onClick={() => clickHandle(book)} className="hover:bg-var-4 hover:text-var-1 duration-100 w-full px-3 py-2 h-fit place-self-center">{book.bookTitle}</p>)}
                 <div className="flex flex-row items-center">
                     <input className="outline-none py-2 px-3 h-fit items-center w-8/10" onChange={filterList} value={dynamicValue} />
-                    <button className="w-2/10 h-full text-logo-sml-ltr justify-center hover:bg-var-4 hover:text-var-1 pb-1">+</button>
+                    <button onClick={postNewBook} className="w-2/10 h-full text-logo-sml-ltr justify-center hover:bg-var-4 hover:text-var-1 pb-1">+</button>
                 </div>
             </div>}
         </div>
