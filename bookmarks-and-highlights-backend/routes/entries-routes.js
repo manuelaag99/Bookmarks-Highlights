@@ -4,13 +4,6 @@ const { check } = require("express-validator");
 const entriesControllers = require("../controllers/entries-controllers");
 const router = express.Router();
 
-router.post(
-    "/user/:userid/createBook",
-    check("bookTitle").isLength({ min: 5 }),
-    entriesControllers.createBook);
-
-router.get("/books", entriesControllers.getAllBooks);
-
 router.get("/user/:userid/all", entriesControllers.getUserEntriesByUserId);
 
 router.get("/user/:userid/:itemId", entriesControllers.getEntryByItemId);

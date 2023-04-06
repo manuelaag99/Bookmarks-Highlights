@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
+const booksRoutes = require("./routes/books-routes");
 const entriesRoutes = require("./routes/entries-routes");
 const HttpError = require("./models/http-error");
 const usersRoutes = require("./routes/users-routes");
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use("/api/books", booksRoutes);
 app.use("/api/entries", entriesRoutes);
 app.use("/api/users", usersRoutes);
 

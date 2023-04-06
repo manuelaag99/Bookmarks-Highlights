@@ -1,6 +1,7 @@
 const HttpError = require("../models/http-error");
 const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require("express-validator");
+const Book = require("../models/book");
 const mongoose = require("mongoose");
 
 const createBook = async (req, res, next) => {
@@ -24,10 +25,15 @@ const createBook = async (req, res, next) => {
 const getAllBooks = async (req, res, next) => {
     let allBooks;
     try {
-        allBooks = await Book.findMany();
+        allBooks = await Book.find({});
     } catch (err) {
+        console.log(err)
         return next(new HttpError("There was a problem retrieving the books", 500));
     };
+
+    if (!allBooks || allBooks.length === 0) {
+        return next(new HttpError("There are no books yet", 404));
+    }
 
     res.json({ allBooks: allBooks.map(book => book.toObject({ getters: true })) });
 }

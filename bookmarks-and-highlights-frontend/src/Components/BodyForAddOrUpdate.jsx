@@ -25,6 +25,19 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         setFormData(initialValues)
     }, [initialValues]);
 
+
+    const [existingBooks, setExistingBooks] = useState();
+    useEffect(() => {
+        const fetchAllBooks = async () => {
+            try {
+                const responseData = await sendHttpRequest("http://localhost:3000/api/books/getAllBooks");
+                setExistingBooks(responseData.allBooks);
+            } catch (err) {}
+        }
+        fetchAllBooks();
+    }, [])
+
+
     const initialTagsState = isAdd ? [] : initialValues.tags;
     const [tagsState, setTagsState] = useState(initialTagsState);
     const keyHandle = () => {
@@ -92,7 +105,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                 <PhotoForAddOrUpdate photo="" />
             </div>
             <div className="w-3/5 md:w-[88%] h-3/10 pl-6 block ">
-                <FormWithListForAddOrUpdate valueFromList={titleValue} isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.title} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
+                <FormWithListForAddOrUpdate valueFromList={titleValue} existingBooks={existingBooks} isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.title} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
             </div>
             <div onClick={clickHandle} className="h-7/10 w-full pl-3">
                 <div className="flex flex-wrap flex-row justify-start">

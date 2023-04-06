@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { useInput } from "../custom-hooks";
 
-export default function FormWithListForAddOrUpdate({ classnames, errorText, field, initialValidity, initialValue, inputType, isBookListOpen, labelText, listOfBooks, onInput, placeholderText, selectTitle, shouldBookListClose, shouldBookListOpen, valueFromList }) {
+export default function FormWithListForAddOrUpdate({ classnames, errorText, existingBooks, field, initialValidity, initialValue, inputType, isBookListOpen, labelText, listOfBooks, onInput, placeholderText, selectTitle, shouldBookListClose, shouldBookListOpen, valueFromList }) {
     const DUMMYOPTIONS = [{ bookTitle: "The History of Europe", bookId: "85jt95rh4897h5948rj3i" }, { bookTitle: "The History of Africa", bookId: "903ekj24d2f6f42a0l000" }];
     const [listQuery, setListQuery] = useState([]);
     useEffect(() => setListQuery(DUMMYOPTIONS), []);
+    console.log(existingBooks)
 
     const [inputState, inputChangeHandler, inputBlurHandler, chooseFromListHandler] = useInput({ value: initialValue, isValid: initialValidity });
     const { value, isValid } = inputState;
@@ -15,7 +16,6 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, fiel
     const focusInHandler = () => shouldBookListOpen();
     const focusOutHandler = () => shouldBookListClose();
     const clickHandle = (book) => {
-        // const listValue = e.target.innerText;
         console.log(book)
         selectTitle(book);
         focusOutHandler();
