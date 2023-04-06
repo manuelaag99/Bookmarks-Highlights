@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 
+import ErrorMessage from "./Portals/ErrorMessage";
+import Loading from "./Portals/Loading";
 import { useInput, useHttpHook } from "../custom-hooks";
 
 export default function FormWithListForAddOrUpdate({ classnames, errorText, existingBooks, field, initialValidity, initialValue, inputType, isBookListOpen, labelText, listOfBooks, onInput, placeholderText, selectTitle, shouldBookListClose, shouldBookListOpen, valueFromList }) {
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
-    
-    const DUMMYOPTIONS = [{ bookTitle: "The History of Europe", bookId: "85jt95rh4897h5948rj3i" }, { bookTitle: "The History of Africa", bookId: "903ekj24d2f6f42a0l000" }];
+
     const [listQuery, setListQuery] = useState([]);
-    useEffect(() => setListQuery(DUMMYOPTIONS), []);
-    // console.log(existingBooks)
+    useEffect(() => {
+        if (existingBooks) setListQuery(existingBooks);
+    }, [existingBooks]);
 
     const [inputState, inputChangeHandler, inputBlurHandler, chooseFromListHandler] = useInput({ value: initialValue, isValid: initialValidity });
     const { value, isValid } = inputState;
@@ -18,7 +20,6 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
     const focusInHandler = () => shouldBookListOpen();
     const focusOutHandler = () => shouldBookListClose();
     const clickHandle = (book) => {
-        console.log(book)
         selectTitle(book);
         focusOutHandler();
     };
@@ -35,46 +36,48 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
     let newList;
     const filterList = () => {
         if (dynamicValue) {
-            newList = DUMMYOPTIONS.filter(option => option.bookTitle.toLowerCase().includes(dynamicValue.toLowerCase()));
+            newList = existingBooks.filter(option => option.bookTitle.toLowerCase().includes(dynamicValue.toLowerCase()));
             setListQuery(newList);
         } else {
-            setListQuery(DUMMYOPTIONS);
+            setListQuery(existingBooks);
         };
     };
     useEffect(() => filterList(), [dynamicValue]);
 
-    const [book, setBook] = useState()
     const postNewBook = async e => {
         e.preventDefault();
-        console.log("click")
-        let newBook;
         try {
-            newBook = await sendHttpRequest(
+            await sendHttpRequest(
                 "http://localhost:3000/api/books/createBook",
                 "POST",
                 JSON.stringify({
                     bookTitle: value
             }),
             { "Content-Type": "Application/json" });
-            setBook(newBook);
         } catch (err) {
             console.log(err)
         };
     };
-    console.log(book)
 
-    return (
-        <div className={"h-16 mt-3 " + classnames}>
-            <label className={"inline text-add-or-update-p font-bold " + ((!inputState.isValid && inputState.isTouched) ? "text-red-btn" : null)}>{labelText}</label>
-            <i className={"ml-3 text-red-btn " + ((!inputState.isValid && inputState.isTouched) ? "inline" : "hidden")}>{errorText}</i>
-            <input className="block outline-none mt-1 pl-2 h-8 w-95 pr-2" type={inputType} placeholder={placeholderText} value={dynamicValue} onFocus={focusInHandler} onBlur={inputBlurHandler} onChange={inputChangeHandler} />
-            {isBookListOpen && <div className="absolute flex flex-col bg-var-1 text-var-5 w-95 h-fit cursor-pointer shadow-card">
-                {listQuery && listQuery.map((book, index) => <p key={index} onClick={() => clickHandle(book)} className="hover:bg-var-4 hover:text-var-1 duration-100 w-full px-3 py-2 h-fit place-self-center">{book.bookTitle}</p>)}
-                <div className="flex flex-row items-center">
-                    <input className="outline-none py-2 px-3 h-fit items-center w-8/10" onChange={filterList} value={dynamicValue} />
-                    <button onClick={postNewBook} className="w-2/10 h-full text-logo-sml-ltr justify-center hover:bg-var-4 hover:text-var-1 pb-1">+</button>
-                </div>
-            </div>}
-        </div>
-    );
+    if (loading) {
+        <Loading open={loading} />
+    } else {
+        return (
+            <div className={"h-16 mt-3 " + classnames}>
+                <ErrorMessage open={error} error={error} onClose={clearError} />
+                <label className={"inline text-add-or-update-p font-bold " + ((!inputState.isValid && inputState.isTouched) ? "text-red-btn" : null)}>{labelText}</label>
+                <i className={"ml-3 text-red-btn " + ((!inputState.isValid && inputState.isTouched) ? "inline" : "hidden")}>{errorText}</i>
+                <input className="block outline-none mt-1 pl-2 h-8 w-95 pr-2" type={inputType} placeholder={placeholderText} value={dynamicValue} onFocus={focusInHandler} onBlur={inputBlurHandler} onChange={inputChangeHandler} />
+                {isBookListOpen && <div className="absolute flex flex-col bg-var-1 text-var-5 w-95 h-fit cursor-pointer shadow-card">
+                    {listQuery && listQuery.map((book, index) => <p key={index} onClick={() => clickHandle(book)} className="hover:bg-var-4 hover:text-var-1 duration-100 w-full px-3 py-2 h-fit place-self-center">{book.bookTitle}</p>)}
+                    <div className="flex flex-row items-center">
+                        <input className="outline-none py-2 px-3 h-fit items-center w-8/10" onChange={filterList} value={dynamicValue} />
+                        <button onClick={postNewBook} className="w-2/10 h-full text-logo-sml-ltr justify-center hover:bg-var-4 hover:text-var-1 pb-1">+</button>
+                    </div>
+                </div>}
+                <Loading open={loading} />
+            </div>
+        );
+    }
+
 };

@@ -8,7 +8,6 @@ import Loading from "./Portals/Loading";
 import PhotoForAddOrUpdate from "./PhotoForAddOrUpdate";
 import TagsSection from "./TagsSection";
 import { useForm, useHttpHook } from "../custom-hooks";
-import { v4 as uuidv4 } from 'uuid';
 
 export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFormValidity, initialValues, isAdd, isFormValid, itemValues, title, userid }) {
     const navigate = useNavigate();
@@ -53,7 +52,6 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                     "POST",
                     JSON.stringify({
                         bookTitle: stateOfForm.inputs.title.value,
-                        bookId: uuidv4(), //this is temporary
                         date: stateOfForm.inputs.date.value,
                         pageNumber: stateOfForm.inputs.page.value,
                         tags: stateOfForm.inputs.tags.value,
@@ -86,10 +84,8 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
 
     const [titleValue, setTitleValue] = useState();
     const selectListItem = (book) => {
-        console.log(book);
         stateOfForm.inputs.title.value = book.bookTitle;
         stateOfForm.inputs.title.isValid = true;
-        console.log(stateOfForm);
         setTitleValue(book.bookTitle);
     };
 
