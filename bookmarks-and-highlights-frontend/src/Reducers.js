@@ -1,14 +1,15 @@
-import { areBothTextsTheSame, minLengthText, nonEmptyText } from "./CheckValidity";
+import { isTextAnEmail, isTextAPassword, minLengthText, nonEmptyText } from "./CheckValidity";
 
 export function addOrUpdateIndividualInputReducer (state, action) {
     switch (action.type) {
         case "change":
             let checkValidity;
-            if (action.placeholder === "Confirm your password") {
-                checkValidity = nonEmptyText(action.val);
-                // TO-DO checkValidity = areBothTextsTheSame(action.formState.password.value, action.formState.confirmPassword.value); 
-            } else {
-                checkValidity = nonEmptyText(action.val);
+            if (action.placeholder === "Enter your e-mail") {
+                checkValidity = isTextAnEmail(action.val);
+            } else if (action.placeholder === "Create a username") {
+                checkValidity = minLengthText(action.val, 6);
+            } else if (action.placeholder === "Create a password") {
+                checkValidity = isTextAPassword(action.val);
             }
             return {
                 ...state,
