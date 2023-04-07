@@ -9,7 +9,7 @@ const createEntry = async (req, res, next) => {
     const selectedUserId = req.params.userid;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {throw new HttpError("Invalid inputs, please check your data", 422);}
-    const { bookTitle, bookId, tags, date, pageNumber, creator } = req.body;
+    const { bookTitle, tags, date, pageNumber, creator } = req.body;
 // ADD PHOTOURL ONCE IT WORKS 
 
     let newEntry;
@@ -17,7 +17,6 @@ const createEntry = async (req, res, next) => {
         newEntry = await Entry({
             userId: selectedUserId,
             bookTitle,
-            bookId,
             tags,
             date,
             pageNumber,

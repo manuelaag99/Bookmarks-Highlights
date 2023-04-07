@@ -17,8 +17,8 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         date: { value: "", isValid: false },
         page: { value: "", isValid: false },
         tags: { value: "", isValid: false }
-    }, false)
-    const [stateOfForm, inputHandler] = useForm(formData)
+    }, false);
+    const [stateOfForm, inputHandler] = useForm(formData);
 
     useEffect(() => setFormData(initialValues), [initialValues]);
 
@@ -29,10 +29,9 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                 const responseData = await sendHttpRequest("http://localhost:3000/api/books/getAllBooks");
                 setExistingBooks(responseData.allBooks);
             } catch (err) {}
-        }
+        };
         fetchAllBooks();
-    }, [])
-
+    }, []);
 
     const initialTagsState = isAdd ? [] : initialValues.tags;
     const [tagsState, setTagsState] = useState(initialTagsState);
@@ -44,6 +43,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
 
     const submitHandler = async e => {
         e.preventDefault()
+        console.log("clicked")
         console.log(stateOfForm)
         if (isAdd) {
             try {
@@ -81,6 +81,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     const [openBookList, setOpenBookList] = useState(false);
     const shouldBookListOpen = () => setOpenBookList(true);
     const shouldBookListClose = () => setOpenBookList(false);
+    const clickHandle = () => setOpenBookList(false);
 
     const [titleValue, setTitleValue] = useState();
     const selectListItem = (book) => {
@@ -88,8 +89,6 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         stateOfForm.inputs.title.isValid = true;
         setTitleValue(book.bookTitle);
     };
-
-    const clickHandle = () => setOpenBookList(false);
 
     return (
         <form id="add-or-update-form" onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row z-0">

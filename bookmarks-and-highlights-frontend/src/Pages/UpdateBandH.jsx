@@ -28,11 +28,6 @@ export default function UpdateBandH () {
 
     if (loading) {
         return <Loading open={loading} />
-    } else if (!loading && !userEntry) {
-        return (
-            <div className="my-10 text-var-6 opacity-40">
-                <p>Sorry, there are no entries yet for this user!</p>
-            </div>) 
     } else if (!loading && userEntry) {
         return (
             <div className="flex flex-wrap items-center justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
@@ -43,4 +38,4 @@ export default function UpdateBandH () {
             </div>
         )
     }
-}
+};

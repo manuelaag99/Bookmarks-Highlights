@@ -79,5 +79,4 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
             </div>
         );
     }
-
 };

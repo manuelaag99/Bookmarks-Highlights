@@ -4,7 +4,6 @@ const Schema = mongoose.Schema
 const entrySchema = new Schema({
     userId: { type: "String", required: true },
     bookTitle: { type: "String", required: true },
-    bookId: { type: "String", required: true },
     photoUrl: { type: "String", required: false }, //i will change this
     tags: { type: ["String"], required: false },
     date: { type: "Date", required: true },
