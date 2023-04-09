@@ -17,13 +17,13 @@ export default function UpdateBandH () {
 
     const [userEntry, setUserEntry] = useState();
     useEffect(() => {
-        const fetchUserEntries = async () => {
+        const fetchUserEntry = async () => {
             try {
                 const responseData = await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/" + itemid);
                 setUserEntry(responseData.selectedEntry);
             } catch (err) {}
         };
-        fetchUserEntries();
+        fetchUserEntry();
     }, [sendHttpRequest, userid, itemid]);
 
     if (loading) {

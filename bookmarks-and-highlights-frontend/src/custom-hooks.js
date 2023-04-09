@@ -15,7 +15,6 @@ const useInput = (initialInput) => {
 export { useInput };
 
 const useForm = (initialFormInputs, initialFormValidity) => {
-    // this function establishes the inputs and their validity status
     const [stateOfForm, dispatch] = useReducer(addOrUpdateFormReducer, {
         inputs: initialFormInputs,
         isValid: initialFormValidity
@@ -57,7 +56,7 @@ const useHttpHook = () => {
             setLoading(false);
             return responseData;
         } catch (err) {
-            console.log(err)
+            console.log(err);
             setError(err.message || "Something went wrong, please try again!");
             setLoading(false);
             throw err;

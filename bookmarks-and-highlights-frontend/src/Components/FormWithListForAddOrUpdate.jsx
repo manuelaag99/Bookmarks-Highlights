@@ -8,9 +8,7 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
 
     const [listQuery, setListQuery] = useState([]);
-    useEffect(() => {
-        if (existingBooks) setListQuery(existingBooks);
-    }, [existingBooks]);
+    useEffect(() => setListQuery(existingBooks), [existingBooks]);
 
     const [inputState, inputChangeHandler, inputBlurHandler, chooseFromListHandler] = useInput({ value: initialValue, isValid: initialValidity });
     const { value, isValid } = inputState;
@@ -35,14 +33,14 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
 
     let newList;
     const filterList = () => {
-        if (dynamicValue) {
+        if (existingBooks && dynamicValue) {
             newList = existingBooks.filter(option => option.bookTitle.toLowerCase().includes(dynamicValue.toLowerCase()));
             setListQuery(newList);
         } else {
             setListQuery(existingBooks);
         };
     };
-    useEffect(() => filterList(), [dynamicValue]);
+    useEffect(() => filterList(), [existingBooks, dynamicValue]);
 
     const postNewBook = async e => {
         e.preventDefault();
@@ -54,9 +52,7 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
                     bookTitle: value
             }),
             { "Content-Type": "Application/json" });
-        } catch (err) {
-            console.log(err)
-        };
+        } catch (err) {};
     };
 
     if (loading) {
@@ -71,7 +67,7 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
                 {isBookListOpen && <div className="absolute flex flex-col bg-var-1 text-var-5 w-95 h-fit cursor-pointer shadow-card">
                     {listQuery && listQuery.map((book, index) => <p key={index} onClick={() => clickHandle(book)} className="hover:bg-var-4 hover:text-var-1 duration-100 w-full px-3 py-2 h-fit place-self-center">{book.bookTitle}</p>)}
                     <div className="flex flex-row items-center">
-                        <input className="outline-none py-2 px-3 h-fit items-center w-8/10" onChange={filterList} value={dynamicValue} />
+                        <input className="outline-none py-2 px-3 h-fit items-center w-8/10" value={dynamicValue} />
                         <button onClick={postNewBook} className="w-2/10 h-full text-logo-sml-ltr justify-center hover:bg-var-4 hover:text-var-1 pb-1">+</button>
                     </div>
                 </div>}

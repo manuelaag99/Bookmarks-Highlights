@@ -20,18 +20,19 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     }, false);
     const [stateOfForm, inputHandler] = useForm(formData);
 
-    useEffect(() => setFormData(initialValues), [initialValues]);
-
     const [existingBooks, setExistingBooks] = useState();
+
     useEffect(() => {
+        setFormData(initialValues);
+        setTitleValue(initialValues.bookTitle);
         const fetchAllBooks = async () => {
             try {
                 const responseData = await sendHttpRequest("http://localhost:3000/api/books/getAllBooks");
                 setExistingBooks(responseData.allBooks);
             } catch (err) {}
         };
-        fetchAllBooks();
-    }, []);
+        fetchAllBooks()
+    }, [initialValues]);
 
     const initialTagsState = isAdd ? [] : initialValues.tags;
     const [tagsState, setTagsState] = useState(initialTagsState);
@@ -43,8 +44,6 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
 
     const submitHandler = async e => {
         e.preventDefault()
-        console.log("clicked")
-        console.log(stateOfForm)
         if (isAdd) {
             try {
                 await sendHttpRequest(
