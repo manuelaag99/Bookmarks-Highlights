@@ -24,8 +24,8 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     const [existingBooks, setExistingBooks] = useState();
 
     useEffect(() => {
-        setFormData(initialValues);
-        setTitleValue(initialValues.bookTitle);
+        !isAdd && setFormData(initialValues);
+        !isAdd && setTitleValue(initialValues.bookTitle);
         const fetchAllBooks = async () => {
             try {
                 const responseData = await sendHttpRequest("http://localhost:3000/api/books/getAllBooks");
