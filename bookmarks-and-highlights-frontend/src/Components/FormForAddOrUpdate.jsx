@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-import { useHttpHook, useInput } from "../custom-hooks";
+import { useInput } from "../custom-hooks";
 
 export default function FormForAddOrUpdate({ classnames, errorText, field, initialValidity, initialValue, inputType, labelText, listOfBooks, onInput, placeholderText, selectTitle }) {
     const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: initialValue, isValid: initialValidity });

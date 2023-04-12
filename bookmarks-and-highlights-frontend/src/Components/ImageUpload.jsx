@@ -1,12 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import Button from "./Button";
+import { useInput } from "../custom-hooks";
 
-export default function ImageUpload ({ id }) {
+export default function ImageUpload ({ field, initialValidity, initialValue, onInput }) {
+    const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: initialValue, isValid: initialValidity });
+    const { value, isValid } = inputState;
+
+    // useEffect here makes sure that the function being called from the parent re-runs every time the values are updated 
+    // useEffect(() => onInput(field, value, isValid), [onInput, field, value, isValid])
+
     const fileSelectorRef = useRef();
     const [file, setFile] = useState();
     const [previewUrl, setPreviewUrl] = useState();
-    const [isValid, setIsValid] = useState(false);
+    const [validity, setValidity] = useState(false);
 
     useEffect(() => {
         if (!file) return;
@@ -17,31 +23,37 @@ export default function ImageUpload ({ id }) {
         fileReader.readAsDataURL(file);
     }, [file]);
 
-    const selectImageHandler = () => {
-        fileSelectorRef.current.click();
-    };
+    const selectFileHandler = () => fileSelectorRef.current.click();
 
     const cancelFileUpload = () => {
         setFile();
         setPreviewUrl();
     };
 
-    const uploadPhotoHandler = e => {
+    const uploadFileHandler = e => {
         e.preventDefault();
+        let selectedFile;
+        let fileIsValid = validity
         if (e.target.files && e.target.files.length === 1) {
-            setFile(e.target.files[0]);
-            setIsValid(true);
-        };
+            selectedFile = e.target.files[0];
+            setFile(selectedFile);
+            setValidity(true);
+            fileIsValid = true
+        } else {
+            setValidity(false);
+            fileIsValid = false
+        }
+        onInput(field, selectedFile, fileIsValid);
     };
 
     return (
         <div className="flex flex-wrap justify-center text-center items-center">
-            <input accept=".jpg,.png,.jpeg" className="w-full h-full " id={id} onChange={uploadPhotoHandler} ref={fileSelectorRef} style={{display: "none"}} type="file" />
+            <input accept=".jpg,.png,.jpeg" className="w-full h-full " id={field} onChange={uploadFileHandler} ref={fileSelectorRef} style={{display: "none"}} type="file" />
             <div className="w-full">
-                {previewUrl && <div onClick={selectImageHandler}>
+                {previewUrl && <div onClick={selectFileHandler}>
                     <img alt="Preview" className="w-full" src={previewUrl} />
                 </div>}
-                {!previewUrl && <button className="w-full h-full" onClick={selectImageHandler} type="button" >Select an image</button>}
+                {!previewUrl && <button className="w-full h-full" onClick={selectFileHandler} type="button" >Select an image</button>}
                 {previewUrl && <button onClick={cancelFileUpload} type="button">CANCEL</button>}
             </div>
         </div>
