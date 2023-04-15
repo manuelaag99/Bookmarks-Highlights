@@ -3,11 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useInput } from "../custom-hooks";
 
 export default function ImageUpload ({ field, initialValidity, initialValue, onInput }) {
-    const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: initialValue, isValid: initialValidity });
-    const { value, isValid } = inputState;
-
-    // useEffect here makes sure that the function being called from the parent re-runs every time the values are updated 
-    // useEffect(() => onInput(field, value, isValid), [onInput, field, value, isValid])
 
     const fileSelectorRef = useRef();
     const [file, setFile] = useState();
@@ -17,9 +12,7 @@ export default function ImageUpload ({ field, initialValidity, initialValue, onI
     useEffect(() => {
         if (!file) return;
         const fileReader = new FileReader();
-        fileReader.onload = () => {
-            setPreviewUrl(fileReader.result);
-        };
+        fileReader.onload = () => setPreviewUrl(fileReader.result);
         fileReader.readAsDataURL(file);
     }, [file]);
 
@@ -49,11 +42,11 @@ export default function ImageUpload ({ field, initialValidity, initialValue, onI
     return (
         <div className="flex flex-wrap justify-center text-center items-center">
             <input accept=".jpg,.png,.jpeg" className="w-full h-full " id={field} onChange={uploadFileHandler} ref={fileSelectorRef} style={{display: "none"}} type="file" />
-            <div className="w-full">
+            <div className="w-full py-auto">
                 {previewUrl && <div onClick={selectFileHandler}>
                     <img alt="Preview" className="w-full" src={previewUrl} />
                 </div>}
-                {!previewUrl && <button className="w-full h-full" onClick={selectFileHandler} type="button" >Select an image</button>}
+                {!previewUrl && <button className="w-full h-full self-center" onClick={selectFileHandler} type="button">Select an image</button>}
                 {previewUrl && <button onClick={cancelFileUpload} type="button">CANCEL</button>}
             </div>
         </div>
