@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { XMarkIcon } from '@heroicons/react/24/solid'
+import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
 export default function ImageUpload ({ field, initialValidity, initialValue, onInput }) {
     const fileSelectorRef = useRef();
@@ -48,7 +48,9 @@ export default function ImageUpload ({ field, initialValidity, initialValue, onI
             </div>}
             <input accept=".jpg,.png,.jpeg" className="w-full h-full " id={field} onChange={uploadFileHandler} ref={fileSelectorRef} style={{display: "none"}} type="file" />
             <div className="w-full h-full flex flex-col justify-center items-center relative">
-                {!previewUrl && <p className="w-full h-fit cursor-pointer">Select an image</p>}
+                {!previewUrl && <div className="cursor-pointer opacity-30 relative w-full px-2">
+                    <p className="w-full h-fit"><PhotoIcon className="h-5 w-5 inline mx-2" />Select an image</p>
+                </div>}
                 {previewUrl && <img alt="Preview" className="h-full object-contain z-10" src={previewUrl} />}
             </div>
         </div>
