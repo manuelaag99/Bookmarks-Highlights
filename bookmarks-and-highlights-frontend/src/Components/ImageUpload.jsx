@@ -8,6 +8,7 @@ export default function ImageUpload ({ field, initialValidity, initialValue, onI
     const [file, setFile] = useState();
     const [previewUrl, setPreviewUrl] = useState();
     const [validity, setValidity] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
 
     useEffect(() => {
         if (!file) return;
@@ -39,14 +40,20 @@ export default function ImageUpload ({ field, initialValidity, initialValue, onI
         onInput(field, selectedFile, fileIsValid);
     };
 
+    const onMouseOverHandler = () => {
+        console.log("hover");
+    };
+
+    const onMouseLeaveHandler = () => {
+        console.log("left");
+    };
+    
     return (
-        <div className="flex flex-wrap justify-center text-center items-center">
+        <div className="flex flex-wrap justify-center text-center items-center cursor-pointer h-full max-h-[200px] bg-var-8" onClick={selectFileHandler} >
             <input accept=".jpg,.png,.jpeg" className="w-full h-full " id={field} onChange={uploadFileHandler} ref={fileSelectorRef} style={{display: "none"}} type="file" />
-            <div className="w-full py-auto">
-                {previewUrl && <div onClick={selectFileHandler}>
-                    <img alt="Preview" className="w-full" src={previewUrl} />
-                </div>}
-                {!previewUrl && <button className="w-full h-full self-center" onClick={selectFileHandler} type="button">Select an image</button>}
+            <div className="w-full h-full flex flex-col justify-center items-center">
+                {!previewUrl && <p className="w-full h-fit cursor-pointer">Select an image</p>}
+                {previewUrl && <img alt="Preview" className="h-full object-contain" onClick={selectFileHandler} onMouseOver={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler} src={previewUrl} />}
                 {previewUrl && <button onClick={cancelFileUpload} type="button">CANCEL</button>}
             </div>
         </div>

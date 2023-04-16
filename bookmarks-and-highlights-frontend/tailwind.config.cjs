@@ -15,6 +15,7 @@ module.exports = {
       "var-5": "#001",
       "var-6": "#6E85A0",
       "var-7": "#93a6bb",
+      "var-8": "#ccc",
       "red-btn": "#CC4455",
       "red-hvr": "#f07f8c",
       "facebook": "#1877D0",
