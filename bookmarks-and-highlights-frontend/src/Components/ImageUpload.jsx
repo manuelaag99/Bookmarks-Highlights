@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export default function ImageUpload ({ field, initialValidity, initialValue, onInput }) {
+import { XMarkIcon } from '@heroicons/react/24/solid'
 
+export default function ImageUpload ({ field, initialValidity, initialValue, onInput }) {
     const fileSelectorRef = useRef();
     const [file, setFile] = useState();
     const [previewUrl, setPreviewUrl] = useState();
@@ -39,9 +40,11 @@ export default function ImageUpload ({ field, initialValidity, initialValue, onI
     
     return (
         <div className="flex flex-wrap justify-center text-center items-center cursor-pointer h-full max-h-[200px] bg-var-8 relative z-0" onClick={previewUrl ? null : selectFileHandler} >
-            {previewUrl && <div className="absolute top-0 right-0 flex flex-row text-var-1 z-20">
-                <button className="rounded-tag bg-var-5 px-2 m-2" onClick={selectFileHandler} type="button">change</button>
-                <button className="rounded-tag bg-var-5 px-2 m-2" onClick={cancelFileUpload} type="button">X</button>
+            {previewUrl && <div className="absolute top-0 right-0 w-fit flex flex-row flex-wrap text-var-1 z-20">
+                <button className="rounded-tag bg-var-5 px-2 m-1.5" onClick={selectFileHandler} type="button">change</button>
+                <button className="rounded-tag bg-var-5 px-2 m-1.5" onClick={cancelFileUpload} type="button">
+                    <XMarkIcon className="h-5 w-5" />
+                </button>
             </div>}
             <input accept=".jpg,.png,.jpeg" className="w-full h-full " id={field} onChange={uploadFileHandler} ref={fileSelectorRef} style={{display: "none"}} type="file" />
             <div className="w-full h-full flex flex-col justify-center items-center relative">
