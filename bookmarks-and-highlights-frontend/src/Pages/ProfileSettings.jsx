@@ -5,6 +5,7 @@ import BackBtnForAddOrUpdate from "../Components/BackBtnForAddOrUpdate";
 import Button from "../Components/Button";
 import ErrorMessage from "../Components/Portals/ErrorMessage";
 import FormForAddOrUpdate from "../Components/FormForAddOrUpdate";
+import ImageUpload from "../Components/ImageUpload";
 import Loading from "../Components/Portals/Loading";
 import { useForm, useHttpHook } from "../custom-hooks";
 
@@ -17,6 +18,7 @@ export default function ProfileSettings () {
 
     const [userInfo, setUserInfo] = useState();
     const [formData, setFormData] = useState({
+        profilePhotoUrl: { value: "", isValid: false },
         username: { value: "", isValid: false },
         displayName: { value: "", isValid: false },
         shortBio: { value: "", isValid: false }
@@ -40,7 +42,10 @@ export default function ProfileSettings () {
     }, [sendHttpRequest, userid])
 
     const [updateButtonValidity, setUpdateButtonValidity] = useState(false);
-    const formChangeHandler = () => setUpdateButtonValidity(stateOfForm.isValid);
+    const formChangeHandler = () => {
+        setUpdateButtonValidity(stateOfForm.isValid)
+        console.log(stateOfForm)
+    };
 
     const submitHandler = async e => {
         e.preventDefault();
@@ -68,20 +73,20 @@ export default function ProfileSettings () {
                 <ErrorMessage open={error} error={error} onClose={clearError} />
                 <div className="fixed top-0 w-full h-16">
                     <Link className="md:w-1/12 w-1/10 h-full absolute left-0" to={"/" + userid + "/myprofile"}>
-                        <BackBtnForAddOrUpdate/>
+                        <BackBtnForAddOrUpdate />
                     </Link>
                 </div>
-                <div className="mt-16 h-2/5 w-8/10 flex sm:flex-col flex-row flex-wrap">
-                    <div className="sm:w-3/10 sm:h-full w-full">
-    
+                <div className="mt-16 h-3/5 w-8/10 flex sm:flex-col flex-row flex-wrap">
+                    <div className="flex justify-center items-center sm:w-3/10 sm:h-full w-full h-1/3">
+                        <ImageUpload field="profilePhotoUrl" onInput={inputHandler} />
                     </div>
-                    <div className="sm:w-7/10 sm:h-full w-full">
-                        <FormForAddOrUpdate field="username" onInput={inputHandler} initialValue={userInfo.username} initialValidity={true} labelText="Username:" placeholderText="Write a username..." />
-                        <FormForAddOrUpdate field="displayName" onInput={inputHandler} initialValue={userInfo.displayName} initialValidity={true} labelText="Display name:" placeholderText="Write a name to display..." />
-                        <FormForAddOrUpdate field="shortBio" onInput={inputHandler} initialValue={userInfo.shortBio} initialValidity={true} labelText="Short bio:" placeholderText="Write less than 100 words..." />
+                    <div className="flex flex-col sm:w-7/10 sm:h-full h-2/3 w-9/10 px-4 items-center">
+                        <FormForAddOrUpdate classnames=" w-full " field="username" onInput={inputHandler} initialValue={userInfo.username} initialValidity={true} labelText="Username:" placeholderText="Write a username..." />
+                        <FormForAddOrUpdate classnames=" w-full " field="displayName" onInput={inputHandler} initialValue={userInfo.displayName} initialValidity={true} labelText="Display name:" placeholderText="Write a name to display..." />
+                        <FormForAddOrUpdate classnames=" w-full " field="shortBio" onInput={inputHandler} initialValue={userInfo.shortBio} initialValidity={true} labelText="Short bio:" placeholderText="Write less than 100 words..." />
                     </div>
                 </div>
-                <div className="h-1/3 flex flex-wrap flex-row justify-around w-full">
+                <div className="sm:h-1/3 flex flex-wrap flex-row justify-around w-full">
                     <Button buttonText="Update" classnames=" w-8/10 text-var-2 bg-var-4 hover:bg-var-4-hovered " form="update-profile-form" isAbled={updateButtonValidity} linkRoute="/home" type="submit" />
                     <Button buttonText="Log out" classnames=" w-8/10 text-var-2 bg-var-4 hover:bg-var-4-hovered " isAbled={true} linkRoute="/home" />
                     <Button buttonText="Delete my account" classnames=" w-8/10 text-var-2 bg-red-btn hover:bg-red-hvr " isAbled={true} linkRoute="/home" />
