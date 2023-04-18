@@ -48,7 +48,6 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                             password: stateOfAuthInputForm.inputs.password.value
                         }),
                         { "Content-Type": "Application/json" })
-                    auth.login();
                 } catch (err) {};
             } else {
                 console.log("they don't match")
@@ -64,11 +63,12 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                         password: stateOfAuthInputForm.inputs.password.value
                     }),
                     { "Content-Type": "Application/json" })
-                    auth.login();
             } catch (err) {};
         };
         if (!error) {
-            navigate("/" + responseData.user.id + "/myprofile");
+            auth.login();
+            if (type === "Sign up") navigate("/" + responseData.user.id + "/myprofile/settings");
+            if (type === "Sign in") navigate("/" + responseData.user.id + "/myprofile");
         }
     };
 

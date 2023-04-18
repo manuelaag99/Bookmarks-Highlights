@@ -1,5 +1,5 @@
-import React, { useEffect, useParams, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import BackBtnForAddOrUpdate from "../Components/BackBtnForAddOrUpdate";
 import Button from "../Components/Button";
@@ -11,8 +11,7 @@ import { useForm, useHttpHook } from "../custom-hooks";
 
 export default function ProfileSettings () {
     const navigate = useNavigate();
-    const location = useLocation();
-    const { userid } = location.state;
+    const { userid } = useParams();
 
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
 
