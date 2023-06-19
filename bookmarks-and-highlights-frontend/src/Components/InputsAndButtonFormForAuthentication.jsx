@@ -39,15 +39,22 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
             if (stateOfAuthInputForm.inputs.password.value === stateOfAuthInputForm.inputs.confirmPassword.value) {
                 console.log("they match");
                 try {
+                    const formData = new FormData();
+                    formData.append("email", stateOfAuthInputForm.inputs.email.value);
+                    formData.append("username", stateOfAuthInputForm.inputs.username.value);
+                    formData.append("password", stateOfAuthInputForm.inputs.password.value);
+                    formData.append("image", stateOfAuthInputForm.inputs.email.value);
                     responseData = await sendHttpRequest(
                         "http://localhost:3000/api/users/signup",
                         "POST",
-                        JSON.stringify({
-                            email: stateOfAuthInputForm.inputs.email.value,
-                            username: stateOfAuthInputForm.inputs.username.value,
-                            password: stateOfAuthInputForm.inputs.password.value
-                        }),
-                        { "Content-Type": "Application/json" })
+                        formData
+                        // JSON.stringify({
+                        //     email: stateOfAuthInputForm.inputs.email.value,
+                        //     username: stateOfAuthInputForm.inputs.username.value,
+                        //     password: stateOfAuthInputForm.inputs.password.value
+                        // }),
+                        // { "Content-Type": "Application/json" }
+                        )
                 } catch (err) {};
             } else {
                 console.log("they don't match")

@@ -13,7 +13,7 @@ router.post("/login", usersControllers.loginToExistingUser);
 
 router.post(
     "/signup",
-    fileUpload.single("image"),
+    // fileUpload.single("image"),
     check("username").isLength({ min: 5 }),
     check("email").isEmail(),
     check("password").isLength({ min: 10 }).isStrongPassword(),
@@ -21,6 +21,7 @@ router.post(
 
 router.patch(
     "/:userid/updateProfile",
+    fileUpload.single("profilePhotoUrl"), 
     check("displayName").not().isEmpty(),
     check("username").isLength({ min: 5 }),
     usersControllers.updateProfile);

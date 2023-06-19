@@ -47,9 +47,16 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         e.preventDefault()
         if (isAdd) {
             try {
+            //     const formData = new FormData();
+            //         formData.append("bookTitle", stateOfAuthInputForm.inputs.title.value);
+            //         formData.append("date", stateOfAuthInputForm.inputs.date.value);
+            //         formData.append("pageNumber", stateOfAuthInputForm.inputs.page.value);
+            //         formData.append("tags", stateOfAuthInputForm.inputs.tags.value);
+            //         formData.append("image", stateOfAuthInputForm.inputs.image.value);
                 await sendHttpRequest(
                     "http://localhost:3000/api/entries/user/" + userid + "/add",
                     "POST",
+                    // formData
                     JSON.stringify({
                         bookTitle: stateOfForm.inputs.title.value,
                         date: stateOfForm.inputs.date.value,
@@ -57,7 +64,8 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                         tags: stateOfForm.inputs.tags.value,
                         creator: userid
                     }),
-                    { "Content-Type": "Application/json" })
+                    { "Content-Type": "Application/json" }
+                    )
                     navigate("/" + userid + "/myprofile");
             } catch (err) {}
         } else {

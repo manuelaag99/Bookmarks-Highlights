@@ -15,9 +15,7 @@ const createAndLogInToUser = async (req, res, next) => {
         return next (new HttpError("Sorry, signup failed!", 422));
     };
 
-    if (existingUser) {
-        return next (new HttpError("Sorry, there is already an account registered with this e-mail!", 422));
-    }
+    if (existingUser) return next (new HttpError("Sorry, there is already an account registered with this e-mail!", 422));
 
     let newUser;
     try {
@@ -25,6 +23,7 @@ const createAndLogInToUser = async (req, res, next) => {
             email,
             username,
             password,
+            profilePhotoUrl: req.file.path,
             entries: []
         });
     } catch (err) {
@@ -86,7 +85,7 @@ const updateProfile = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) throw new HttpError("Invalid inputs, please check your data", 422);
     const { displayName, shortBio, username } = req.body;
-//ADD PROFILEPHOTOURL WHEN I HAVE IT
+    const profilePhotoUrl = req.file.path
     let selectedUser;
     try {
         selectedUser = await User.findById(userid);
@@ -94,12 +93,10 @@ const updateProfile = async (req, res, next) => {
         return next (new HttpError("Sorry, could not find the selected user's data!", 401));
     };
 
-    if (!selectedUser) {
-        return next (new HttpError("Sorry, could not find a matching user!", 401));
-    }
+    if (!selectedUser) return next (new HttpError("Sorry, could not find a matching user!", 401));
 
     selectedUser.displayName = displayName;    
-    // selectedUser.profilePhotoUrl = profilePhotoUrl;
+    selectedUser.profilePhotoUrl = "localhost:3000/" + profilePhotoUrl;
     selectedUser.shortBio = shortBio;
     selectedUser.username = username;
 

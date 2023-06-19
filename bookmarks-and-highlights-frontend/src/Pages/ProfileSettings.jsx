@@ -50,18 +50,27 @@ export default function ProfileSettings () {
         e.preventDefault();
         console.log(stateOfForm)
         try {
+            const formData = new FormData();
+                    formData.append("profilePhotoUrl", stateOfForm.inputs.profilePhotoUrl.value);
+                    formData.append("username", stateOfForm.inputs.username.value);
+                    formData.append("displayName", stateOfForm.inputs.displayName.value);
+                    formData.append("shortBio", stateOfForm.inputs.shortBio.value);
             await sendHttpRequest(
                 "http://localhost:3000/api/users/" + userid + "/updateProfile",
                 "PATCH",
-                JSON.stringify({
-                    username: stateOfForm.inputs.username.value,
-                    displayName: stateOfForm.inputs.displayName.value,
-                    shortBio: stateOfForm.inputs.shortBio.value
-                }),
-                { "Content-Type": "Application/json" }
-                )
+                formData
+                // JSON.stringify({
+                //     profilePhotoUrl: stateOfForm.inputs.profilePhotoUrl.value,
+                //     username: stateOfForm.inputs.username.value,
+                //     displayName: stateOfForm.inputs.displayName.value,
+                //     shortBio: stateOfForm.inputs.shortBio.value
+                // }),
+                // { "Content-Type": "Application/json" }
+                );
             navigate("/" + userid + "/myprofile");
-        } catch (err) {}
+        } catch (err) {
+            console.log(err)
+        }
     };
 
     if (!userInfo) {
