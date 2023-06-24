@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const fs = require("fs");
+const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -14,6 +15,8 @@ const usersRoutes = require("./routes/users-routes");
 const app = express();
 
 app.use(bodyParser.json());
+
+app.use("/uploads/images", express.static(path.join("uploads", "images")))
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -29,7 +32,7 @@ app.use("/api/users", usersRoutes);
 
 app.use((req, res) => {
     const error = new HttpError("Sorry, this page was not found", 404);
-    throw error
+    throw error;
 });
 
 app.use((error, req, res, next) => {
