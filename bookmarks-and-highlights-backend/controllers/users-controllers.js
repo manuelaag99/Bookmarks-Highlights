@@ -96,7 +96,7 @@ const updateProfile = async (req, res, next) => {
     if (!selectedUser) return next (new HttpError("Sorry, could not find a matching user!", 401));
 
     selectedUser.displayName = displayName;    
-    selectedUser.profilePhotoUrl = "localhost:3000/" + profilePhotoUrl;
+    selectedUser.profilePhotoUrl = "http://localhost:3000/" + profilePhotoUrl;
     selectedUser.shortBio = shortBio;
     selectedUser.username = username;
 
