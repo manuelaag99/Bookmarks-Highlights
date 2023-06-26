@@ -54,19 +54,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                     formData.append("tags", stateOfForm.inputs.tags.value);
                     formData.append("creator", userid)
                     formData.append("photoUrl", stateOfForm.inputs.photoUrl.value);
-                await sendHttpRequest(
-                    "http://localhost:3000/api/entries/user/" + userid + "/add",
-                    "POST",
-                    formData
-                    // JSON.stringify({
-                    //     bookTitle: stateOfForm.inputs.title.value,
-                    //     date: stateOfForm.inputs.date.value,
-                    //     pageNumber: stateOfForm.inputs.page.value,
-                    //     tags: stateOfForm.inputs.tags.value,
-                    //     creator: userid
-                    // }),
-                    // { "Content-Type": "Application/json" }
-                    )
+                await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/add", "POST", formData)
                     navigate("/" + userid + "/myprofile");
             } catch (err) {}
         } else {
@@ -78,19 +66,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                     formData.append("tags", stateOfForm.inputs.tags.value);
                     formData.append("creator", userid)
                     formData.append("photoUrl", stateOfForm.inputs.photoUrl.value);
-                await sendHttpRequest(
-                    "http://localhost:3000/api/entries/user/" + userid + "/update/" + itemid ,
-                    "PATCH",
-                    formData
-                    // JSON.stringify({
-                    //     bookTitle: stateOfForm.inputs.title.value,
-                    //     date: stateOfForm.inputs.date.value,
-                    //     pageNumber: stateOfForm.inputs.page.value,
-                    //     tags: stateOfForm.inputs.tags.value,
-                    //     creator: userid
-                    // }),
-                    // { "Content-Type": "Application/json" }
-                    );
+                await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/update/" + itemid , "PATCH", formData);
                     navigate("/" + userid + "/myprofile");
             } catch (err) {}
         }
@@ -107,8 +83,6 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         stateOfForm.inputs.title.isValid = true;
         setTitleValue(book.bookTitle);
     };
-
-    console.log(initialValues)
 
     return (
         <form id="add-or-update-form" onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row z-0">
