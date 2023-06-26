@@ -108,11 +108,13 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         setTitleValue(book.bookTitle);
     };
 
+    console.log(initialValues)
+
     return (
         <form id="add-or-update-form" onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row z-0">
             <ErrorMessage open={error} error={error} onClose={clearError} />
             <div onClick={clickHandle} className="w-2/5 md:w-3/10 items-center">
-                <ImageUpload field="photoUrl" initialValue={isAdd ? "" : initialValues.date || null} initialValidity={initialFormValidity} onInput={inputHandler} />
+                <ImageUpload field="photoUrl" initialValue={isAdd ? null : initialValues.photoUrl || null} initialValidity={initialFormValidity} onInput={inputHandler} />
             </div>
             <div className="w-3/5 md:w-7/10 h-3/10 pl-6 block ">
                 <FormWithListForAddOrUpdate valueFromList={titleValue} existingBooks={existingBooks} isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.title} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
