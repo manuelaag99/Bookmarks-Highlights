@@ -10,8 +10,8 @@ const createEntry = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {throw new HttpError("Invalid inputs, please check your data", 422);}
     const { bookTitle, tags, date, pageNumber, creator } = req.body;
-// ADD PHOTOURL ONCE IT WORKS 
-
+    const photoUrl = req.file.path
+    console.log(req.file.path)
     let newEntry;
     try {
         newEntry = await Entry({
@@ -20,7 +20,8 @@ const createEntry = async (req, res, next) => {
             tags,
             date,
             pageNumber,
-            creator
+            creator,
+            photoUrl
         });
     } catch (err) {
         console.log(err)
