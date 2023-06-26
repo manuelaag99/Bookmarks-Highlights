@@ -17,6 +17,7 @@ router.post(
 
 router.patch(
     "/user/:userid/update/:itemId",
+    fileUpload.single("photoUrl"),
     [check("bookTitle").isLength({ min: 5 }),
     check("photoUrl").not().isEmpty(),
     check("pageNumber").isNumeric(),

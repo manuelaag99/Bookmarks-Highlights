@@ -10,7 +10,7 @@ const createEntry = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {throw new HttpError("Invalid inputs, please check your data", 422);}
     const { bookTitle, tags, date, pageNumber, creator } = req.body;
-    const photoUrl = req.file.path
+    const photoUrl = "http://localhost:3000/" + req.file.path
     console.log(req.file.path)
     let newEntry;
     try {
@@ -115,8 +115,9 @@ const getUserEntriesByUserId = async (req, res, next) => {
 
 const updateEntry = async (req, res, next) => {
     const selectedItemId = req.params.itemId;
-    const { bookTitle, photoUrl, tags, date, pageNumber } = req.body
-
+    const { bookTitle, tags, date, pageNumber } = req.body
+    const photoUrl = req.file.path
+    console.log(req.file.path)
     let selectedEntry;
     try {
         selectedEntry = await Entry.findById(selectedItemId)
@@ -125,7 +126,7 @@ const updateEntry = async (req, res, next) => {
     }
 
     selectedEntry.bookTitle = bookTitle;
-    selectedEntry.photoUrl = photoUrl;
+    selectedEntry.photoUrl = "http://localhost:3000/" + photoUrl;
     selectedEntry.tags = tags;
     selectedEntry.date = date;
     selectedEntry.pageNumber = pageNumber;

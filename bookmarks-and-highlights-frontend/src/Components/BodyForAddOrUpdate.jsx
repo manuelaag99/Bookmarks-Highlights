@@ -68,22 +68,29 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                     // { "Content-Type": "Application/json" }
                     )
                     navigate("/" + userid + "/myprofile");
-            } catch (err) {
-                console.log(err)
-            }
+            } catch (err) {}
         } else {
             try {
+                const formData = new FormData();
+                    formData.append("bookTitle", stateOfForm.inputs.title.value);
+                    formData.append("date", stateOfForm.inputs.date.value);
+                    formData.append("pageNumber", stateOfForm.inputs.page.value);
+                    formData.append("tags", stateOfForm.inputs.tags.value);
+                    formData.append("creator", userid)
+                    formData.append("photoUrl", stateOfForm.inputs.photoUrl.value);
                 await sendHttpRequest(
                     "http://localhost:3000/api/entries/user/" + userid + "/update/" + itemid ,
                     "PATCH",
-                    JSON.stringify({
-                        bookTitle: stateOfForm.inputs.title.value,
-                        date: stateOfForm.inputs.date.value,
-                        pageNumber: stateOfForm.inputs.page.value,
-                        tags: stateOfForm.inputs.tags.value,
-                        creator: userid
-                    }),
-                    { "Content-Type": "Application/json" });
+                    formData
+                    // JSON.stringify({
+                    //     bookTitle: stateOfForm.inputs.title.value,
+                    //     date: stateOfForm.inputs.date.value,
+                    //     pageNumber: stateOfForm.inputs.page.value,
+                    //     tags: stateOfForm.inputs.tags.value,
+                    //     creator: userid
+                    // }),
+                    // { "Content-Type": "Application/json" }
+                    );
                     navigate("/" + userid + "/myprofile");
             } catch (err) {}
         }
