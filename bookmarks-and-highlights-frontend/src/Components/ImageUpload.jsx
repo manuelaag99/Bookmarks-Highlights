@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
-export default function ImageUpload ({ field, initialValidity, initialValue, profilePic, onInput }) {
+export default function ImageUpload ({ field, initialValidity, initialValue, isProfileSettings, onInput }) {
     const fileSelectorRef = useRef();
     const [file, setFile] = useState();
     const [previewUrl, setPreviewUrl] = useState();
@@ -39,8 +39,8 @@ export default function ImageUpload ({ field, initialValidity, initialValue, pro
     };
     
     return (
-        <div className={"flex flex-wrap justify-center text-center items-center cursor-pointer h-full max-h-[200px] w-1/2 sm:w-8/10 relative z-0 " + (!initialValue && "bg-var-8" )} onClick={previewUrl ? null : selectFileHandler} >
-            {previewUrl && <div className="absolute top-0 right-0 w-fit flex flex-row flex-wrap text-var-1 z-20">
+        <div className={"flex flex-wrap justify-center sm:mx-auto text-center items-center cursor-pointer h-full max-h-[200px] sm:w-8/10 relative z-0 " + (!initialValue && "bg-var-8" ) + (isProfileSettings ? " w-1/2" : " w-full")} onClick={previewUrl ? null : selectFileHandler} >
+            {previewUrl && <div className="absolute top-0 right-0 w-fit flex flex-row flex-wrap justify-center text-var-1 z-20">
                 <button className="rounded-tag bg-var-5 px-2 m-1.5" onClick={selectFileHandler} type="button">change</button>
                 <button className="rounded-tag bg-var-5 px-2 m-1.5" onClick={cancelFileUpload} type="button">
                     <XMarkIcon className="h-5 w-5" />

@@ -89,7 +89,7 @@ export default function ProfileSettings () {
                 </div>
                 <div className="mt-16 h-3/5 w-8/10 flex sm:flex-col flex-row flex-wrap">
                     <div className="flex justify-center items-start sm:w-3/10 sm:h-full w-full h-1/3">
-                        <ImageUpload initialValue={userInfo.profilePhotoUrl} initialValidity={true} field="profilePhotoUrl" onInput={inputHandler} />
+                        <ImageUpload field="profilePhotoUrl" initialValue={userInfo.profilePhotoUrl} initialValidity={true} isProfileSettings={true} onInput={inputHandler} />
                     </div>
                     <div className="flex flex-col sm:w-7/10 sm:h-full h-2/3 w-9/10 px-4 items-center">
                         <FormForAddOrUpdate classnames=" w-full " field="username" onInput={inputHandler} initialValue={userInfo.username} initialValidity={true} labelText="Username:" placeholderText="Write a username..." />
