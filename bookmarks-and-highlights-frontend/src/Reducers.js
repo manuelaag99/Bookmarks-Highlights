@@ -57,10 +57,13 @@ export function addOrUpdateFormReducer (state, action) {
                 if (specificInput === action.field) {
                     if (specificInput === "tags") {
                         if (action.value) {
-                            value = action.value.trim().split(",").filter((possibleTag) => {
-                                const trimmedTag = possibleTag.trim()
-                                if (trimmedTag !== "") return trimmedTag.trim()
+                            value = action.value.trim().split(",").filter(possibleTag => {
+                                let trimmedTag = possibleTag.trim();
+                                if (trimmedTag !== "") return trimmedTag;
                             })
+                            value = value.map(tag => {
+                                return tag.trim()
+                            });
                         }
                     } else {
                         value = action.value

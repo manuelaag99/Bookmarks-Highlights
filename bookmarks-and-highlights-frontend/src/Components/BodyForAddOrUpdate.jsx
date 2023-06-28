@@ -13,11 +13,11 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     const navigate = useNavigate();
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
     const [formData, setFormData] = useState({
-        title: { value: "", isValid: false },
-        date: { value: "", isValid: false },
-        page: { value: "", isValid: false },
-        tags: { value: "", isValid: false },
-        photoUrl: { value: "", isValid: false }
+        title: { value: isAdd ? "" : initialValues.bookTitle, isValid: isAdd ? false : true },
+        date: { value: isAdd ? "" : initialValues.date, isValid: isAdd ? false : true },
+        page: { value: isAdd ? "" : initialValues.pageNumber, isValid: isAdd ? false : true },
+        tags: { value: isAdd ? [] : initialValues.tags, isValid: isAdd ? false : true },
+        photoUrl: { value: isAdd ? "" : initialValues.photoUrl, isValid: isAdd ? false : true }
     }, false);
     const [stateOfForm, inputHandler] = useForm(formData);
 
@@ -66,7 +66,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                     formData.append("tags", stateOfForm.inputs.tags.value);
                     formData.append("creator", userid)
                     formData.append("photoUrl", stateOfForm.inputs.photoUrl.value);
-                await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/update/" + itemid , "PATCH", formData);
+                await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/update/" + itemid, "PATCH", formData);
                     navigate("/" + userid + "/myprofile");
             } catch (err) {}
         }
