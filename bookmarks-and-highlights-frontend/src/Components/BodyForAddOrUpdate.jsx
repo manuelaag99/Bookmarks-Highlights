@@ -95,8 +95,8 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
             </div>
             <div onClick={clickHandle} className="h-7/10 w-full pl-3">
                 <div className="flex flex-wrap flex-row justify-start">
-                    <FormForAddOrUpdate onInput={inputHandler} field="date" initialValue={isAdd ? "" : initialValues.date || null} initialValidity={initialFormValidity} errorText="error!" labelText="date:" placeholderText="DD/MM/YYYY" classnames="w-2/3 " inputType="date" />
-                    <FormForAddOrUpdate onInput={inputHandler} field="page" initialValue={isAdd ? "" : initialValues.pageNumber || null} initialValidity={initialFormValidity} errorText="error!" labelText="page #:" placeholderText="e.g. 31, 105" classnames="w-3/10 " inputType="number" />
+                    <FormForAddOrUpdate onInput={inputHandler} field="date" initialValue={isAdd ? "" : initialValues.date || null} initialValidity={initialFormValidity} errorText="error!" labelText="date:" placeholderText="DD/MM/YYYY" classnames="w-2/3 mt-3" inputType="date" />
+                    <FormForAddOrUpdate onInput={inputHandler} field="page" initialValue={isAdd ? "" : initialValues.pageNumber || null} initialValidity={initialFormValidity} errorText="error!" labelText="page #:" placeholderText="e.g. 31, 105" classnames="w-3/10 mt-3" inputType="number" />
                 </div>
                 <FormForAddOrUpdate onInput={inputHandler} field="tags" initialValue={isAdd ? "" : initialTagsState.toString().replaceAll(",", ", ") || null} initialValidity={initialFormValidity} errorText="error!" labelText="tags:" placeholderText="e.g. geography..." inputType="text" classnames=" w-full mt-6 relative " />
                 <div className="mt-6">
