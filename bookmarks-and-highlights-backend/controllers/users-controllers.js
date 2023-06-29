@@ -1,6 +1,7 @@
 const fs = require("fs");
 const HttpError = require("../models/http-error");
 let { users } = require("../MOCKDATA");
+const bcrypt = require("bcrypt");
 const { validationResult } = require("express-validator");
 const User = require("../models/user");
 
@@ -18,6 +19,13 @@ const createAndLogInToUser = async (req, res, next) => {
 
     if (existingUser) return next (new HttpError("Sorry, there is already an account registered with this e-mail!", 422));
 
+    let hashedPassword;
+    try {
+        hashedPassword = await bcrypt.hash(password, 12);
+    } catch (err) {
+        return next (new HttpError("Sorry, could not save the new user!", 500));
+    }
+
     let newUser;
     try {
         newUser = await User({
@@ -29,7 +37,7 @@ const createAndLogInToUser = async (req, res, next) => {
         });
     } catch (err) {
         return next (new HttpError("Sorry, could not create the new user!", 422));
-    };
+    };  
 
     try {
         await newUser.save();
@@ -86,12 +94,17 @@ const loginToExistingUser = async (req, res, next) => {
     } catch {
         return next (new HttpError("Sorry, could not find a user corresponding to the provided credentials!", 422));
     };
+
+    let isPasswordValid = false;
+    try {
+        isPasswordValid = await bcrypt.compare(password, selectedUser.password);
+    } catch (err) {
+        return next (new HttpError("Sorry, could not check your data!", 500));
+    }
+
+    if (!isPasswordValid) return next (new HttpError("The password and the user credential do not match", 401));
     
-    if (selectedUser) {
-        if (selectedUser.password === password) {
-            res.json({ user: selectedUser.toObject({ getters: true }) });
-        } else return next (new HttpError("The password and the user credential do not match", 401));
-    } else return next (new HttpError("Could not find a user corresponding to the provided credentials", 401));
+    res.json({ user: selectedUser.toObject({ getters: true }) });
 };
 
 const updateProfile = async (req, res, next) => {
