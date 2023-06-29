@@ -19,6 +19,7 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
 
     const [passwordConfirmationStatus, setPasswordConfirmationStatus] = useState(true);
     if (type === "Sign up") {
+        console.log(stateOfAuthInputForm.inputs)
         useEffect(() => {
             if (stateOfAuthInputForm.inputs.password.value) {
                 if (stateOfAuthInputForm.inputs.password.value === stateOfAuthInputForm.inputs.confirmPassword.value) {
@@ -39,21 +40,20 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
             if (stateOfAuthInputForm.inputs.password.value === stateOfAuthInputForm.inputs.confirmPassword.value) {
                 console.log("they match");
                 try {
-                    const formData = new FormData();
-                    formData.append("email", stateOfAuthInputForm.inputs.email.value);
-                    formData.append("username", stateOfAuthInputForm.inputs.username.value);
-                    formData.append("password", stateOfAuthInputForm.inputs.password.value);
-                    formData.append("image", stateOfAuthInputForm.inputs.email.value);
+                    // const formData = new FormData();
+                    // formData.append("email", stateOfAuthInputForm.inputs.email.value);
+                    // formData.append("username", stateOfAuthInputForm.inputs.username.value);
+                    // formData.append("password", stateOfAuthInputForm.inputs.password.value);
                     responseData = await sendHttpRequest(
                         "http://localhost:3000/api/users/signup",
                         "POST",
-                        formData
-                        // JSON.stringify({
-                        //     email: stateOfAuthInputForm.inputs.email.value,
-                        //     username: stateOfAuthInputForm.inputs.username.value,
-                        //     password: stateOfAuthInputForm.inputs.password.value
-                        // }),
-                        // { "Content-Type": "Application/json" }
+                        // formData
+                        JSON.stringify({
+                            email: stateOfAuthInputForm.inputs.email.value,
+                            username: stateOfAuthInputForm.inputs.username.value,
+                            password: stateOfAuthInputForm.inputs.password.value
+                        }),
+                        { "Content-Type": "Application/json" }
                         )
                 } catch (err) {};
             } else {
@@ -74,8 +74,8 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
         };
         if (!error) {
             auth.login();
-            if (type === "Sign up") navigate("/" + responseData.user.id + "/myprofile/settings");
-            if (type === "Sign in") navigate("/" + responseData.user.id + "/myprofile");
+            if (type === "Sign up") navigate("/" + responseData.userId + "/myprofile/settings");
+            if (type === "Sign in") navigate("/" + responseData.userId + "/myprofile");
         }
     };
 

@@ -1,9 +1,12 @@
 const express = require("express");
 const { check } = require("express-validator");
 
+const checkAuth = require("../middleware/check-auth");
 const entriesControllers = require("../controllers/entries-controllers");
 const fileUpload = require("../middleware/file-upload");
 const router = express.Router();
+
+router.use(checkAuth);
 
 router.get("/user/:userid/all", entriesControllers.getUserEntriesByUserId);
 

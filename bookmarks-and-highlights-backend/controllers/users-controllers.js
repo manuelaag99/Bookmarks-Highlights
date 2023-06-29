@@ -1,6 +1,5 @@
 const fs = require("fs");
 const HttpError = require("../models/http-error");
-let { users } = require("../MOCKDATA");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
@@ -33,7 +32,6 @@ const createAndLogInToUser = async (req, res, next) => {
             email,
             username,
             password,
-            profilePhotoUrl: req.file.path,
             entries: []
         });
     } catch (err) {
@@ -103,13 +101,17 @@ const loginToExistingUser = async (req, res, next) => {
         return next (new HttpError("Sorry, could not find a user corresponding to the provided credentials!", 422));
     };
 
-    let isPasswordValid = false;
+    console.log(selectedUser)
+    let isPasswordValid;
     try {
+        console.log(password)
+        console.log(selectedUser.password);
         isPasswordValid = await bcrypt.compare(password, selectedUser.password);
     } catch (err) {
         return next (new HttpError("Sorry, could not check your data!", 500));
     }
 
+    console.log(isPasswordValid);
     if (!isPasswordValid) return next (new HttpError("The password and the user credential do not match", 401));
     
     let token;
