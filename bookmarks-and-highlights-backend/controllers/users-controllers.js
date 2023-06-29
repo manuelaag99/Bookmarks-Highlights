@@ -2,6 +2,7 @@ const fs = require("fs");
 const HttpError = require("../models/http-error");
 let { users } = require("../MOCKDATA");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const User = require("../models/user");
 
@@ -46,7 +47,14 @@ const createAndLogInToUser = async (req, res, next) => {
         return next (new HttpError("Sorry, could not save the new user!", 422));
     };
 
-    res.status(201).json({ user: newUser.toObject({ getters: true }) });
+    let token;
+    try {
+        token = jwt.sign({ userId: newUser.id, email: newUser.email }, "secret_key", { expiresIn: "1h" });
+    } catch (err) {
+        return next (new HttpError("Signing up failed, please try again!", 500));
+    }
+
+    res.status(201).json({ userId: newUser.id, email: newUser.email, token: token });
 };
 
 // const deleteUser = async (req, res, next) => {
@@ -104,7 +112,14 @@ const loginToExistingUser = async (req, res, next) => {
 
     if (!isPasswordValid) return next (new HttpError("The password and the user credential do not match", 401));
     
-    res.json({ user: selectedUser.toObject({ getters: true }) });
+    let token;
+    try {
+        token = jwt.sign({ userId: selectedUser.id, email: selectedUser.email }, "secret_key", { expiresIn: "1h" });
+    } catch (err) {
+        return next (new HttpError("Logging in failed, please try again!", 500));
+    }
+
+    res.json({ userId: newUser.id, email: newUser.email, token: token });
 };
 
 const updateProfile = async (req, res, next) => {
