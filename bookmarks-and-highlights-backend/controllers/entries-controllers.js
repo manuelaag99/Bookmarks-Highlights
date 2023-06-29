@@ -1,5 +1,5 @@
+const fs = require("fs");
 const HttpError = require("../models/http-error");
-const fs = require("fs")
 const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require("express-validator");
 const Entry = require("../models/entry");
@@ -65,7 +65,7 @@ const deleteEntry = async (req, res, next) => {
         return next (new HttpError("Sorry, could not find the specified entry!", 500));
     };
 
-    const imagePath = selectedEntry.photoUrl
+    const imagePath = selectedEntry.photoUrl;
 
     try {
         const currentSession = await mongoose.startSession();

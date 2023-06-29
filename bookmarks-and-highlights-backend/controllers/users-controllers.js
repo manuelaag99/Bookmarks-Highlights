@@ -1,3 +1,4 @@
+const fs = require("fs");
 const HttpError = require("../models/http-error");
 let { users } = require("../MOCKDATA");
 const { validationResult } = require("express-validator");
@@ -39,6 +40,19 @@ const createAndLogInToUser = async (req, res, next) => {
 
     res.status(201).json({ user: newUser.toObject({ getters: true }) });
 };
+
+// const deleteUser = async (req, res, next) => {
+//     const userid = req.params.userid;
+
+//     let selectedUser;
+//     try {
+//         selectedUser = await User.findById(userid);
+//     } catch (err) {
+//         return next (new HttpError("Sorry, could not delete this user!", 422))
+//     }
+
+//     res.json({ user: selectedUser.toObject({ getters: true }) });
+// }
 
 const getAllUsers = async (req, res, next) => {
     let allUsers;
