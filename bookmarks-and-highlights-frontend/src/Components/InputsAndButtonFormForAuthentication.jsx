@@ -73,7 +73,7 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
             } catch (err) {};
         };
         if (!error) {
-            auth.login();
+            auth.login(responseData.userId, responseData.token);
             if (type === "Sign up") navigate("/" + responseData.userId + "/myprofile/settings");
             if (type === "Sign in") navigate("/" + responseData.userId + "/myprofile");
         }

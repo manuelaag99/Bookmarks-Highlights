@@ -14,10 +14,17 @@ import ProfileSettings from "./Pages/ProfileSettings";
 
 export default function App () {
   const [ isUserLoggedIn, setIsUserLoggedIn ] = useState(false)
+  const [ userId, setUserId ] = useState(false);
 
-  const logIn = useCallback(() => setIsUserLoggedIn(() => true), [])
+  const logIn = useCallback(() => {
+    setUserId(userId)
+    setIsUserLoggedIn((true))
+  }, []);
 
-  const logOut = useCallback(() => setIsUserLoggedIn(() => false), [])
+  const logOut = useCallback(() => {
+    setUserId(false)
+    setIsUserLoggedIn(false)
+  }, []);
 
   return (
     <>

@@ -41,7 +41,7 @@ export default function ProfileSettings () {
             } catch (err) {}
         }
         fetchUserInfo();
-    }, [sendHttpRequest, userid])
+    }, [sendHttpRequest, userid]);
 
     const [updateButtonValidity, setUpdateButtonValidity] = useState(false);
     const formChangeHandler = () => {
@@ -58,18 +58,7 @@ export default function ProfileSettings () {
                     formData.append("username", stateOfForm.inputs.username.value);
                     formData.append("displayName", stateOfForm.inputs.displayName.value);
                     formData.append("shortBio", stateOfForm.inputs.shortBio.value);
-            await sendHttpRequest(
-                "http://localhost:3000/api/users/" + userid + "/updateProfile",
-                "PATCH",
-                formData
-                // JSON.stringify({
-                //     profilePhotoUrl: stateOfForm.inputs.profilePhotoUrl.value,
-                //     username: stateOfForm.inputs.username.value,
-                //     displayName: stateOfForm.inputs.displayName.value,
-                //     shortBio: stateOfForm.inputs.shortBio.value
-                // }),
-                // { "Content-Type": "Application/json" }
-                );
+            await sendHttpRequest("http://localhost:3000/api/users/" + userid + "/updateProfile", "PATCH", formData);
             navigate("/" + userid + "/myprofile");
         } catch (err) {
             console.log(err)
@@ -99,7 +88,7 @@ export default function ProfileSettings () {
                 </div>
                 <div className="sm:h-1/3 flex flex-wrap flex-row justify-around w-full">
                     <Button buttonText="Update" classnames=" w-8/10 text-var-2 bg-var-4 hover:bg-var-4-hovered " form="update-profile-form" isAbled={updateButtonValidity} linkRoute="/home" type="submit" />
-                    <Button buttonText="Log out" classnames=" w-8/10 text-var-2 bg-var-4 hover:bg-var-4-hovered " isAbled={true} linkRoute="/home" />
+                    <Button buttonClick={clickButtonHandle} buttonText="Log out" classnames=" w-8/10 text-var-2 bg-var-4 hover:bg-var-4-hovered " isAbled={true} linkRoute="/home" />
                     <Button buttonText="Delete my account" classnames=" w-8/10 text-var-2 bg-red-btn hover:bg-red-hvr " isAbled={true} linkRoute="/home" />
                 </div>
                 <Loading open={loading} />
