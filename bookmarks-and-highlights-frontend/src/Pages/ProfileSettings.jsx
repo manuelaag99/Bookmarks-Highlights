@@ -49,7 +49,7 @@ export default function ProfileSettings () {
         console.log(stateOfForm)
     };
 
-    const submitHandler = async e => {
+    const updateHandle = async e => {
         e.preventDefault();
         console.log(stateOfForm)
         try {
@@ -65,11 +65,19 @@ export default function ProfileSettings () {
         }
     };
 
+    const deleteHandle = () => {
+        console.log("delete")
+    }
+
+    const logOutHandle = () => {
+        console.log("log out")
+    }
+
     if (!userInfo) {
         <Loading open={loading} />
     } else {
         return (
-            <form id="update-profile-form" onKeyUp={formChangeHandler} onSubmit={submitHandler} className="flex flex-wrap justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
+            <div id="update-profile-form" onKeyUp={formChangeHandler} className="flex flex-wrap justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
                 <ErrorMessage open={error} error={error} onClose={clearError} />
                 <div className="fixed top-0 w-full h-16">
                     <Link className="md:w-1/12 w-1/10 h-full absolute left-0" to={"/" + userid + "/myprofile"}>
@@ -87,12 +95,12 @@ export default function ProfileSettings () {
                     </div>
                 </div>
                 <div className="sm:h-1/3 flex flex-wrap flex-row justify-around w-full">
-                    <Button buttonText="Update" classnames=" w-8/10 text-var-2 bg-var-4 hover:bg-var-4-hovered " form="update-profile-form" isAbled={updateButtonValidity} linkRoute="/home" type="submit" />
-                    <Button buttonClick={clickButtonHandle} buttonText="Log out" classnames=" w-8/10 text-var-2 bg-var-4 hover:bg-var-4-hovered " isAbled={true} linkRoute="/home" />
-                    <Button buttonText="Delete my account" classnames=" w-8/10 text-var-2 bg-red-btn hover:bg-red-hvr " isAbled={true} linkRoute="/home" />
+                    <Button buttonClick={updateHandle} buttonText="Update" classnames=" w-8/10 text-var-2 bg-var-4 hover:bg-var-4-hovered " isAbled={updateButtonValidity} type="submit" />
+                    <Button buttonClick={logOutHandle} buttonText="Log out" classnames=" w-8/10 text-var-2 bg-var-4 hover:bg-var-4-hovered " isAbled={true} />
+                    <Button buttonClick={deleteHandle} buttonText="Delete my account" classnames=" w-8/10 text-var-2 bg-red-btn hover:bg-red-hvr " isAbled={true} />
                 </div>
                 <Loading open={loading} />
-            </form>
+            </div>
         )
     }
 }
