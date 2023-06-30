@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { AuthContext } from "../context/auth-context";
 import BackBtnForAddOrUpdate from "./BackBtnForAddOrUpdate";
 import Button from "./Button";
 import ConfirmDelete from "./Portals/ConfirmDelete";
@@ -9,6 +10,7 @@ import Loading from "./Portals/Loading";
 import { useHttpHook } from "../custom-hooks";
 
 export default function TopForAddOrUpdate ({ classnames, formForSubmitButtonform, isAddOrUpdateBtnAbled, isUpdating, itemid, route, stateToSend, typeForSubmitButton, userid }) {   
+    const auth = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [ showDeleteWindow, setShowDeleteWindow ] = useState(false)
@@ -21,9 +23,11 @@ export default function TopForAddOrUpdate ({ classnames, formForSubmitButtonform
         console.log("deleted!")
         closeDeleteWindow()
         try {
-            await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/delete/" + itemid, "DELETE");
+            await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/delete/" + itemid, "DELETE", null, { Authorization: "Bearer " + auth.token });
             navigate("/" + userid + "/myprofile");
-        } catch (err) {}
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (

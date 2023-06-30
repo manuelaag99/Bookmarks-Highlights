@@ -21,7 +21,7 @@ export default function UpdateBandH () {
     useEffect(() => {
         const fetchUserEntry = async () => {
             try {
-                const responseData = await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/" + itemid);
+                const responseData = await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/" + itemid, "GET", null, { Authorization: "Bearer " + auth.token });
                 setUserEntry(responseData.selectedEntry);
             } catch (err) {}
         };
