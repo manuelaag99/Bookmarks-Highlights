@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import { AuthContext } from "../context/auth-context";
 import BodyForAddOrUpdate from "../Components/BodyForAddOrUpdate";
 import ErrorMessage from "../Components/Portals/ErrorMessage";
 import Loading from "../Components/Portals/Loading";
@@ -8,6 +9,7 @@ import TopForAddOrUpdate from "../Components/TopForAddOrUpdate";
 import { useHttpHook } from "../custom-hooks";
 
 export default function UpdateBandH () {
+    const auth = useContext(AuthContext);
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
     const location = useLocation();
     const { userid, bookid, title, entries, itemid } = location.state;

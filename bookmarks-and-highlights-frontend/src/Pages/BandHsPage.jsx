@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useParams, useLocation } from "react-router-dom"
 
+import { AuthContext } from "../context/auth-context";
 import BackBtnForAddOrUpdate from "../Components/BackBtnForAddOrUpdate"
 import CardsSection from "../Components/CardsSection";
 import Options from "../Components/Options";
@@ -8,6 +9,7 @@ import PhotoWindow from "../Components/Portals/PhotoWindow";
 import ProfileTop from "../Components/ProfileTop";
 
 export default function BandHsPage () {
+    const auth = useContext(AuthContext);
     const location = useLocation();
     const { userid, bookid, title, entries } = location.state
 

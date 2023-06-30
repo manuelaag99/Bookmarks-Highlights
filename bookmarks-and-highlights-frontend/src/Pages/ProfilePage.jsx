@@ -37,7 +37,7 @@ export default function ProfilePage () {
         fetchData();
         const fetchEntriesData = async () => {
             try {
-                const userEntriesData = await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/all");
+                const userEntriesData = await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/all", "GET", null, { Authorization: "Bearer " + auth.token });
                 setSelectedUserEntries(userEntriesData.userEntries);
             } catch (err) {}
         };

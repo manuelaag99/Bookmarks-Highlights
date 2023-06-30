@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import { AuthContext } from "../context/auth-context";
 import BodyForAddOrUpdate from "../Components/BodyForAddOrUpdate";
 import TopForAddOrUpdate from "../Components/TopForAddOrUpdate";
 
 // this one is very similar to /UpdateBandH so I might simplify this code or put them together once I've worked out the API 
 export default function AddBandH () {
+    const auth = useContext(AuthContext);
     const location = useLocation();
     const { userid, userinfo } = location.state;
 
