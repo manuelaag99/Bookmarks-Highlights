@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+import { AuthContext } from "../context/auth-context";
 import BackBtnForAddOrUpdate from "../Components/BackBtnForAddOrUpdate";
 import Button from "../Components/Button";
 import ErrorMessage from "../Components/Portals/ErrorMessage";
@@ -10,6 +11,8 @@ import Loading from "../Components/Portals/Loading";
 import { useForm, useHttpHook } from "../custom-hooks";
 
 export default function ProfileSettings () {
+    const auth = useContext(AuthContext);
+    console.log(auth);
     const navigate = useNavigate();
     const { userid } = useParams();
 
@@ -71,6 +74,8 @@ export default function ProfileSettings () {
 
     const logOutHandle = () => {
         console.log("log out")
+        auth.logout();
+        navigate("/");
     }
 
     if (!userInfo) {

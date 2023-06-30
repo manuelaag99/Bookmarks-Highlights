@@ -38,17 +38,8 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
         e.preventDefault();
         if (type === "Sign up") {
             if (stateOfAuthInputForm.inputs.password.value === stateOfAuthInputForm.inputs.confirmPassword.value) {
-                console.log("they match");
                 try {
-                    // const formData = new FormData();
-                    // formData.append("email", stateOfAuthInputForm.inputs.email.value);
-                    // formData.append("username", stateOfAuthInputForm.inputs.username.value);
-                    // formData.append("password", stateOfAuthInputForm.inputs.password.value);
-                    responseData = await sendHttpRequest(
-                        "http://localhost:3000/api/users/signup",
-                        "POST",
-                        // formData
-                        JSON.stringify({
+                    responseData = await sendHttpRequest("http://localhost:3000/api/users/signup", "POST", JSON.stringify({
                             email: stateOfAuthInputForm.inputs.email.value,
                             username: stateOfAuthInputForm.inputs.username.value,
                             password: stateOfAuthInputForm.inputs.password.value
@@ -62,10 +53,7 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
             }
         } else if (type === "Sign in") {
             try {
-                responseData = await sendHttpRequest(
-                    "http://localhost:3000/api/users/login",
-                    "POST",
-                    JSON.stringify({
+                responseData = await sendHttpRequest("http://localhost:3000/api/users/login", "POST", JSON.stringify({
                         email: stateOfAuthInputForm.inputs.email.value,
                         password: stateOfAuthInputForm.inputs.password.value
                     }),

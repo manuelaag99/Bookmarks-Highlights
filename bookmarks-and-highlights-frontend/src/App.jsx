@@ -2,7 +2,6 @@ import React, { useCallback, useContext, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { AuthContext } from "./context/auth-context";
-
 import AddBandH from "./Pages/AddBandH";
 import BandHsPage from "./Pages/BandHsPage";
 import ProfilePage from "./Pages/ProfilePage";
@@ -13,22 +12,22 @@ import UpdateBandH from "./Pages/UpdateBandH";
 import ProfileSettings from "./Pages/ProfileSettings";
 
 export default function App () {
-  const [ isUserLoggedIn, setIsUserLoggedIn ] = useState(false)
+  const [ token, setToken ] = useState(false);
   const [ userId, setUserId ] = useState(false);
 
-  const logIn = useCallback(() => {
-    setUserId(userId)
-    setIsUserLoggedIn((true))
+  const logIn = useCallback((uId, token) => {
+    setUserId(uId)
+    setToken((token))
   }, []);
 
   const logOut = useCallback(() => {
-    setUserId(false)
-    setIsUserLoggedIn(false)
+    setUserId(null)
+    setToken(null)
   }, []);
 
   return (
     <>
-      <AuthContext.Provider value={{isLoggedIn: isUserLoggedIn, login: logIn, logout: logOut}}>
+      <AuthContext.Provider value={{ isLoggedIn: token, token: token, userId: userId, login: logIn, logout: logOut }}>
         <Router>
           <Routes>
             <Route path="/*" element={<SignInOrSignUpPage />}/>

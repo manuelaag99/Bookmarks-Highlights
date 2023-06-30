@@ -1,6 +1,7 @@
-import React, { useEffect, useParams, useState } from "react";
+import React, { useContext, useEffect, useParams, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { AuthContext } from "../context/auth-context";
 import ErrorMessage from "./Portals/ErrorMessage";
 import FormForAddOrUpdate from "./FormForAddOrUpdate";
 import FormWithListForAddOrUpdate from "./FormWithListForAddOrUpdate";
@@ -10,6 +11,7 @@ import TagsSection from "./TagsSection";
 import { useForm, useHttpHook } from "../custom-hooks";
 
 export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFormValidity, initialValues, isAdd, isFormValid, itemValues, title, userid }) {
+    const auth = useContext(AuthContext);
     const navigate = useNavigate();
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
     const [formData, setFormData] = useState({
@@ -21,6 +23,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     }, false);
     const [stateOfForm, inputHandler] = useForm(formData);
 
+    console.log(auth)
     const [existingBooks, setExistingBooks] = useState();
 
     useEffect(() => {
