@@ -14,6 +14,7 @@ const createAndLogInToUser = async (req, res, next) => {
     try {
         existingUser = await User.findOne({ email: email });
     } catch (err) {
+        console.log(err)
         return next (new HttpError("Sorry, signup failed!", 422));
     };
 
