@@ -13,10 +13,8 @@ router.post("/login", usersControllers.loginToExistingUser);
 
 router.post(
     "/signup",
-    // fileUpload.single("image"),
     check("username").isLength({ min: 5 }),
     check("email").isEmail(),
-    check("password").isLength({ min: 10 }).isStrongPassword(),
     usersControllers.createAndLogInToUser);
 
 router.patch(

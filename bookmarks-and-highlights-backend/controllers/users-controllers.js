@@ -10,11 +10,11 @@ const createAndLogInToUser = async (req, res, next) => {
     if (!errors.isEmpty()) return next (new HttpError("Invalid inputs, please check your data", 422));
     const { email, username, password } = req.body;
 
+    console.log(password)
     let existingUser;
     try {
         existingUser = await User.findOne({ email: email });
     } catch (err) {
-        console.log(err)
         return next (new HttpError("Sorry, signup failed!", 422));
     };
 
@@ -32,7 +32,7 @@ const createAndLogInToUser = async (req, res, next) => {
         newUser = await User({
             email,
             username,
-            password,
+            password: hashedPassword,
             entries: []
         });
     } catch (err) {
@@ -98,7 +98,7 @@ const loginToExistingUser = async (req, res, next) => {
     let selectedUser;
     try {
         selectedUser = await User.findOne({ email: email });
-    } catch {
+    } catch (err) {
         return next (new HttpError("Sorry, could not find a user corresponding to the provided credentials!", 422));
     };
 
@@ -122,7 +122,7 @@ const loginToExistingUser = async (req, res, next) => {
         return next (new HttpError("Logging in failed, please try again!", 500));
     }
 
-    res.json({ userId: newUser.id, email: newUser.email, token: token });
+    res.json({ userId: selectedUser.id, email: selectedUser.email, token: token });
 };
 
 const updateProfile = async (req, res, next) => {
