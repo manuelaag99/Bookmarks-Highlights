@@ -16,14 +16,22 @@ export default function App () {
   const [ userId, setUserId ] = useState(false);
 
   const logIn = useCallback((uId, token) => {
-    setUserId(uId)
-    setToken((token))
+    setUserId(uId);
+    setToken((token));
+    localStorage.setItem("userData", JSON.stringify({ userId: Id, token: token }));
   }, []);
 
   const logOut = useCallback(() => {
-    setUserId(null)
-    setToken(null)
+    setUserId(null);
+    setToken(null);
   }, []);
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+    if (storedData && storedData.token) {
+      logIn(storedData.userId, storedData.token);
+    }
+  })
 
   return (
     <>
