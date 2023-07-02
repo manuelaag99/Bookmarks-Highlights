@@ -23,7 +23,7 @@ export default function App () {
     setToken((token));
     const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60)
     setTokenExpiration(tokenExpirationDate);
-    localStorage.setItem("userData", JSON.stringify({ userId: Id, token: token, expiration: tokenExpirationDate.toISOString() }));
+    localStorage.setItem("userData", JSON.stringify({ userId: uId, token: token, expiration: tokenExpirationDate.toISOString() }));
   }, []);
 
   const logOut = useCallback(() => {
