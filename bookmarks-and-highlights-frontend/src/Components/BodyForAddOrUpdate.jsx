@@ -23,7 +23,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     }, false);
     const [stateOfForm, inputHandler] = useForm(formData);
 
-    console.log(auth)
+    console.log(initialValues)
     const [existingBooks, setExistingBooks] = useState();
 
     useEffect(() => {

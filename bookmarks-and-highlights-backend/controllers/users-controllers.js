@@ -130,7 +130,12 @@ const updateProfile = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) throw new HttpError("Invalid inputs, please check your data", 422);
     const { displayName, shortBio, username } = req.body;
-    const profilePhotoUrl = req.file.path
+
+    let profilePhotoUrl;
+    if (req.file) {
+        profilePhotoUrl = req.file.path;
+    }
+    
     let selectedUser;
     try {
         selectedUser = await User.findById(userid);
@@ -141,9 +146,12 @@ const updateProfile = async (req, res, next) => {
     if (!selectedUser) return next (new HttpError("Sorry, could not find a matching user!", 401));
 
     selectedUser.displayName = displayName;    
-    selectedUser.profilePhotoUrl = "http://localhost:3000/" + profilePhotoUrl;
     selectedUser.shortBio = shortBio;
     selectedUser.username = username;
+
+    if (profilePhotoUrl) {
+        selectedUser.profilePhotoUrl = "http://localhost:3000/" + profilePhotoUrl;
+    }
 
     try {
         await selectedUser.save()

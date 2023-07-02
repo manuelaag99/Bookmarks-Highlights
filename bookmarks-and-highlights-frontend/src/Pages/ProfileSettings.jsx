@@ -20,7 +20,7 @@ export default function ProfileSettings () {
 
     const [userInfo, setUserInfo] = useState();
     const [formData, setFormData] = useState({
-        profilePhotoUrl: { value: "", isValid: false },
+        profilePhotoUrl: { value: "", isValid: true },
         username: { value: "", isValid: false },
         displayName: { value: "", isValid: false },
         shortBio: { value: "", isValid: false }
