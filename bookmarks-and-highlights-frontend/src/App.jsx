@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { AuthContext } from "./context/auth-context";
@@ -11,27 +11,43 @@ import SignUpPage from "./Pages/SignUpPage";
 import UpdateBandH from "./Pages/UpdateBandH";
 import ProfileSettings from "./Pages/ProfileSettings";
 
+let logOutTimer;
+
 export default function App () {
   const [ token, setToken ] = useState(false);
+  const [ tokenExpiration, setTokenExpiration ] = useState(null);
   const [ userId, setUserId ] = useState(false);
 
-  const logIn = useCallback((uId, token) => {
+  const logIn = useCallback((uId, token, expirationDate) => {
     setUserId(uId);
     setToken((token));
-    localStorage.setItem("userData", JSON.stringify({ userId: Id, token: token }));
+    const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60)
+    setTokenExpiration(tokenExpirationDate);
+    localStorage.setItem("userData", JSON.stringify({ userId: Id, token: token, expiration: tokenExpirationDate.toISOString() }));
   }, []);
 
   const logOut = useCallback(() => {
-    setUserId(null);
     setToken(null);
+    setTokenExpiration(null);
+    setUserId(null);
+    localStorage.removeItem("userData");
   }, []);
 
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("userData"));
-    if (storedData && storedData.token) {
-      logIn(storedData.userId, storedData.token);
+    if (token && tokenExpiration) {
+      const remainingTime = tokenExpiration.getTime() - new Date().getTime();
+      logOutTimer = setTimeout(logOut, remainingTime);
+    } else {
+      clearTimeout(logOutTimer);
     }
-  })
+  }, [token, logOut, tokenExpiration])
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+    if (storedData && storedData.token && (new Date(storedData.expiration) > new Date())) {
+      logIn(storedData.userId, storedData.token, new Date(storedData.expiration));
+    }
+  }, [logIn]);
 
   return (
     <>
