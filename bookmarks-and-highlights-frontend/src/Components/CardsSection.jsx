@@ -22,7 +22,7 @@ export default function CardsSection ({ bookid, cardsInfo, entries, isProfilePag
             </div>)
     } else {
         return (
-            <div className="md:w-10/12 w-full flex flex-wrap mt-4 mb-20 md:flex-row xl:grid xl:grid-cols-3 xl:gap-[4.5%] sm:justify-around justify-center">
+            <div className={"md:w-10/12 w-full flex flex-wrap mb-20 md:flex-row xl:grid xl:grid-cols-3 xl:gap-[4.5%] sm:justify-around justify-center " + (!isProfilePage ? " mt-14" : " mt-4") }>
                 {isProfilePage ? (cardsInfo.map((bookOrArticleCard, index) => {
                     return <Card key={index} specificUserId={userid} specificBookId={bookOrArticleCard.labelId} title={bookOrArticleCard.title} numberOfPhotos={bookOrArticleCard.collection.length} photos={bookOrArticleCard.collection}/>
                     })) : (entries.map((note, index) => {
