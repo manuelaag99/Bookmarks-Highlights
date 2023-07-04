@@ -9,7 +9,8 @@ const userSchema = new Schema({
     password: { type: "String", required: true },
     profilePhotoUrl: { type: "String", required: false },
     shortBio: { type: "String", required: false },
-    entries: [{ type: mongoose.Types.ObjectId, required: true, ref: "Entry"}]
+    entries: [{ type: mongoose.Types.ObjectId, required: true, ref: "Entry"}],
+    books: [{ type: mongoose.Types.ObjectId, required: true, ref: "Book" }]
 });
 const User = new mongoose.model("User", userSchema);
 

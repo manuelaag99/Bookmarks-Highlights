@@ -36,9 +36,7 @@ const createEntry = async (req, res, next) => {
         return next (new HttpError("Sorry, could not create new entry!", 500));
     };
 
-    if (!user) {
-        return next (new HttpError("Could not find a user for the provided ID.", 404));
-    };
+    if (!user) return next (new HttpError("Could not find a user for the provided ID.", 404));
 
     try {
         const currentSession = await mongoose.startSession();
