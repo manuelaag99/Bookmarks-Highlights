@@ -15,7 +15,7 @@ import { useHttpHook } from "../custom-hooks";
 
 export default function ProfilePage () {
     const auth = useContext(AuthContext);
-    console.log(auth);
+    // console.log(auth);
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
     const { userid } = useParams();
 
@@ -55,11 +55,21 @@ export default function ProfilePage () {
     const searchButtonHandle = (searchText) => {
         setSearchQuery((searchText) => searchText);
         const lowerCaseSearchText = searchText.toLowerCase();
-        if (searchText === "") {
-            setCardsToDisplay(() => cards);
+        console.log(cardsToDisplay)
+        if (searchText) {
+            if (searchText === "") {
+                setCardsToDisplay(() => cards);
+            } else {
+                // setCardsToDisplay(() => cards.filter((card) => card.title.toLowerCase().includes(lowerCaseSearchText)));
+                setCardsToDisplay(() => cards.map((card) => {
+                    console.log(card.bookTitle)
+                    card.bookTitle.toLowerCase().includes(lowerCaseSearchText)
+                }))
+            }
         } else {
-            setCardsToDisplay(() => cards.filter((card) => card.title.toLowerCase().includes(lowerCaseSearchText)));
+            setCardsToDisplay(() => cards);
         }
+        console.log(cardsToDisplay)
     };
 
     const groupButtonHandle = event => {
