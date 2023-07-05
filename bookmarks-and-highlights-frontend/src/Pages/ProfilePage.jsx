@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import AddCommand from "../Components/Portals/AddCommand"
-import { arrangeCardGroups, arrangeCardGroupsWhenLabelIsArray } from "../ArrangeCardGroups";
+import { arrangeCardGroups } from "../ArrangeCardGroups";
 import { AuthContext } from "../context/auth-context";
 import Breaker from "../Components/Breaker";
 import CardsSection from "../Components/CardsSection";
@@ -54,13 +54,13 @@ export default function ProfilePage () {
 
     const searchButtonHandle = (searchText) => {
         setSearchQuery(searchText);
-        const lowerCaseSearchText = searchText.toLowerCase();
+        const lowerCaseSearchText = searchQuery.toLowerCase();
+        console.log(cards)
         console.log(cardsToDisplay)
-        if (searchText) {
-            if (searchText === "") {
+        if (searchQuery) {
+            if (searchQuery === "" || searchQuery === null) {
                 setCardsToDisplay(() => cards);
             } else {
-                // setCardsToDisplay(() => cards.filter((card) => card.title.toLowerCase().includes(lowerCaseSearchText)));
                 setCardsToDisplay(() => cards.filter((card) => {
                     console.log(card.bookTitle)
                     return card.bookTitle.toLowerCase().includes(lowerCaseSearchText)
@@ -69,8 +69,10 @@ export default function ProfilePage () {
         } else {
             setCardsToDisplay(() => cards);
         }
-        console.log(cardsToDisplay)
     };
+
+    console.log(groupingOfCards)
+    console.log(cardsToDisplay)
 
     const groupButtonHandle = event => {
         const selectedLabel = event.toLowerCase();
@@ -83,7 +85,7 @@ export default function ProfilePage () {
                 setCards(() => newGroups);
                 setCardsToDisplay(() => newGroups);
             } else {
-                const newGroups = arrangeCardGroupsWhenLabelIsArray(event, selectedUserEntries);
+                const newGroups = arrangeCardGroups(event, selectedUserEntries);
                 setCards(() => newGroups);
                 setCardsToDisplay(() => newGroups);
             }
@@ -108,4 +110,4 @@ export default function ProfilePage () {
             </div>
         )
     }
-}
+};

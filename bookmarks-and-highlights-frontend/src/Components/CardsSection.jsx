@@ -9,7 +9,6 @@ export default function CardsSection ({ bookid, cardsInfo, entries, isProfilePag
     const addHandle = () => navigate("/" + userid + "/add");
 
     console.log(cardsInfo)
-    console.log(entries)
 
     if (isProfilePage && !cardsInfo) {
         return (
@@ -24,9 +23,14 @@ export default function CardsSection ({ bookid, cardsInfo, entries, isProfilePag
     } else {
         return (
             <div className={"md:w-10/12 w-full flex flex-wrap mb-20 md:flex-row xl:grid xl:grid-cols-3 xl:gap-[4.5%] sm:justify-around justify-center " + (!isProfilePage ? " mt-14" : " mt-4") }>
-                {isProfilePage ? (cardsInfo.map((bookOrArticleCard, index) => {
-                    return <Card key={index} specificUserId={userid} specificBookId={bookOrArticleCard.labelId} title={bookOrArticleCard.title} numberOfPhotos={bookOrArticleCard.collection.length || null} photos={bookOrArticleCard.collection}/>
-                    })) : (entries.map((note, index) => {
+                {isProfilePage && !cardsInfo && <div>sorry, error</div> }
+                {isProfilePage && cardsInfo && cardsInfo.collection && (cardsInfo.map((bookOrArticleCard, index) => {
+                    return <Card key={index} specificUserId={userid} specificBookId={bookOrArticleCard.labelId} title={bookOrArticleCard.title} numberOfPhotos={bookOrArticleCard ? bookOrArticleCard.collection.length : null} photos={bookOrArticleCard.collection}/>
+                    }))}
+                {isProfilePage && cardsInfo && !cardsInfo.collection && (cardsInfo.map((bookOrArticleCard, index) => {
+                    return <Card key={index} specificUserId={userid} specificBookId={bookOrArticleCard.labelId} title={bookOrArticleCard.title} numberOfPhotos={bookOrArticleCard ? bookOrArticleCard.collection.length : null} photos={bookOrArticleCard.collection}/>
+                    }))}
+                {!isProfilePage && (entries.map((note, index) => {
                         return <BandHsPhotoCard key={index} showBookTitles={showBookTitles} userid={userid} bookid={bookid} title={title} entries={entries} bookTitle={note.bookTitle} itemid={note.id} taglist={note.tags} photosrc={note.photoUrl} page={note.pageNumber} date={note.date}/>
                     }))}
             </div>
