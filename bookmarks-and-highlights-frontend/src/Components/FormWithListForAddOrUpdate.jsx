@@ -4,7 +4,7 @@ import ErrorMessage from "./Portals/ErrorMessage";
 import Loading from "./Portals/Loading";
 import { useInput, useHttpHook } from "../custom-hooks";
 
-export default function FormWithListForAddOrUpdate({ classnames, errorText, existingBooks, field, initialValidity, initialValue, inputType, isBookListOpen, labelText, listOfBooks, onInput, placeholderText, selectTitle, shouldBookListClose, shouldBookListOpen, valueFromList }) {
+export default function FormWithListForAddOrUpdate({ classnames, errorText, existingBooks, field, initialValidity, initialValue, inputType, isBookListOpen, labelText, listOfBooks, onInput, placeholderText, selectTitle, shouldBookListClose, shouldBookListOpen, userid, valueFromList }) {
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
 
     const [listQuery, setListQuery] = useState([]);
@@ -49,10 +49,13 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
                 "http://localhost:3000/api/books/createBook",
                 "POST",
                 JSON.stringify({
-                    bookTitle: value
+                    bookTitle: value,
+                    creator: userid
             }),
             { "Content-Type": "Application/json" });
-        } catch (err) {};
+        } catch (err) {
+            console.log(err)
+        };
     };
 
     if (loading) {

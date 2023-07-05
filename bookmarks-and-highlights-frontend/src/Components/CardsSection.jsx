@@ -15,6 +15,11 @@ export default function CardsSection ({ bookid, cardsInfo, entries, isProfilePag
             <div className="my-20 text-var-6 opacity-40 cursor-pointer" onClick={addHandle}>
                 <p>Sorry, you do not have any bookmark or hightlight! Add one by clicking here or the "+" button</p>
             </div>)
+    // } else if (isProfilePage && !cardsInfo.collection) {
+    //     return (
+    //         <div className="my-20 text-var-6 opacity-40 cursor-pointer" onClick={addHandle}>
+    //             <p>Sorry, you have no entries that match your search! Add one by clicking here or the "+" button</p>
+    //         </div>)
     } else if (!isProfilePage && !entries) {
         return (
             <div className="my-20 text-var-6 opacity-40 cursor-pointer" onClick={addHandle}>
@@ -23,11 +28,7 @@ export default function CardsSection ({ bookid, cardsInfo, entries, isProfilePag
     } else {
         return (
             <div className={"md:w-10/12 w-full flex flex-wrap mb-20 md:flex-row xl:grid xl:grid-cols-3 xl:gap-[4.5%] sm:justify-around justify-center " + (!isProfilePage ? " mt-14" : " mt-4") }>
-                {isProfilePage && !cardsInfo && <div>sorry, error</div> }
-                {isProfilePage && cardsInfo && cardsInfo.collection && (cardsInfo.map((bookOrArticleCard, index) => {
-                    return <Card key={index} specificUserId={userid} specificBookId={bookOrArticleCard.labelId} title={bookOrArticleCard.title} numberOfPhotos={bookOrArticleCard ? bookOrArticleCard.collection.length : null} photos={bookOrArticleCard.collection}/>
-                    }))}
-                {isProfilePage && cardsInfo && !cardsInfo.collection && (cardsInfo.map((bookOrArticleCard, index) => {
+                {isProfilePage && (cardsInfo.map((bookOrArticleCard, index) => {
                     return <Card key={index} specificUserId={userid} specificBookId={bookOrArticleCard.labelId} title={bookOrArticleCard.title} numberOfPhotos={bookOrArticleCard ? bookOrArticleCard.collection.length : null} photos={bookOrArticleCard.collection}/>
                     }))}
                 {!isProfilePage && (entries.map((note, index) => {

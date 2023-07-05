@@ -26,24 +26,25 @@ export default function ProfilePage () {
     const [groupingOfCards, setgroupingOfCards] = useState("bookTitle");
     const [searchQuery, setSearchQuery] = useState("")
 
-    let defaultCards;
+    console.log(selectedUser)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userInfoData = await sendHttpRequest("http://localhost:3000/api/users/" + userid + "/info");
+                const userInfoData = await sendHttpRequest("http://localhost:3000/api/users/" + auth.userId + "/info");
                 setSelectedUser(userInfoData.user);
             } catch (err) {}
         };
         fetchData();
         const fetchEntriesData = async () => {
             try {
-                const userEntriesData = await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/all", "GET", null, { Authorization: "Bearer " + auth.token });
+                const userEntriesData = await sendHttpRequest("http://localhost:3000/api/entries/user/" + auth.userId + "/all", "GET", null, { Authorization: "Bearer " + auth.token });
                 setSelectedUserEntries(userEntriesData.userEntries);
             } catch (err) {}
         };
         fetchEntriesData();
-    }, [sendHttpRequest, userid]);
+    }, [sendHttpRequest, auth.userId]);
 
+    let defaultCards;
     useEffect(() => {
         if (selectedUserEntries) {
             setCards(selectedUserEntries);
@@ -53,17 +54,19 @@ export default function ProfilePage () {
     }, [selectedUserEntries]);
 
     const searchButtonHandle = (searchText) => {
-        setSearchQuery(searchText);
-        const lowerCaseSearchText = searchQuery.toLowerCase();
+        const lowerCaseSearchText = searchText.toLowerCase();
+        setSearchQuery(lowerCaseSearchText);
         console.log(cards)
         console.log(cardsToDisplay)
-        if (searchQuery) {
-            if (searchQuery === "" || searchQuery === null) {
-                setCardsToDisplay(() => cards);
+        console.log(lowerCaseSearchText)
+        if (lowerCaseSearchText) {
+            if (lowerCaseSearchText === "") {
+                setCards(selectedUserEntries);
+                setCardsToDisplay(() => arrangeCardGroups("bookTitle", selectedUserEntries));
             } else {
                 setCardsToDisplay(() => cards.filter((card) => {
-                    console.log(card.bookTitle)
-                    return card.bookTitle.toLowerCase().includes(lowerCaseSearchText)
+                    console.log(card.title);
+                    return card.title.toLowerCase().includes(lowerCaseSearchText);
                 }))
             }
         } else {
@@ -71,8 +74,18 @@ export default function ProfilePage () {
         }
     };
 
-    console.log(groupingOfCards)
-    console.log(cardsToDisplay)
+    // useEffect(() => {
+    //     console.log("change")
+    //     console.log(searchQuery)
+    //     console.log(cardsToDisplay)
+    //     if (searchQuery === "") {
+    //         setCardsToDisplay(cards);
+    //     } else {
+    //         setCardsToDisplay(() => cardsToDisplay.filter((card) => {
+    //             return card.title.toLowerCase().includes()
+    //         }))
+    //     }
+    // }, [])
 
     const groupButtonHandle = event => {
         const selectedLabel = event.toLowerCase();
@@ -80,15 +93,8 @@ export default function ProfilePage () {
         if (selectedUserEntries.length === 0) {
             return "empty"
         } else {
-            if (event !== "tags") {
-                const newGroups = arrangeCardGroups(event, selectedUserEntries);
-                setCards(() => newGroups);
-                setCardsToDisplay(() => newGroups);
-            } else {
-                const newGroups = arrangeCardGroups(event, selectedUserEntries);
-                setCards(() => newGroups);
-                setCardsToDisplay(() => newGroups);
-            }
+            const newGroups = arrangeCardGroups(event, selectedUserEntries);
+            setCardsToDisplay(() => newGroups);
         }
     };
 

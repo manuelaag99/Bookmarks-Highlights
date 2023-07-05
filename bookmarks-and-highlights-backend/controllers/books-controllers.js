@@ -10,6 +10,8 @@ const createBook = async (req, res, next) => {
     if (!errors.isEmpty()) {throw new HttpError("Invalid input, please check your data", 422);}
     const { bookTitle, creator } = req.body;
 
+    console.log(creator)
+
     try {
         newBook = await Book({
             bookTitle,
