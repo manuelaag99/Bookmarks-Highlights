@@ -7,7 +7,7 @@ function arrangeCardGroups (label, entries) {
             const titlesArrayNoDuplicates = selectedArray.filter((item, index) => selectedArray.indexOf(item) === index)
             const listOfCardObjects = []
             titlesArrayNoDuplicates.map((title) => {
-                var cardObject = {title: title, bookTitle: "", labelId: "tagName=" + title , collection: []}
+                var cardObject = {title: title, labelId: "tagName=" + title , collection: []}
                 listOfCardObjects.push(cardObject)
             })
             listOfCardObjects.map((cardObject) => {

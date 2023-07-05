@@ -53,7 +53,7 @@ export default function ProfilePage () {
     }, [selectedUserEntries]);
 
     const searchButtonHandle = (searchText) => {
-        setSearchQuery((searchText) => searchText);
+        setSearchQuery(searchText);
         const lowerCaseSearchText = searchText.toLowerCase();
         console.log(cardsToDisplay)
         if (searchText) {
@@ -61,9 +61,9 @@ export default function ProfilePage () {
                 setCardsToDisplay(() => cards);
             } else {
                 // setCardsToDisplay(() => cards.filter((card) => card.title.toLowerCase().includes(lowerCaseSearchText)));
-                setCardsToDisplay(() => cards.map((card) => {
+                setCardsToDisplay(() => cards.filter((card) => {
                     console.log(card.bookTitle)
-                    card.bookTitle.toLowerCase().includes(lowerCaseSearchText)
+                    return card.bookTitle.toLowerCase().includes(lowerCaseSearchText)
                 }))
             }
         } else {
@@ -91,9 +91,7 @@ export default function ProfilePage () {
     };
 
     if (!selectedUser) {
-        return (
-            <Loading open={loading} />
-        )
+        return <Loading open={loading} />
     } else {
         return (
             <div className="flex flex-wrap justify-center md:w-full w-8/10 mx-auto">
