@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import AddCommand from "../Components/Portals/AddCommand"
 import { arrangeCardGroups } from "../ArrangeCardGroups";
@@ -17,7 +17,6 @@ export default function ProfilePage () {
     const auth = useContext(AuthContext);
     // console.log(auth);
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
-    const { userid } = useParams();
 
     const [selectedUser, setSelectedUser] = useState();
     const [selectedUserEntries, setSelectedUserEntries] = useState();
@@ -26,7 +25,6 @@ export default function ProfilePage () {
     const [groupingOfCards, setgroupingOfCards] = useState("bookTitle");
     const [searchQuery, setSearchQuery] = useState("")
 
-    console.log(selectedUser)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -62,41 +60,25 @@ export default function ProfilePage () {
                 setCards(defaultCards);
                 setCardsToDisplay(defaultCards);
             } else {
-                
-                setCardsToDisplay(() => cards.filter((card) => {
+                setCardsToDisplay(cards.filter((card) => {
                     console.log(card.title);
                     return card.title.toLowerCase().includes(lowerCaseSearchText);
                 }))
             }
         } else {
-            setCardsToDisplay(() => cards);
+            setCardsToDisplay(cards);
         }
     };
 
-    console.log(cards)
-    console.log(cardsToDisplay)
-
-    // useEffect(() => {
-    //     console.log("change")
-    //     console.log(searchQuery)
-    //     console.log(cardsToDisplay)
-    //     if (searchQuery === "") {
-    //         setCardsToDisplay(cards);
-    //     } else {
-    //         setCardsToDisplay(() => cardsToDisplay.filter((card) => {
-    //             return card.title.toLowerCase().includes()
-    //         }))
-    //     }
-    // }, [])
-
     const groupButtonHandle = event => {
         const selectedLabel = event.toLowerCase();
-        setgroupingOfCards(() => selectedLabel);
+        setgroupingOfCards(selectedLabel);
         if (selectedUserEntries.length === 0) {
             return "empty"
         } else {
             const newGroups = arrangeCardGroups(event, selectedUserEntries);
-            setCardsToDisplay(() => newGroups);
+            setCards(() => newGroups);
+            setCardsToDisplay(newGroups);
         }
     };
 
