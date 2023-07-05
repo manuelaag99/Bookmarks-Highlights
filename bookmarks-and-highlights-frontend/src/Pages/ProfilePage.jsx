@@ -47,8 +47,8 @@ export default function ProfilePage () {
     let defaultCards;
     useEffect(() => {
         if (selectedUserEntries) {
-            setCards(selectedUserEntries);
             defaultCards = arrangeCardGroups("bookTitle", selectedUserEntries);
+            setCards(defaultCards)
             setCardsToDisplay(defaultCards);
         }
     }, [selectedUserEntries]);
@@ -56,14 +56,13 @@ export default function ProfilePage () {
     const searchButtonHandle = (searchText) => {
         const lowerCaseSearchText = searchText.toLowerCase();
         setSearchQuery(lowerCaseSearchText);
-        console.log(cards)
-        console.log(cardsToDisplay)
         console.log(lowerCaseSearchText)
         if (lowerCaseSearchText) {
             if (lowerCaseSearchText === "") {
-                setCards(selectedUserEntries);
-                setCardsToDisplay(() => arrangeCardGroups("bookTitle", selectedUserEntries));
+                setCards(defaultCards);
+                setCardsToDisplay(defaultCards);
             } else {
+                
                 setCardsToDisplay(() => cards.filter((card) => {
                     console.log(card.title);
                     return card.title.toLowerCase().includes(lowerCaseSearchText);
@@ -73,6 +72,9 @@ export default function ProfilePage () {
             setCardsToDisplay(() => cards);
         }
     };
+
+    console.log(cards)
+    console.log(cardsToDisplay)
 
     // useEffect(() => {
     //     console.log("change")
