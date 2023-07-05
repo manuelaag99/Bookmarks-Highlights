@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
+import { AuthContext } from "../context/auth-context";
 import ErrorMessage from "./Portals/ErrorMessage";
 import Loading from "./Portals/Loading";
 import { useInput, useHttpHook } from "../custom-hooks";
 
 export default function FormWithListForAddOrUpdate({ classnames, errorText, existingBooks, field, initialValidity, initialValue, inputType, isBookListOpen, labelText, listOfBooks, onInput, placeholderText, selectTitle, shouldBookListClose, shouldBookListOpen, userid, valueFromList }) {
+    const auth = useContext(AuthContext);
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
 
     const [listQuery, setListQuery] = useState([]);
@@ -45,14 +47,7 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
     const postNewBook = async e => {
         e.preventDefault();
         try {
-            await sendHttpRequest(
-                "http://localhost:3000/api/books/createBook",
-                "POST",
-                JSON.stringify({
-                    bookTitle: value,
-                    creator: userid
-            }),
-            { "Content-Type": "Application/json" });
+            await sendHttpRequest("http://localhost:3000/api/books/createBook", "POST", JSON.stringify({ bookTitle: value, creator: userid }), { "Content-Type": "Application/json", Authorization: "Bearer " + auth.token });
         } catch (err) {
             console.log(err)
         };

@@ -29,7 +29,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         !isAdd && setTitleValue(initialValues.bookTitle);
         const fetchAllBooks = async () => {
             try {
-                const responseData = await sendHttpRequest("http://localhost:3000/api/books/getAllBooks");
+                const responseData = await sendHttpRequest("http://localhost:3000/api/books/getAllBooks", "GET", null, { Authorization: "Bearer " + auth.token });
                 setExistingBooks(responseData.allBooks);
             } catch (err) {}
         };
