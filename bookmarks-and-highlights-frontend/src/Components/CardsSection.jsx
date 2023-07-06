@@ -8,18 +8,11 @@ export default function CardsSection ({ bookid, cardsInfo, entries, isProfilePag
     const navigate = useNavigate();
     const addHandle = () => navigate("/" + userid + "/add");
 
-    console.log(cardsInfo)
-
     if (isProfilePage && !cardsInfo) {
         return (
             <div className="my-20 text-var-6 opacity-40 cursor-pointer" onClick={addHandle}>
                 <p>Sorry, you do not have any bookmark or hightlight! Add one by clicking here or the "+" button</p>
             </div>)
-    // } else if (isProfilePage && !cardsInfo.collection) {
-    //     return (
-    //         <div className="my-20 text-var-6 opacity-40 cursor-pointer" onClick={addHandle}>
-    //             <p>Sorry, you have no entries that match your search! Add one by clicking here or the "+" button</p>
-    //         </div>)
     } else if (!isProfilePage && !entries) {
         return (
             <div className="my-20 text-var-6 opacity-40 cursor-pointer" onClick={addHandle}>

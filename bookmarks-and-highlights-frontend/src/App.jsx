@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "./context/auth-context";
 import AddBandH from "./Pages/AddBandH";
@@ -31,6 +31,7 @@ export default function App () {
     setTokenExpiration(null);
     setUserId(null);
     localStorage.removeItem("userData");
+
   }, []);
 
   useEffect(() => {
@@ -49,23 +50,40 @@ export default function App () {
     }
   }, [logIn]);
 
-  return (
-    <>
-      <AuthContext.Provider value={{ isLoggedIn: token, token: token, userId: userId, login: logIn, logout: logOut }}>
-        <Router>
-          <Routes>
-            <Route path="/*" element={<SignInOrSignUpPage />}/>
-            <Route path="/home" element={<SignInOrSignUpPage />}/>
-            <Route path="/signin" element={<SignInPage />}/>
-            <Route path="/signup" element={<SignUpPage />}/>
-            <Route path="/:userid/myprofile" element={<ProfilePage />}/>
-            <Route path="/:userid/myprofile/settings" element={<ProfileSettings />}/>
-            <Route path="/:userid/bandhs/labelid/:bookid" element={<BandHsPage />}/>
-            <Route path="/:userid/bandhs/labelid/:bookid/update/itemid/:itemid" element={<UpdateBandH />}/>
-            <Route path="/:userid/add" element={<AddBandH />}/>
-          </Routes>
-        </Router>
-      </AuthContext.Provider>
-    </>
-  )
-}
+  if (!token) {
+    return (
+      <>
+        <AuthContext.Provider value={{ isLoggedIn: token, token: token, userId: userId, login: logIn, logout: logOut }}>
+          <Router>
+            <Routes>
+              <Route path="/*" element={<SignInOrSignUpPage />}/>
+              <Route path="/home" element={<SignInOrSignUpPage />}/>
+              <Route path="/signin" element={<SignInPage />}/>
+              <Route path="/signup" element={<SignUpPage />}/>
+            </Routes>
+          </Router>
+        </AuthContext.Provider>
+      </>
+    )
+  } else {
+    return (
+      <>
+        <AuthContext.Provider value={{ isLoggedIn: token, token: token, userId: userId, login: logIn, logout: logOut }}>
+          <Router>
+            <Routes>
+              <Route path="/*" element={<SignInOrSignUpPage />}/>
+              <Route path="/home" element={<SignInOrSignUpPage />}/>
+              <Route path="/signin" element={<SignInPage />}/>
+              <Route path="/signup" element={<SignUpPage />}/>
+              <Route path="/:userid/myprofile" element={<ProfilePage />}/>
+              <Route path="/:userid/myprofile/settings" element={<ProfileSettings />}/>
+              <Route path="/:userid/bandhs/labelid/:bookid" element={<BandHsPage />}/>
+              <Route path="/:userid/bandhs/labelid/:bookid/update/itemid/:itemid" element={<UpdateBandH />}/>
+              <Route path="/:userid/add" element={<AddBandH />}/>
+            </Routes>
+          </Router>
+        </AuthContext.Provider>
+      </>
+    )
+  }
+};
