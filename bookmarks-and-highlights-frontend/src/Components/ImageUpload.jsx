@@ -49,8 +49,8 @@ export default function ImageUpload ({ field, initialValidity, initialValue, isP
             <input accept=".jpg,.png,.jpeg" className="w-full h-full " id={field} onChange={uploadFileHandler} ref={fileSelectorRef} style={{display: "none"}} type="file" />
 
             <div className="w-full h-full flex flex-col justify-center items-center relative">
-                {!previewUrl && initialValue && <img className="z-0 h-full w-full object-cover " src={initialValue} alt="upload" />}
-                {!previewUrl && !initialValue && <div className="z-1 cursor-pointer opacity-30 w-full px-2 absolute">
+                {!previewUrl && initialValue && <img className={"z-0 h-full w-full object-cover " + ((field !== "photoUrl") && " hover:opacity-30 duration-200 ")} src={initialValue} alt="upload" />}
+                {(field !== "photoUrl") && <div className="z-1 cursor-pointer opacity-30 w-full px-2 absolute">
                     <p className="w-full h-fit"><PhotoIcon className="z-1 h-5 w-5 inline mx-2" />Select an image</p>
                 </div>}
                 {previewUrl && <img alt="Preview" className="z-1 h-full object-contain z-10" src={previewUrl} />}

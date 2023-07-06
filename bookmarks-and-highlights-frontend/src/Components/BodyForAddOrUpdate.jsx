@@ -94,7 +94,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
             <div className="w-3/5 md:w-7/10 h-3/10 pl-6 block ">
                 <FormWithListForAddOrUpdate userid={userid} valueFromList={titleValue} existingBooks={existingBooks} isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.title} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
             </div>
-            <div onClick={clickHandle} className="h-7/10 w-full pl-3">
+            <div onClick={clickHandle} className="h-7/10 w-full md:pl-3">
                 <div className="flex flex-wrap flex-row justify-start">
                     <FormForAddOrUpdate onInput={inputHandler} field="date" initialValue={isAdd ? "" : initialValues.date || null} initialValidity={initialFormValidity} errorText="error!" labelText="date:" placeholderText="DD/MM/YYYY" classnames="w-2/3 mt-3" inputType="date" />
                     <FormForAddOrUpdate onInput={inputHandler} field="page" initialValue={isAdd ? "" : initialValues.pageNumber || null} initialValidity={initialFormValidity} errorText="error!" labelText="page #:" placeholderText="e.g. 31, 105" classnames="w-3/10 mt-3" inputType="number" />

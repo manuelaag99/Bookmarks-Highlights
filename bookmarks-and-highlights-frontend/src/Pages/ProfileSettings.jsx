@@ -73,7 +73,6 @@ export default function ProfileSettings () {
     }
 
     const logOutHandle = () => {
-        console.log("log out")
         auth.logout();
         navigate("/");
     }
