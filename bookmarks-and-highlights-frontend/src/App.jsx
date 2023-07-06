@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { AuthContext } from "./context/auth-context";
 import AddBandH from "./Pages/AddBandH";
@@ -21,7 +21,7 @@ export default function App () {
   const logIn = useCallback((uId, token, expirationDate) => {
     setUserId(uId);
     setToken((token));
-    const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60)
+    const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
     setTokenExpiration(tokenExpirationDate);
     localStorage.setItem("userData", JSON.stringify({ userId: uId, token: token, expiration: tokenExpirationDate.toISOString() }));
   }, []);
@@ -31,7 +31,6 @@ export default function App () {
     setTokenExpiration(null);
     setUserId(null);
     localStorage.removeItem("userData");
-
   }, []);
 
   useEffect(() => {
@@ -41,7 +40,7 @@ export default function App () {
     } else {
       clearTimeout(logOutTimer);
     }
-  }, [token, logOut, tokenExpiration])
+  }, [token, logOut, tokenExpiration]);
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("userData"));
@@ -75,6 +74,7 @@ export default function App () {
               <Route path="/home" element={<SignInOrSignUpPage />}/>
               <Route path="/signin" element={<SignInPage />}/>
               <Route path="/signup" element={<SignUpPage />}/>
+              <Route path="/:userid/myprofile" element={<ProfilePage />}/>
               <Route path="/:userid/myprofile" element={<ProfilePage />}/>
               <Route path="/:userid/myprofile/settings" element={<ProfileSettings />}/>
               <Route path="/:userid/bandhs/labelid/:bookid" element={<BandHsPage />}/>
