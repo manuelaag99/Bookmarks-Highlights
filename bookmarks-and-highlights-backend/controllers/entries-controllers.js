@@ -119,7 +119,9 @@ const getUserEntriesByUserId = async (req, res, next) => {
 const updateEntry = async (req, res, next) => {
     const selectedItemId = req.params.itemId;
     const { bookTitle, tags, date, pageNumber } = req.body;
-    
+    const photoUrl = "http://localhost:3000/" + req.file.path
+    console.log(req.file.path)
+
     let selectedEntry;
     try {
         selectedEntry = await Entry.findById(selectedItemId)
@@ -131,6 +133,7 @@ const updateEntry = async (req, res, next) => {
     selectedEntry.tags = tags;
     selectedEntry.date = date;
     selectedEntry.pageNumber = pageNumber;
+    selectedEntry.photoUrl = photoUrl;
 
     try {
         await selectedEntry.save()
