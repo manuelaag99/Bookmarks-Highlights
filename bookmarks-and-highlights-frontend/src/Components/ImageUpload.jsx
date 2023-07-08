@@ -37,11 +37,13 @@ export default function ImageUpload ({ field, initialValidity, initialValue, isP
         }
         onInput(field, selectedFile, fileIsValid);
     };
+
+    console.log(previewUrl)
     
     return (
-        <div className={"flex flex-wrap justify-center sm:mx-auto text-center items-center cursor-pointer h-full max-h-[200px] sm:w-8/10 relative z-0 " + (!initialValue && "bg-var-8" ) + (isProfileSettings ? " w-1/2" : " w-full")} onClick={previewUrl ? null : selectFileHandler} >
-            {previewUrl && <div className="absolute top-0 right-0 w-fit flex flex-row flex-wrap justify-center text-var-1 z-20">
-                {!initialValue && <button className="rounded-tag bg-var-5 px-2 m-1.5" onClick={selectFileHandler} type="button">change</button>}
+        <div className={"flex flex-wrap justify-center sm:mx-auto text-center items-center cursor-pointer h-fit sm:h-[200px] aspect-square sm:w-8/10 relative z-0 " + (!initialValue && "bg-var-8" ) + (isProfileSettings ? " w-1/4" : " w-full")} onClick={previewUrl ? null : selectFileHandler} >
+            {(previewUrl || initialValue) && <div className="absolute top-0 right-0 w-fit flex flex-row flex-wrap justify-center text-var-1 z-20">
+                <button className="rounded-tag bg-var-5 px-2 m-1.5" onClick={selectFileHandler} type="button">change</button>
                 <button className="rounded-tag bg-var-5 px-2 m-1.5" onClick={cancelFileUpload} type="button">
                     <XMarkIcon className="h-5 w-5" />
                 </button>
@@ -50,8 +52,10 @@ export default function ImageUpload ({ field, initialValidity, initialValue, isP
 
             <div className="w-full h-full flex flex-col justify-center items-center relative">
                 {!previewUrl && initialValue && <img className={"z-0 h-full w-full object-cover " + ((field !== "photoUrl") && " hover:opacity-30 duration-200 ")} src={initialValue} alt="upload" />}
-                {(field !== "photoUrl") && <div className="z-1 cursor-pointer opacity-30 w-full px-2 absolute">
-                    <p className="w-full h-fit"><PhotoIcon className="z-1 h-5 w-5 inline mx-2" />Select an image</p>
+                {!initialValue && <div className="z-1 cursor-pointer opacity-30 w-full px-2 absolute">
+                    <p className="w-full h-fit">
+                    <PhotoIcon className="z-1 h-5 w-5 inline mx-2" />
+                    Select an image</p>
                 </div>}
                 {previewUrl && <img alt="Preview" className="z-1 h-full object-contain z-10" src={previewUrl} />}
             </div>
