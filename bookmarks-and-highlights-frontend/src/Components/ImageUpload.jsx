@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
-export default function ImageUpload ({ field, initialValidity, initialValue, isProfileSettings, onInput }) {
+export default function ImageUpload ({ field, initialValidity, initialValue, onInput }) {
     const fileSelectorRef = useRef();
     const [file, setFile] = useState();
     const [previewUrl, setPreviewUrl] = useState();
@@ -37,10 +37,6 @@ export default function ImageUpload ({ field, initialValidity, initialValue, isP
         }
         onInput(field, selectedFile, fileIsValid);
     };
-
-    if (previewUrl) {
-        console.log("yeah")
-    }
     
     return (
         <div className={"flex flex-wrap justify-center text-center items-center cursor-pointer h-fit mx-auto aspect-square sm:w-8/10 relative z-0 w-full " + (!initialValue && "bg-var-8" )} onClick={previewUrl ? null : selectFileHandler} >
@@ -53,11 +49,11 @@ export default function ImageUpload ({ field, initialValidity, initialValue, isP
             <input accept=".jpg,.png,.jpeg" className="w-full h-full " id={field} onChange={uploadFileHandler} ref={fileSelectorRef} style={{ display: "none" }} type="file" />
 
             <div className="w-full h-full flex flex-col justify-center items-center relative">
-                {!previewUrl && initialValue && <img className={"z-0 mx-auto h-full w-full object-cover " + ((field !== "photoUrl") && " hover:opacity-30 duration-200 ")} src={initialValue} alt="upload" />}
+                {!previewUrl && initialValue && <img className={"z-0 mx-auto h-full w-full object-cover " + ((field !== "photoUrl") && " hover:opacity-30 duration-200 ")} src={"http://localhost:3000/" + initialValue} alt="upload" />}
                 {!initialValue && <div className="z-1 cursor-pointer opacity-30 w-full px-2 absolute">
                     <p className="w-full h-fit"><PhotoIcon className="z-1 h-5 w-5 inline mx-2" />Select an image</p>
                 </div>}
-                {previewUrl && <img alt="Preview" className="z-1 mx-auto h-full w-full object-contain z-10" src={previewUrl} />}
+                {previewUrl && <img alt="Preview" className="z-1 mx-auto h-full w-full object-contain z-10" src={"http://localhost:3000/" + previewUrl} />}
             </div>
         </div>
     )

@@ -150,7 +150,7 @@ const updateProfile = async (req, res, next) => {
     selectedUser.username = username;
 
     if (profilePhotoUrl) {
-        selectedUser.profilePhotoUrl = "http://localhost:3000/" + profilePhotoUrl;
+        selectedUser.profilePhotoUrl = profilePhotoUrl;
     }
 
     try {

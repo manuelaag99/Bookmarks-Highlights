@@ -90,7 +90,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
             <ErrorMessage open={error} error={error} onClose={clearError} />
             <div className="flex flex-col justify-center sm:flex-row w-full">
                 <div onClick={clickHandle} className="flex mx-auto w-8/10 sm:w-3/10 justify-center items-center mb-4 sm:mb-0">
-                    <ImageUpload field="photoUrl" initialValue={isAdd ? null : initialValues.photoUrl || null} initialValidity={initialFormValidity} isProfileSettings={false} onInput={inputHandler} />
+                    <ImageUpload field="photoUrl" initialValue={isAdd ? null : initialValues.photoUrl || null} initialValidity={initialFormValidity} onInput={inputHandler} />
                 </div>
                 <div className="w-full sm:w-7/10 h-3/10">
                     <FormWithListForAddOrUpdate userid={userid} valueFromList={titleValue} existingBooks={existingBooks} isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.title} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />

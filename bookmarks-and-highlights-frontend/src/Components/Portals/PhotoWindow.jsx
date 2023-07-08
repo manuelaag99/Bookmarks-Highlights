@@ -13,7 +13,7 @@ export default function PhotoWindow ({ open, image, onClose }) {
                     </button>
                 </div>
                 <div className="absolute top-[11.5%] w-full h-8/9 aspect-square flex justify-center">
-                    <img className="h-full object-contain" src={image} alt="" />
+                    <img className="h-full object-contain" src={"http://localhost:3000/" + image} alt="" />
                 </div>
             </div>
         </div>

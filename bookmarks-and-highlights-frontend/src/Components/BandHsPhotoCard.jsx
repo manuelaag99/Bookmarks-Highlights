@@ -21,7 +21,7 @@ export default function BandHsPhotoCard ({ bookTitle, bookid, date, entries, ite
             <PageAndDateSection showBookTitle={showBookTitles} bookTitle={bookTitle} page={page} date={date} />
             <div className={"w-full bg-var-7 " + (showBookTitles ? "h-6/10 mt-4 mb-1" : "h-7/10")}>
                 <img onClick={() => setPhotoWindow(() => true)}
-                    className="h-full mx-auto cursor-pointer" src={photosrc} alt="" />
+                    className="h-full mx-auto cursor-pointer" src={"http://localhost:3000/" + photosrc} alt="" />
                 <PhotoWindow open={photoWindow} image={photosrc} onClose={() => setPhotoWindow(() => false)} />
             </div>
             <div className="h-2/10 w-full pt-2.5 relative">

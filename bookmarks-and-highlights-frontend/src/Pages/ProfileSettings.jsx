@@ -94,7 +94,7 @@ export default function ProfileSettings () {
                             <label className="w-full sm:text-add-or-update-p text-add-or-update-mob font-bold mt-0 ">Profile Picture:</label>
                         </div>
                         <div className="w-full mt-0 px-4">
-                            <ImageUpload field="profilePhotoUrl" initialValue={userInfo.profilePhotoUrl} initialValidity={true} isProfileSettings={true} onInput={inputHandler} />
+                            <ImageUpload field="profilePhotoUrl" initialValue={userInfo.profilePhotoUrl} initialValidity={true} onInput={inputHandler} />
                         </div>
                     </div>
 

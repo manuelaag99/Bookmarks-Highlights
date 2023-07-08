@@ -12,7 +12,7 @@ const createEntry = async (req, res, next) => {
     if (!errors.isEmpty()) {throw new HttpError("Invalid inputs, please check your data", 422);}
     console.log(req.body)
     const { bookTitle, tags, date, pageNumber, creator } = req.body;
-    const photoUrl = "http://localhost:3000/" + req.file.path
+    const photoUrl = req.file.path
     console.log(req.file.path)
 
     console.log(tags)
