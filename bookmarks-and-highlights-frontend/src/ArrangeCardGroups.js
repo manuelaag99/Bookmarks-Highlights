@@ -14,10 +14,13 @@ function arrangeCardGroups (label, entries) {
                 entries.map((entry) => {
                     if (entry[label].toString() === cardObject.title) {
                         cardObject.collection.push(entry)
+                    } else if (entry[label].toString().includes(cardObject.title)) {
+                        cardObject.collection.push(entry)
                     }
                 })
             })
-            return listOfCardObjects
+            console.log(entries)
+            return listOfCardObjects;
         }   
     }
 };
