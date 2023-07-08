@@ -11,9 +11,9 @@ export default function FormForAddOrUpdate({ classnames, errorText, field, initi
 
     return (
         <div className={"h-16 " + classnames}>
-            <label className={"inline text-add-or-update-p font-bold " + ((!inputState.isValid && inputState.isTouched) ? "text-red-btn" : null)}>{labelText}</label>
+            <label className={"inline sm:text-add-or-update-p text-add-or-update-mob font-bold " + ((!inputState.isValid && inputState.isTouched) ? "text-red-btn" : null)}>{labelText}</label>
             <i className={"ml-3 text-red-btn " + ((!inputState.isValid && inputState.isTouched) ? "inline" : "hidden")}>{errorText}</i>
-            <input className="block outline-none mt-1 pl-2 h-8 w-95 pr-2" type={inputType} placeholder={placeholderText} value={value} onChange={inputChangeHandler} onBlur={inputBlurHandler} />
+            <input className="block outline-none sm:text-add-or-update-p text-add-or-update-mob mt-1 pl-2 h-8 w-95 pr-2" type={inputType} placeholder={placeholderText} value={value} onChange={inputChangeHandler} onBlur={inputBlurHandler} />
         </div>
     )
 };

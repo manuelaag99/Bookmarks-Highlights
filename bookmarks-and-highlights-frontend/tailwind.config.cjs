@@ -43,6 +43,7 @@ module.exports = {
       "dsk-card-button": "1.3rem",
       "dsk-add-command": "1rem",
       "add-or-update-p": "1.2rem",
+      "add-or-update-mob": "0.9rem",
       "tbl-add-command": "1rem",
       "mob-add-command": "3rem"
     },
