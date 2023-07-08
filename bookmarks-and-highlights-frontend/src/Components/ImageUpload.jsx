@@ -53,7 +53,7 @@ export default function ImageUpload ({ field, initialValidity, initialValue, onI
                 {!initialValue && <div className="z-1 cursor-pointer opacity-30 w-full px-2 absolute">
                     <p className="w-full h-fit"><PhotoIcon className="z-1 h-5 w-5 inline mx-2" />Select an image</p>
                 </div>}
-                {previewUrl && <img alt="Preview" className="z-1 mx-auto h-full w-full object-contain z-10" src={"http://localhost:3000/" + previewUrl} />}
+                {previewUrl && <img alt="Preview" className="z-1 mx-auto h-full w-full object-contain z-10" src={previewUrl} />}
             </div>
         </div>
     )
