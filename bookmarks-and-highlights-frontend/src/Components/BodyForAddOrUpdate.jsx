@@ -85,15 +85,19 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     };
 
     return (
-        <form id="add-or-update-form" onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 md:h-6/10 h-8/10 md:mt-32 mt-16 flex flex-wrap flex-row z-0">
+        <form id="add-or-update-form" onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 sm:h-6/10 h-8/10 sm:mt-32 mt-5 flex flex-wrap flex-row z-0">
             <ErrorMessage open={error} error={error} onClose={clearError} />
-            <div onClick={clickHandle} className="w-2/5 md:w-3/10 justify-center items-center">
-                <ImageUpload field="photoUrl" initialValue={isAdd ? null : initialValues.photoUrl || null} initialValidity={initialFormValidity} isProfileSettings={false} onInput={inputHandler} />
+            <div className="flex flex-col justify-center sm:flex-row w-full">
+                <div onClick={clickHandle} className="flex mx-auto w-8/10 sm:w-3/10 justify-center items-center mb-4 sm:mb-0">
+                    <ImageUpload field="photoUrl" initialValue={isAdd ? null : initialValues.photoUrl || null} initialValidity={initialFormValidity} isProfileSettings={false} onInput={inputHandler} />
+                </div>
+                <div className="w-full sm:w-7/10 h-3/10">
+                    <FormWithListForAddOrUpdate userid={userid} valueFromList={titleValue} existingBooks={existingBooks} isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.title} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
+                </div>
             </div>
-            <div className="w-3/5 md:w-7/10 h-3/10 pl-6 block ">
-                <FormWithListForAddOrUpdate userid={userid} valueFromList={titleValue} existingBooks={existingBooks} isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.title} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
-            </div>
-            <div onClick={clickHandle} className="h-7/10 w-full md:pl-3">
+
+
+            <div onClick={clickHandle} className="h-4/10 w-full sm:pl-3">
                 <div className="flex flex-wrap flex-row justify-start">
                     <FormForAddOrUpdate onInput={inputHandler} field="date" initialValue={isAdd ? "" : initialValues.date.split("T")[0] || null} initialValidity={initialFormValidity} errorText="error!" labelText="date:" placeholderText="DD/MM/YYYY" classnames="w-2/3 mt-3" inputType="date" />
                     <FormForAddOrUpdate onInput={inputHandler} field="page" initialValue={isAdd ? "" : initialValues.pageNumber || null} initialValidity={initialFormValidity} errorText="error!" labelText="page #:" placeholderText="e.g. 31, 105" classnames="w-3/10 mt-3" inputType="number" />

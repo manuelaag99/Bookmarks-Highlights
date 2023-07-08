@@ -72,5 +72,5 @@ export default function FormWithListForAddOrUpdate({ classnames, errorText, exis
                 <Loading open={loading} />
             </div>
         );
-    }
+    };
 };
