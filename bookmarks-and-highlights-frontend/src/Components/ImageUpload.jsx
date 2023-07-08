@@ -38,7 +38,9 @@ export default function ImageUpload ({ field, initialValidity, initialValue, isP
         onInput(field, selectedFile, fileIsValid);
     };
 
-    console.log(previewUrl)
+    if (previewUrl) {
+        console.log("yeah")
+    }
     
     return (
         <div className={"flex flex-wrap justify-center text-center items-center cursor-pointer h-fit mx-auto aspect-square sm:w-8/10 relative z-0 w-full " + (!initialValue && "bg-var-8" )} onClick={previewUrl ? null : selectFileHandler} >
@@ -48,7 +50,7 @@ export default function ImageUpload ({ field, initialValidity, initialValue, isP
                     <XMarkIcon className="h-5 w-5" />
                 </button>
             </div>}
-            <input accept=".jpg,.png,.jpeg" className="w-full h-full " id={field} onChange={uploadFileHandler} ref={fileSelectorRef} style={{display: "none"}} type="file" />
+            <input accept=".jpg,.png,.jpeg" className="w-full h-full " id={field} onChange={uploadFileHandler} ref={fileSelectorRef} style={{ display: "none" }} type="file" />
 
             <div className="w-full h-full flex flex-col justify-center items-center relative">
                 {!previewUrl && initialValue && <img className={"z-0 mx-auto h-full w-full object-cover " + ((field !== "photoUrl") && " hover:opacity-30 duration-200 ")} src={initialValue} alt="upload" />}

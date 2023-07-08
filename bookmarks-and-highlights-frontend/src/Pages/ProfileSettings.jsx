@@ -83,7 +83,7 @@ export default function ProfileSettings () {
             <div onKeyUp={formChangeHandler} className="flex flex-wrap justify-center w-full h-full mx-auto bg-var-2 shadow-card relative">
                 <ErrorMessage open={error} error={error} onClose={clearError} />
                 <div className="fixed top-0 w-full h-16">
-                    <Link className="md:w-1/12 w-1/10 h-full absolute left-0" to={"/" + auth.userId + "/myprofile"}>
+                    <Link className="md:w-1/12 w-2/10 h-full absolute left-0" to={"/" + auth.userId + "/myprofile"}>
                         <BackBtnForAddOrUpdate />
                     </Link>
                 </div>
@@ -91,7 +91,7 @@ export default function ProfileSettings () {
                 <div className="mt-16 h-4/5 w-8/10 flex flex-col sm:flex-row mb-5">
                     <div className="flex flex-col justify-center items-start sm:w-3/5 w-full h-fit">
                         <div className="w-full mt-0 px-4 mb-2">
-                            <label className="w-full text-add-or-update-p font-bold mt-0 ">Profile Picture:</label>
+                            <label className="w-full sm:text-add-or-update-p text-add-or-update-mob font-bold mt-0 ">Profile Picture:</label>
                         </div>
                         <div className="w-full mt-0 px-4">
                             <ImageUpload field="profilePhotoUrl" initialValue={userInfo.profilePhotoUrl} initialValidity={true} isProfileSettings={true} onInput={inputHandler} />
@@ -105,7 +105,7 @@ export default function ProfileSettings () {
                     </div>
                 </div>
 
-                <div className="sm:h-1/3 flex flex-wrap flex-row justify-around w-full">
+                <div className="sm:h-1/3 flex flex-wrap flex-row justify-around w-full my-6">
                     <Button buttonClick={updateHandle} buttonText="Update" classnames=" w-8/10 text-var-2 bg-var-4 hover:bg-var-4-hovered my-2 " isAbled={updateButtonValidity} type="submit" />
                     <Button buttonClick={logOutHandle} buttonText="Log out" classnames=" w-8/10 text-var-2 bg-var-4 hover:bg-var-4-hovered my-2 " isAbled={true} />
                     <Button buttonClick={deleteHandle} buttonText="Delete my account" classnames=" w-8/10 text-var-2 bg-red-btn hover:bg-red-hvr my-2 " isAbled={true} />
