@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../context/auth-context";
 import BackBtnForAddOrUpdate from "../Components/BackBtnForAddOrUpdate";
@@ -11,10 +11,9 @@ import Loading from "../Components/Portals/Loading";
 import { useForm, useHttpHook } from "../custom-hooks";
 
 export default function ProfileSettings () {
-    const auth = useContext(AuthContext);
+    const auth = useContext(AuthContext)
     console.log(auth);
     const navigate = useNavigate();
-    const { userid } = useParams();
 
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
 
@@ -32,7 +31,7 @@ export default function ProfileSettings () {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const responseData = await sendHttpRequest("http://localhost:3000/api/users/" + userid + "/info");
+                const responseData = await sendHttpRequest("http://localhost:3000/api/users/" + auth.userId + "/info");
                 setUserInfo(responseData.user)
                 setFormData({
                     profilePhotoUrl: { value: responseData.user.profilePhotoUrl, isValid: true },
@@ -44,7 +43,7 @@ export default function ProfileSettings () {
             } catch (err) {}
         }
         fetchUserInfo();
-    }, [sendHttpRequest, userid]);
+    }, [sendHttpRequest, auth.userId]);
 
     const [updateButtonValidity, setUpdateButtonValidity] = useState(false);
     const formChangeHandler = () => {
@@ -61,8 +60,8 @@ export default function ProfileSettings () {
                     formData.append("username", stateOfForm.inputs.username.value);
                     formData.append("displayName", stateOfForm.inputs.displayName.value);
                     formData.append("shortBio", stateOfForm.inputs.shortBio.value);
-            await sendHttpRequest("http://localhost:3000/api/users/" + userid + "/updateProfile", "PATCH", formData);
-            navigate("/" + userid + "/myprofile");
+            await sendHttpRequest("http://localhost:3000/api/users/" + auth.userId + "/updateProfile", "PATCH", formData);
+            navigate("/" + auth.userId + "/myprofile");
         } catch (err) {
             console.log(err)
         }
@@ -84,7 +83,7 @@ export default function ProfileSettings () {
             <div id="update-profile-form" onKeyUp={formChangeHandler} className="flex flex-wrap justify-center w-full h-screen mx-auto bg-var-2 shadow-card relative">
                 <ErrorMessage open={error} error={error} onClose={clearError} />
                 <div className="fixed top-0 w-full h-16">
-                    <Link className="md:w-1/12 w-1/10 h-full absolute left-0" to={"/" + userid + "/myprofile"}>
+                    <Link className="md:w-1/12 w-1/10 h-full absolute left-0" to={"/" + auth.userId + "/myprofile"}>
                         <BackBtnForAddOrUpdate />
                     </Link>
                 </div>

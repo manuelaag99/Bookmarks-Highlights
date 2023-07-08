@@ -52,7 +52,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                     formData.append("bookTitle", stateOfForm.inputs.title.value);
                     formData.append("date", stateOfForm.inputs.date.value);
                     formData.append("pageNumber", stateOfForm.inputs.page.value);
-                    stateOfForm.inputs.tags.value.forEach(tag => formData.append("tags[]", tag))
+                    stateOfForm.inputs.tags.value.forEach(tag => formData.append("tags[]", tag));
                     formData.append("creator", auth.userId)
                     formData.append("photoUrl", stateOfForm.inputs.photoUrl.value);
                 await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/add", "POST", formData, { Authorization: "Bearer " + auth.token });
@@ -64,9 +64,8 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                     formData.append("bookTitle", stateOfForm.inputs.title.value);
                     formData.append("date", stateOfForm.inputs.date.value);
                     formData.append("pageNumber", stateOfForm.inputs.page.value);
-                    stateOfForm.inputs.tags.value.forEach(tag => formData.append("tags[]", tag))
-                    formData.append("creator", auth.userId)
-                    formData.append("photoUrl", stateOfForm.inputs.photoUrl.value);
+                    stateOfForm.inputs.tags.value.forEach(tag => formData.append("tags[]", tag));
+                    formData.append("creator", auth.userId);
                 await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/update/" + itemid, "PATCH", formData, { Authorization: "Bearer " + auth.token });
                     navigate("/" + userid + "/myprofile");
             } catch (err) {}

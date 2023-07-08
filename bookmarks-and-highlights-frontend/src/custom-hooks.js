@@ -47,7 +47,7 @@ const useHttpHook = () => {
                 signal: httpAbortCtrl.signal
             });
             const responseData = await response.json();
-            console.log(responseData);
+            // console.log(responseData);
             activeHttpRequest.current = activeHttpRequest.current.filter(reqCtrl => reqCtrl !== httpAbortCtrl);
 
             if (!response.ok) {

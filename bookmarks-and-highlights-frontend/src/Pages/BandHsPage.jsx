@@ -22,7 +22,7 @@ export default function BandHsPage () {
     return (
         <div className="flex flex-wrap justify-center mx-auto md:w-full w-8/10">
             <div className="md:absolute fixed w-full h-16 z-20">
-                <Link className="md:w-1/12 w-1/10 h-full absolute left-0 top-0" to={"/" + auth.userId + "/myprofile"}>
+                <Link className="md:w-1/12 w-2/10 h-full absolute left-0 top-0" to={"/" + auth.userId + "/myprofile"}>
                     <BackBtnForAddOrUpdate/>
                 </Link>
             </div>
