@@ -141,7 +141,7 @@ const updateEntry = async (req, res, next) => {
     selectedEntry.pageNumber = pageNumber;
 
     if (photoUrl) {
-        selectedEntry.photoUrl = "http://localhost:3000/" + photoUrl;
+        selectedEntry.photoUrl = photoUrl;
     }
 
     try {
