@@ -12,8 +12,8 @@ export default function PageAndDateSection ({ bookTitle, date, showBookTitle, pa
 
     return (
         <div className={"flex flex-row flex-wrap w-full justify-between font-bold " + (showBookTitle ? "h-[13%]": "h-1/10")}>
-            <div className="w-7/10">{showBookTitle && bookTitleToShow + ", "} page #{page}</div>
-            <div className="w-3/10 text-right">{shortDate}</div>
+            <div className="w-1/2">{showBookTitle && bookTitleToShow + ", "} page #{page}</div>
+            <div className="w-1/2 text-right">{shortDate}</div>
         </div>
     )
 }

@@ -11,10 +11,10 @@ export default function Options ({ classnames, groupButton, rightText, searchBut
 
     return (
         <div className={"min-h-16 flex sm:flex-row flex-col justify-between text-var-6 md:text-dsk-options opacity-40 md:w-10/12 w-full " + classnames}>
-            <div className="h-16 sm:w-2/5 w-full flex items-center sm:justify-start justify-center sm:mt-0 mt-3">
-                <form onSubmit={() => {{searchButton(searchText)}}} action="" method="get">
+            <div className="h-16 sm:w-2/5 w-full flex items-center sm:justify-start justify-between sm:mt-0 mt-3">
+                <form className="flex justify-center" onSubmit={() => {{searchButton(searchText)}}} action="" method="get">
                     <p className="inline-block">search </p>
-                    <input className="inline-block bg-var-3 outline-none ml-2 pt-1 sm:w-1/2 w-2/3" onChange={searchInputHandle} value={searchText} type="text" autoComplete="off"/>
+                    <input className="inline-block bg-var-3 outline-none ml-2 pt-1 w-1/2" onChange={searchInputHandle} value={searchText} type="text" autoComplete="off"/>
                     <button onClick={(event) => {event.preventDefault()
                         {searchButton(searchText)}
                     }}><SearchIcon /></button>

@@ -10,9 +10,12 @@ const createEntry = async (req, res, next) => {
     const selectedUserId = req.params.userid;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {throw new HttpError("Invalid inputs, please check your data", 422);}
+    console.log(req.body)
     const { bookTitle, tags, date, pageNumber, creator } = req.body;
     const photoUrl = "http://localhost:3000/" + req.file.path
     console.log(req.file.path)
+
+    console.log(tags)
     let newEntry;
     try {
         newEntry = await Entry({
