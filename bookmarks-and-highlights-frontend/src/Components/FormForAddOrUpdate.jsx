@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 
 import { useInput } from "../custom-hooks";
 
-export default function FormForAddOrUpdate({ classnames, errorText, field, initialValidity, initialValue, inputType, labelText, listOfBooks, onInput, placeholderText, selectTitle }) {
+export default function FormForAddOrUpdate({ classnames, errorText, field, initialValidity, initialValue, inputType, labelText, onInput, placeholderText }) {
     const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: initialValue, isValid: initialValidity });
     const { value, isValid } = inputState;
 
-    // useEffect here makes sure that the function being called from the parent re-runs every time the values are updated 
+    console.log(initialValue)
     useEffect(() => onInput(field, value, isValid), [onInput, field, value, isValid])
 
     return (

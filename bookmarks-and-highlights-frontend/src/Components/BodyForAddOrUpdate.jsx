@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useParams, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../context/auth-context";
@@ -85,6 +85,8 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         setTitleValue(book.bookTitle);
     };
 
+    console.log(formData)
+
     return (
         <form id="add-or-update-form" onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 sm:h-6/10 h-8/10 sm:mt-32 mt-5 flex flex-wrap flex-row z-0">
             <ErrorMessage open={error} error={error} onClose={clearError} />
@@ -92,11 +94,10 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                 <div onClick={clickHandle} className="flex mx-auto w-8/10 sm:w-3/10 justify-center items-center mb-4 sm:mb-0">
                     <ImageUpload field="photoUrl" initialValue={isAdd ? null : initialValues.photoUrl || null} initialValidity={initialFormValidity} onInput={inputHandler} />
                 </div>
-                <div className="w-full sm:w-7/10 h-3/10">
-                    <FormWithListForAddOrUpdate userid={userid} valueFromList={titleValue} existingBooks={existingBooks} isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.title} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
+                <div className="w-full sm:w-7/10 h-3/10">      
+                    <FormWithListForAddOrUpdate userid={userid} valueFromList={titleValue} existingBooks={existingBooks} isAdd={isAdd}isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.bookTitle} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
                 </div>
             </div>
-
 
             <div onClick={clickHandle} className="h-4/10 w-full sm:pl-3">
                 <div className="flex flex-wrap flex-row justify-start">

@@ -1,16 +1,15 @@
-import React, { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import { addOrUpdateFormReducer } from "./Reducers";
 import { addOrUpdateIndividualInputReducer } from "./Reducers";
 
 const useInput = (initialInput) => {
     const [inputState, dispatch] = useReducer(addOrUpdateIndividualInputReducer, initialInput)
-    const inputChangeHandler = e => {
-        dispatch({ type: "change", val: e.target.value, placeholder: e.target.placeholder });
-    }
-    const inputBlurHandler = () => dispatch({ type: "blur" })
-    const inputFocusHandler = () => dispatch({ type: "focus" })
-    const chooseFromListHandler = (valueFromList) => dispatch({ type: "list option", val: valueFromList })
-    return [inputState, inputChangeHandler, inputBlurHandler, inputFocusHandler, chooseFromListHandler]
+    const inputChangeHandler = e => dispatch({ type: "change", val: e.target.value, placeholder: e.target.placeholder });
+    const inputBlurHandler = () => dispatch({ type: "blur" });
+    const inputFocusHandler = () => dispatch({ type: "focus" });
+    const chooseFromListHandler = (valueFromList) => dispatch({ type: "list option", val: valueFromList });
+    
+    return [inputState, inputChangeHandler, inputBlurHandler, inputFocusHandler, chooseFromListHandler];
 }
 export { useInput };
 

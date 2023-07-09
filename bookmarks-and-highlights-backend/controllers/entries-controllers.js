@@ -15,7 +15,6 @@ const createEntry = async (req, res, next) => {
     const photoUrl = req.file.path
     console.log(req.file.path)
 
-    console.log(tags)
     let newEntry;
     try {
         newEntry = await Entry({
