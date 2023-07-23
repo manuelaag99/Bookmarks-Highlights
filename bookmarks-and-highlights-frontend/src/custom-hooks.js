@@ -20,11 +20,11 @@ const useForm = (initialFormInputs, initialFormValidity) => {
     })
 
     // this hook makes sure that this function is only re-rendered given the state of the specified dependencies
-    const inputHandler = useCallback((field, value, isValid) => {
+    const formHandler = useCallback((field, value, isValid) => {
         dispatch({type: "change", field: field, value: value, isValid: isValid})
     }, [dispatch])
 
-    return [stateOfForm, inputHandler]
+    return [stateOfForm, formHandler]
 }
 export { useForm };
 
