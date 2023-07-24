@@ -6,10 +6,16 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+// const passport = require("passport");
+const session = require("express-session");
+const cookieSession = require("cookie-session");
+const cors = require("cors");
 
+const authRoute = require("./routes/auth");
 const booksRoutes = require("./routes/books-routes");
 const entriesRoutes = require("./routes/entries-routes");
 const HttpError = require("./models/http-error");
+const passport = require("./middleware/passport")
 const usersRoutes = require("./routes/users-routes");
 
 const app = express();
@@ -17,6 +23,20 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use("/uploads/images", express.static(path.join("uploads", "images")));
+
+app.use(session({ secret: "cookey", resave: false, saveUninitialized: false }))
+app.use(passport.initialize());
+app.use(passport.session());
+
+// app.use(
+//     cors({
+//         origin: "http://localhost:5173",
+//         methods: "GET,POST,PATCH,DELETE",
+//         credentials: true
+//     })
+// )
+
+app.use("/auth", authRoute);
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
