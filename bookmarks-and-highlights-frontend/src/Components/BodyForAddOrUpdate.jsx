@@ -95,7 +95,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                     <ImageUpload field="photoUrl" initialValue={isAdd ? null : initialValues.photoUrl || null} initialValidity={initialFormValidity} onInput={inputHandler} />
                 </div>
                 <div className="w-full sm:w-7/10 h-3/10">      
-                    <FormWithListForAddOrUpdate userid={userid} valueFromList={titleValue} existingBooks={existingBooks} isAdd={isAdd} isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.bookTitle} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
+                    <FormWithListForAddOrUpdate userid={userid} valueFromList={titleValue} existingBooks={existingBooks} isAdd={isAdd}isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.bookTitle} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
                 </div>
             </div>
 
