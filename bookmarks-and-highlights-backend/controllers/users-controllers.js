@@ -105,11 +105,9 @@ const loginToExistingUser = async (req, res, next) => {
     console.log(selectedUser)
     let isPasswordValid;
     try {
-        console.log(password)
-        console.log(selectedUser.password);
         isPasswordValid = await bcrypt.compare(password, selectedUser.password);
     } catch (err) {
-        return next (new HttpError("Sorry, could not check your data!", 500));
+        return next (new HttpError("Sorry, could not check your data. Try again.", 500));
     }
 
     console.log(isPasswordValid);

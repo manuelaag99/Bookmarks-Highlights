@@ -32,6 +32,7 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
             }
         }, [stateOfAuthInputForm]);
     };
+    console.log(passwordConfirmationStatus)
 
     let responseData;
     const submitHandler = async e => {
@@ -58,7 +59,9 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                         password: stateOfAuthInputForm.inputs.password.value
                     }),
                     { "Content-Type": "Application/json" })
-            } catch (err) {};
+            } catch (err) {
+                setError("")
+            };
         };
         if (!error) {
             auth.login(responseData.userId, responseData.token);
