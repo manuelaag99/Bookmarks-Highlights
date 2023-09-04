@@ -12,7 +12,7 @@ export default function AddBandH () {
     const checkFormValidity = (stateOfForm) => setformValidity(() => stateOfForm.isValid);
 
     return (
-        <div className="flex flex-wrap items-center justify-center w-full h-screen h- mx-auto bg-var-2 shadow-card relative">
+        <div className="flex flex-col items-center justify-center w-full mx-auto bg-var-2 shadow-card relative">
             <TopForAddOrUpdate typeForSubmitButton="submit" formForSubmitButtonform="add-or-update-form" userid={auth.userId} isAddOrUpdateBtnAbled={formValidity} classnames=" w-8/10 " isUpdating={false} route={"/" + auth.userId + "/myprofile"}/>
             <BodyForAddOrUpdate userid={auth.userId} isFormValid={checkFormValidity} initialFormValidity={false} isAdd={true} />
         </div>
