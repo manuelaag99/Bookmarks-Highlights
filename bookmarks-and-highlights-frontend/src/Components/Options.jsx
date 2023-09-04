@@ -14,7 +14,7 @@ export default function Options ({ classnames, groupButton, rightText, searchBut
             <div className="h-16 sm:w-2/5 w-full flex items-center sm:justify-start justify-between sm:mt-0 mt-3">
                 <form className="flex justify-center" onSubmit={() => {{searchButton(searchText)}}} action="" method="get">
                     <p className="inline-block">search </p>
-                    <input className="inline-block bg-var-3 outline-none ml-2 pt-1 w-1/2" onChange={searchInputHandle} value={searchText} type="text" autoComplete="off"/>
+                    <input className="inline-block bg-var-3 outline-none ml-2 w-1/2" onChange={searchInputHandle} value={searchText} type="text" autoComplete="off"/>
                     <button onClick={(event) => {event.preventDefault()
                         {searchButton(searchText)}
                     }}><SearchIcon /></button>
