@@ -12,7 +12,8 @@ export default function PopUpWithTags ({ contentForTagsPopUp, onClose, open }) {
                         <ClearIcon />
                     </button>
                 </div>
-                <div className="min-h-7/10 w-full bg-var-2 p-4">
+                <div className="flex flex-row flex-wrap min-h-7/10 w-full bg-var-2 p-4">
+                    <p className="inline-block h-fit mr-4">Tags: </p>
                     {contentForTagsPopUp.map((tag, index) => {
                         return <p key={index} className="inline-block w-fit h-7 py-0.5 px-2.5 shadow-card rounded-tag cursor-pointer mr-2 mb-2 bg-var-7 hover:bg-var-6 duration-300">{tag}</p>
                     })}

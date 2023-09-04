@@ -15,7 +15,7 @@ export default function BandHsPhotoCard ({ bookTitle, bookid, date, entries, ite
     if (taglist) shortenedTags = taglist.filter((photo, index) => index < 4)
 
     return (
-        <div className={"rounded-tag shadow-card xl:w-9/10 md:w-88 w-full h-fit bg-var-2 p-4 box-border flex flex-col flex-wrap md:hover:h-102 duration-500 justify-center mb-14 sm:mx-5 xl:mx-auto  " + (photoWindow && " ")}>
+        <div className={"rounded-tag shadow-card xl:w-9/10 md:w-88 w-full h-fit bg-var-2 p-4 box-border flex flex-col flex-wrap duration-500 justify-center mb-14 sm:mx-5 xl:mx-auto  " + (photoWindow && " ")}>
             <PageAndDateSection showBookTitle={showBookTitles} bookTitle={bookTitle} page={page} date={date} />
             <div className={"w-full bg-var-7 " + (showBookTitles ? "h-6/10" : "h-7/10")}>
                 <img onClick={() => setPhotoWindow(() => true)}
