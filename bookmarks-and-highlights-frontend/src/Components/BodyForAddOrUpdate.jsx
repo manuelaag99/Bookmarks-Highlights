@@ -99,7 +99,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                 </div>
             </div>
 
-            <div onClick={clickHandle} className="h-4/10 w-full mt-2 sm:pl-3">
+            <div onClick={clickHandle} className="h-4/10 w-full mt-2 mb-10 sm:pl-3">
                 <div className="flex flex-wrap flex-row justify-start">
                     <FormForAddOrUpdate onInput={inputHandler} field="date" initialValue={isAdd ? "" : initialValues.date.split("T")[0] || null} initialValidity={initialFormValidity} errorText="error!" labelText="date:" placeholderText="DD/MM/YYYY" classnames="w-2/3 mt-3" inputType="date" />
                     <FormForAddOrUpdate onInput={inputHandler} field="page" initialValue={isAdd ? "" : initialValues.pageNumber || null} initialValidity={initialFormValidity} errorText="error!" labelText="page #:" placeholderText="e.g. 31, 105" classnames="w-3/10 mt-3" inputType="number" />
