@@ -28,10 +28,10 @@ export default function IndividualInputForAuthentication ({ errorText, field, fo
         <>
             <div className={"flex flex-row mb-7 px-2 border-solid bg-var-1 border-2 rounded-tag h-12 w-9/10 relative " + ((!inputState.isValid && inputState.isTouched) && "border-red-btn" )}>
                 <input autoComplete="off" className="w-full h-full outline-none text-center" onBlur={inputBlurHandler} onFocus={inputFocusHandler} onChange={inputChangeHandler} placeholder={placeholderText} type={inputTypeForPassword || inputType} />
-                {(field === "password" || field === "confirmPassword") && !isPasswordVisible && <button className="absolute right-2 top-3 w-1/10 my-auto" onClick={() => setIsPasswordVisible(true)} >
+                {(field === "password" || field === "confirmPassword") && !isPasswordVisible && <button className="absolute right-2 top-2 w-1/10 my-auto" onClick={() => setIsPasswordVisible(true)} >
                     <VisibilityIcon className="w-full"/>
                 </button>}
-                {(field === "password" || field === "confirmPassword") && isPasswordVisible && <button className="absolute right-2 top-3 w-1/10 my-auto" onClick={() => setIsPasswordVisible(false)} >
+                {(field === "password" || field === "confirmPassword") && isPasswordVisible && <button className="absolute right-2 top-2 w-1/10 my-auto" onClick={() => setIsPasswordVisible(false)} >
                     <VisibilityOffIcon className="w-full"/>
                 </button>}
             </div>
