@@ -10,12 +10,12 @@ import Loading from "./Portals/Loading";
 import TagsSection from "./TagsSection";
 import { useForm, useHttpHook } from "../custom-hooks";
 
-export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFormValidity, initialValues, isAdd, isFormValid, itemValues, title, userid }) {
+export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFormValidity, initialValues, isAdd, isFormValid, itemValues, userid }) {
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
     const [formData, setFormData] = useState({
-        title: { value: isAdd ? "" : initialValues.bookTitle, isValid: isAdd ? false : true },
+        bookTitle: { value: isAdd ? "" : initialValues.bookTitle, isValid: isAdd ? false : true },
         date: { value: isAdd ? "" : initialValues.date, isValid: isAdd ? false : true },
         page: { value: isAdd ? "" : initialValues.pageNumber, isValid: isAdd ? false : true },
         tags: { value: isAdd ? [] : initialValues.tags, isValid: isAdd ? false : true },
@@ -48,7 +48,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         if (isAdd) {
             try {
                 const formData = new FormData();
-                    formData.append("bookTitle", stateOfForm.inputs.title.value);
+                    formData.append("bookTitle", stateOfForm.inputs.bookTitle.value);
                     formData.append("date", stateOfForm.inputs.date.value);
                     formData.append("pageNumber", stateOfForm.inputs.page.value);
                     stateOfForm.inputs.tags.value.forEach(tag => formData.append("tags[]", tag));
@@ -60,7 +60,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         } else {
             try {
                 const formData = new FormData();
-                    formData.append("bookTitle", stateOfForm.inputs.title.value);
+                    formData.append("bookTitle", stateOfForm.inputs.bookTitle.value);
                     formData.append("date", stateOfForm.inputs.date.value);
                     formData.append("pageNumber", stateOfForm.inputs.page.value);
                     stateOfForm.inputs.tags.value.forEach(tag => formData.append("tags[]", tag));
@@ -79,8 +79,8 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
 
     const [titleValue, setTitleValue] = useState();
     const selectListItem = (book) => {
-        stateOfForm.inputs.title.value = book.bookTitle;
-        stateOfForm.inputs.title.isValid = true;
+        stateOfForm.inputs.bookTitle.value = book.bookTitle;
+        stateOfForm.inputs.bookTitle.isValid = true;
         setTitleValue(book.bookTitle);
     };
 
@@ -94,7 +94,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                     <ImageUpload field="photoUrl" initialValue={isAdd ? null : initialValues.photoUrl || null} initialValidity={initialFormValidity} onInput={inputHandler} />
                 </div>
                 <div className="w-full sm:w-7/10 h-3/10">      
-                    <FormWithListForAddOrUpdate userid={userid} valueFromList={titleValue} existingBooks={existingBooks} isAdd={isAdd}isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="title" initialValue={isAdd ? "" : initialValues.bookTitle} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
+                    <FormWithListForAddOrUpdate userid={userid} valueFromList={titleValue} existingBooks={existingBooks} isAdd={isAdd}isBookListOpen={openBookList} shouldBookListClose={shouldBookListClose} shouldBookListOpen={shouldBookListOpen} selectTitle={selectListItem} classnames=" w-full relative z-2" onInput={inputHandler} field="bookTitle" initialValue={isAdd ? "" : initialValues.bookTitle} initialValidity={initialFormValidity} errorText="error!" labelText="Title of the book/article:" placeholderText="i.e. Title (author, year)" inputType="text" />
                 </div>
             </div>
 
