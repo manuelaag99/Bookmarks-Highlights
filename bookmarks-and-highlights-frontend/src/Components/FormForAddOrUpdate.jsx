@@ -6,7 +6,6 @@ export default function FormForAddOrUpdate({ classnames, errorText, field, initi
     const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: initialValue, isValid: initialValidity });
     const { value, isValid } = inputState;
 
-    console.log(initialValue)
     useEffect(() => onInput(field, value, isValid), [onInput, field, value, isValid])
 
     return (

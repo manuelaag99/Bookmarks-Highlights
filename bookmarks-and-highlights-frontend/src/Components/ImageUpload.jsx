@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { useInput } from "../custom-hooks";
 
 export default function ImageUpload ({ field, initialValidity, initialValue, onInput }) {
     const fileSelectorRef = useRef();
     const [file, setFile] = useState();
     const [previewUrl, setPreviewUrl] = useState();
     const [validity, setValidity] = useState(false);
+    const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: initialValue, isValid: initialValidity });
+    const { value, isValid } = inputState;
 
     useEffect(() => {
         if (!file) return;
@@ -41,6 +44,10 @@ export default function ImageUpload ({ field, initialValidity, initialValue, onI
         }
     };
     
+    useEffect(() => {
+        onInput(field, file, validity)
+    }, [onInput, field, file, isValid])
+
     return (
         <div className={"flex flex-wrap justify-center text-center items-center cursor-pointer h-fit mx-auto aspect-square sm:w-8/10 relative z-0 w-full " + (!initialValue && "bg-var-8" )} onClick={previewUrl ? null : selectFileHandler} >
             {(previewUrl || initialValue) && <div className="absolute top-0 right-0 w-fit flex flex-row justify-center text-var-1 z-20">
