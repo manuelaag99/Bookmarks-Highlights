@@ -39,7 +39,6 @@ export default function ImageUpload ({ field, initialValidity, initialValue, onI
             setValidity(false);
             fileIsValid = false
         }
-        onInput(field, selectedFile, fileIsValid);
     };
     
     return (

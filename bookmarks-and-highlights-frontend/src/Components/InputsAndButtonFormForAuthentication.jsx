@@ -80,7 +80,7 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                     <IndividualInputForAuthentication windowInfoText={(type === "Sign up") && "Write at least 10 characters, and use special characters, capital letters, lowercase letters, and numbers"} errorText="Please write a valid password" inputType="password" field="password" formState={stateOfAuthInputForm.inputs} onInput={authInputHandler} placeholderText={passwordPlaceholder} />
                     {type === "Sign up" && <IndividualInputForAuthentication showError={!passwordConfirmationStatus} windowInfoText="Make sure this matches your password" errorText="The passwords do not match" inputType="password" field="confirmPassword" formState={stateOfAuthInputForm.inputs} onInput={authInputHandler} placeholderText={confirmPasswordPlaceholder} />}
                 </div>
-                <Button buttonText={buttonInput} classnames="w-9/10 mt-[-20px] mb-5 text-var-1 bg-var-4 hover:bg-var-4-hovered " form="sign-in-or-sign-up-form" isAbled={inputButtonValidity} isSignInOrSignUpButton={true} type="submit"  />
+                <Button buttonText={buttonInput} classnames="w-9/10 mt-[-16px] mb-5 text-var-1 bg-var-4 hover:bg-var-4-hovered " form="sign-in-or-sign-up-form" isAbled={inputButtonValidity} isSignInOrSignUpButton={true} type="submit"  />
             </form>
             <Loading open={loading} />
         </div>

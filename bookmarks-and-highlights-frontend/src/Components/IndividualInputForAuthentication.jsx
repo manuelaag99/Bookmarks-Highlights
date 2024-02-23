@@ -26,7 +26,7 @@ export default function IndividualInputForAuthentication ({ errorText, field, fo
     
     return (
         <>
-            <div className={"flex flex-row mb-5 px-2 border-solid bg-var-1 border-2 rounded-tag h-12 w-9/10 relative " + ((!inputState.isValid && inputState.isTouched) && "border-red-btn" )}>
+            <div className={"flex flex-row mb-7 px-2 border-solid bg-var-1 border-2 rounded-tag h-12 w-9/10 relative " + ((!inputState.isValid && inputState.isTouched) && "border-red-btn" )}>
                 <input autoComplete="off" className="w-full h-full outline-none text-center" onBlur={inputBlurHandler} onFocus={inputFocusHandler} onChange={inputChangeHandler} placeholder={placeholderText} type={inputTypeForPassword || inputType} />
                 {(field === "password" || field === "confirmPassword") && !isPasswordVisible && <button className="absolute right-2 top-3 w-1/10 my-auto" onClick={() => setIsPasswordVisible(true)} >
                     <VisibilityIcon className="w-full"/>
@@ -35,8 +35,8 @@ export default function IndividualInputForAuthentication ({ errorText, field, fo
                     <VisibilityOffIcon className="w-full"/>
                 </button>}
             </div>
-            <p className={"mt-[-18px] text-red-btn text-center px-4 " + ((!inputState.isValid && inputState.isTouched && field !== "confirmPassword") ? "inline" : "hidden")}>{errorText}</p>
-            {(field === "confirmPassword") && showError && <p className={"mt-[-18px] text-red-btn text-center px-4 " + ((inputState.isTouched) ? "inline" : "hidden")}>{errorText}</p>}
+            <p className={"mt-[-26px] text-red-btn text-center px-4 " + ((!inputState.isValid && inputState.isTouched && field !== "confirmPassword") ? "inline" : "hidden")}>{errorText}</p>
+            {(field === "confirmPassword") && showError && <p className={"mt-[-24px] text-red-btn text-center px-4 " + ((inputState.isTouched) ? "inline" : "hidden")}>{errorText}</p>}
             {inputState.isActive && !inputState.isTouched && windowInfoText && <WindowForInputInfo windowInfoText={windowInfoText}/>}
         </>
     )
