@@ -9,13 +9,14 @@ import CardsSection from "../Components/CardsSection";
 import EmptyLine from "../Components/EmptyLine";
 import ErrorMessage from "../Components/Portals/ErrorMessage";
 import Loading from "../Components/Portals/Loading";
+import NavigateMessage from "../Components/Portals/NavigateMessage";
 import Options from "../Components/Options";
 import ProfileTop from "../Components/ProfileTop";
 import { useHttpHook } from "../custom-hooks";
 
 export default function ProfilePage () {
     const auth = useContext(AuthContext);
-    const { loading, error, sendHttpRequest, clearError } = useHttpHook();
+    const { loading, error, sendHttpRequest, clearError, setError } = useHttpHook();
 
     const [selectedUser, setSelectedUser] = useState();
     const [selectedUserEntries, setSelectedUserEntries] = useState();
@@ -81,20 +82,22 @@ export default function ProfilePage () {
         }
     };
 
-    console.log(selectedUser.displayName)
     const [userHasMissingInfo, setUserHasMissingInfo] = useState(false);
     useEffect(() => {
-        if (!selectedUser.displayName) {
-            setUserHasMissingInfo(true);
+        if (selectedUser) {
+            if (!selectedUser.displayName) {
+                setUserHasMissingInfo(true);
+            }
         }
-    }, [])
+    }, [selectedUser])
 
     if (!selectedUser) {
         return <Loading open={loading} />
     } else {
         return (
             <div className="flex flex-wrap justify-center md:w-full w-8/10 mx-auto">
-                <ErrorMessage open={error} error={error} onClose={clearError} isNavigateMessage={userHasMissingInfo} userid={auth.userId} />
+                <NavigateMessage message="Your account lacks info. You will be redirected to where you can update it." open={userHasMissingInfo} userid={auth.userId} />
+                <ErrorMessage open={error} error={error} onClose={clearError} />
                 <ProfileTop isProfilePage={true} needsPhoto={true} userid={selectedUser.id} name={selectedUser.displayName} bio={selectedUser.shortBio} photoUrl={selectedUser.profilePhotoUrl} stateToSend={{ userid: selectedUser.id }} />
                 <EmptyLine />
                 <Breaker breakerText="MY BOOKMARKS & HIGHLIGHTS" />

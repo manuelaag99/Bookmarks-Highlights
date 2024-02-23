@@ -33,6 +33,7 @@ const createAndLogInToUser = async (req, res, next) => {
             email,
             username,
             password: hashedPassword,
+            displayName: "",
             entries: []
         });
     } catch (err) {
