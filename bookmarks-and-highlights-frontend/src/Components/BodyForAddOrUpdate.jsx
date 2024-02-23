@@ -41,7 +41,6 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
     const keyHandle = () => {
         if (tagsState !== stateOfForm.inputs.tags.value) setTagsState(() => stateOfForm.inputs.tags.value);
         isFormValid(stateOfForm);
-        console.log(stateOfForm);
     };
 
     const submitHandler = async e => {
@@ -84,8 +83,6 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         stateOfForm.inputs.title.isValid = true;
         setTitleValue(book.bookTitle);
     };
-
-    console.log(formData)
 
     return (
         <form id="add-or-update-form" onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 sm:h-6/10 h-8/10 mt-10 mb-12 flex flex-wrap z-0">

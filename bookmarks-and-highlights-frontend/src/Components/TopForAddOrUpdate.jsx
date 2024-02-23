@@ -20,7 +20,6 @@ export default function TopForAddOrUpdate ({ classnames, formForSubmitButtonform
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
 
     const deleteButtonHandle = async () => {
-        console.log("deleted!")
         closeDeleteWindow()
         try {
             await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/delete/" + itemid, "DELETE", null, { Authorization: "Bearer " + auth.token });

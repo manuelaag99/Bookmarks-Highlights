@@ -12,7 +12,6 @@ import { useForm, useHttpHook } from "../custom-hooks";
 
 export default function ProfileSettings () {
     const auth = useContext(AuthContext)
-    console.log(auth);
     const navigate = useNavigate();
 
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
@@ -25,8 +24,6 @@ export default function ProfileSettings () {
         shortBio: { value: "", isValid: false }
     }, false);
     const [stateOfForm, inputHandler] = useForm(formData);
-
-    console.log(userInfo);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -48,12 +45,10 @@ export default function ProfileSettings () {
     const [updateButtonValidity, setUpdateButtonValidity] = useState(false);
     const formChangeHandler = () => {
         setUpdateButtonValidity(stateOfForm.isValid)
-        console.log(stateOfForm)
     };
 
     const updateHandle = async e => {
         e.preventDefault();
-        console.log(stateOfForm)
         try {
             const formData = new FormData();
                     formData.append("profilePhotoUrl", stateOfForm.inputs.profilePhotoUrl.value);

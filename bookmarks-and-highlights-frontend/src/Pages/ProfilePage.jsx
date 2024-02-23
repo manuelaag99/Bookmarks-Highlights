@@ -54,14 +54,12 @@ export default function ProfilePage () {
     const searchButtonHandle = (searchText) => {
         const lowerCaseSearchText = searchText.toLowerCase();
         setSearchQuery(lowerCaseSearchText);
-        console.log(lowerCaseSearchText)
         if (lowerCaseSearchText) {
             if (lowerCaseSearchText === "") {
                 setCards(defaultCards);
                 setCardsToDisplay(defaultCards);
             } else {
                 setCardsToDisplay(cards.filter((card) => {
-                    console.log(card.title);
                     return card.title.toLowerCase().includes(lowerCaseSearchText);
                 }))
             }

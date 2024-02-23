@@ -19,20 +19,16 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
 
     const [passwordConfirmationStatus, setPasswordConfirmationStatus] = useState(true);
     if (type === "Sign up") {
-        console.log(stateOfAuthInputForm.inputs)
         useEffect(() => {
             if (stateOfAuthInputForm.inputs.password.value) {
                 if (stateOfAuthInputForm.inputs.password.value === stateOfAuthInputForm.inputs.confirmPassword.value) {
-                    console.log("they match")
                     setPasswordConfirmationStatus(true);
                 } else {
-                    console.log("They dont match")
                     setPasswordConfirmationStatus(false);
                 }
             }
         }, [stateOfAuthInputForm]);
     };
-    console.log(passwordConfirmationStatus)
 
     let responseData;
     const submitHandler = async e => {
@@ -49,7 +45,6 @@ export default function InputsAndButtonFormForAuthentication ({ buttonInput, con
                         )
                 } catch (err) {};
             } else {
-                console.log("they don't match")
                 setError("The passwords do not match!")
             }
         } else if (type === "Sign in") {
