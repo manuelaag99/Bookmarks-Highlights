@@ -1,10 +1,17 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import ClearIcon from '@mui/icons-material/Clear';
+import { useNavigate } from "react-router-dom";
 
 import Button from "../Button";
 
-export default function PopUpWithTags ({ onClose, open, error }) {
+export default function PopUpWithTags ({ error, isNavigateMessage, onClose, onNavigateToSettingsPage, open, userid }) {
+    const navigate = useNavigate();
+
+    function navigateToSettingsPage () {
+        navigate("/" + userid + "/settings");
+    }
+
     const errorWindow = (
         <div>
             <div className="w-full h-full fixed top-0 bottom-0 bg-var-5 opacity-20"></div>
@@ -16,7 +23,8 @@ export default function PopUpWithTags ({ onClose, open, error }) {
                 </div>
                 <div className="min-h-7/10 w-full bg-var-2 p-4 justify-center">
                     <p className="text-center mb-4">{error}</p>
-                    <Button buttonClick={onClose} buttonText="Ok!" classnames=" w-9/10 sm:w-3/10 text-var-1 bg-var-4 hover:bg-var-4-hovered " isAbled={true} />
+                    {!isNavigateMessage && <Button buttonClick={onClose} buttonText="Ok!" classnames=" w-9/10 sm:w-3/10 text-var-1 bg-var-4 hover:bg-var-4-hovered " isAbled={true} />}
+                    {isNavigateMessage && <Button buttonClick={navigateToSettingsPage} buttonText="Ok!" classnames=" w-9/10 sm:w-3/10 text-var-1 bg-var-4 hover:bg-var-4-hovered " isAbled={true} />}
                 </div>
             </div>
         </div>

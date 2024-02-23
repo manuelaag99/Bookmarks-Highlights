@@ -15,7 +15,6 @@ import { useHttpHook } from "../custom-hooks";
 
 export default function ProfilePage () {
     const auth = useContext(AuthContext);
-    // console.log(auth);
     const { loading, error, sendHttpRequest, clearError } = useHttpHook();
 
     const [selectedUser, setSelectedUser] = useState();
@@ -82,12 +81,20 @@ export default function ProfilePage () {
         }
     };
 
+    console.log(selectedUser.displayName)
+    const [userHasMissingInfo, setUserHasMissingInfo] = useState(false);
+    useEffect(() => {
+        if (!selectedUser.displayName) {
+            setUserHasMissingInfo(true);
+        }
+    }, [])
+
     if (!selectedUser) {
         return <Loading open={loading} />
     } else {
         return (
             <div className="flex flex-wrap justify-center md:w-full w-8/10 mx-auto">
-                <ErrorMessage open={error} error={error} onClose={clearError} />
+                <ErrorMessage open={error} error={error} onClose={clearError} isNavigateMessage={userHasMissingInfo} userid={auth.userId} />
                 <ProfileTop isProfilePage={true} needsPhoto={true} userid={selectedUser.id} name={selectedUser.displayName} bio={selectedUser.shortBio} photoUrl={selectedUser.profilePhotoUrl} stateToSend={{ userid: selectedUser.id }} />
                 <EmptyLine />
                 <Breaker breakerText="MY BOOKMARKS & HIGHLIGHTS" />
