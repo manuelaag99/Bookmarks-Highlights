@@ -65,7 +65,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
                     formData.append("pageNumber", stateOfForm.inputs.page.value);
                     stateOfForm.inputs.tags.value.forEach(tag => formData.append("tags[]", tag));
                     formData.append("creator", auth.userId);
-                    formData.append("photoUrl", stateOfForm.inputs.photoUrl.value);
+                    if (stateOfForm.inputs.photoUrl.value) formData.append("photoUrl", stateOfForm.inputs.photoUrl.value);
                 await sendHttpRequest("http://localhost:3000/api/entries/user/" + userid + "/update/" + itemid, "PATCH", formData, { Authorization: "Bearer " + auth.token });
                     navigate("/" + userid + "/myprofile");
             } catch (err) {}
@@ -83,8 +83,6 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         stateOfForm.inputs.bookTitle.isValid = true;
         setTitleValue(book.bookTitle);
     };
-
-    console.log(stateOfForm.isValid)
 
     return (
         <form id="add-or-update-form" onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 sm:h-6/10 h-8/10 mt-10 mb-12 flex flex-wrap z-0">

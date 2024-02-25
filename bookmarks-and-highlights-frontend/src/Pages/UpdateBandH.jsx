@@ -34,7 +34,7 @@ export default function UpdateBandH () {
         return (
             <div className="flex flex-col items-center justify-center w-full mx-auto bg-var-2 shadow-card relative">
                 <ErrorMessage open={error} error={error} onClose={clearError} />
-                <TopForAddOrUpdate typeForSubmitButton="submit" formForSubmitButtonform="add-or-update-form" itemid={itemid} userid={userid} isAddOrUpdateBtnAbled={formValidity} classnames=" w-1/3 " isUpdating={true} route={"/" + userid + "/bandhs/labelid/" + bookid} stateToSend={{ userid: userid, bookid: bookid, entries: entries }}/>
+                <TopForAddOrUpdate typeForSubmitButton="submit" formForSubmitButtonform="add-or-update-form" itemid={itemid} userid={userid} isAddOrUpdateBtnAbled={formValidity} classnames=" w-1/3 " isUpdating={true} route={"/" + userid + "/bandhs/labelid/" + bookid} stateToSend={{ userid: userid, bookid: bookid, entries: entries, title: userEntry.bookTitle }}/>
                 <BodyForAddOrUpdate isFormValid={checkFormValidity} initialValues={userEntry} initialFormValidity={true} isAdd={false} userid={userid} bookid={bookid} entries={entries} itemid={itemid} />
                 <Loading open={loading} />
             </div>
