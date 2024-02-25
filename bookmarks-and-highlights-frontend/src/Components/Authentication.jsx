@@ -12,7 +12,7 @@ export default function Authentication ({ authBtnText, confirmPasswordPlaceholde
                     <Breaker breakerText={upperText} />
                     <InputsAndButtonFormForAuthentication buttonInput={authBtnText} initialInputsForForm={initialInputsForForm} usernamePlaceholder={usernamePlaceholder} emailPlaceholder={emailPlaceholder} passwordPlaceholder={passwordPlaceholder} confirmPasswordPlaceholder={confirmPasswordPlaceholder} type={upperText}/>
                     <Breaker breakerText="or" classnames="w-full" />
-                    {/* <OAuthAndGoBack googleOAuthText={googleBtnText} facebookOAuthText={facebookBtnText}/> */}
+                    <OAuthAndGoBack googleOAuthText={googleBtnText} facebookOAuthText={facebookBtnText}/>
                 </div>
             </div>                        
         </div>
