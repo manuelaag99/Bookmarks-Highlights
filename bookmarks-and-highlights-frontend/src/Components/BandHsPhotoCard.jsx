@@ -23,8 +23,8 @@ export default function BandHsPhotoCard ({ bookTitle, bookid, date, entries, ite
                 <PhotoWindow open={photoWindow} image={photosrc} onClose={() => setPhotoWindow(() => false)} />
             </div>
             <div className="flex flex-row h-2/10 w-full pt-2.5 relative">
-                <div>
-                    <p className="inline pr-2">tags: </p>
+                <div className="flex w-9/10 pr-4">
+                    
                     <TagsSection tagsArray={shortenedTags} />
                     {(taglist.length > 4) && <p onClick={() => setTagsPopUp(() => true)} className="inline w-fit py-1.5 h-12 px-2.5 rounded-tag cursor-pointer mr-1 mb-2 bg-var-7 hover:bg-var-6 duration-300">...</p>}
                     <PopUpWithTags open={tagsPopUp} contentForTagsPopUp={taglist} onClose={() => setTagsPopUp(() => false)} />  
