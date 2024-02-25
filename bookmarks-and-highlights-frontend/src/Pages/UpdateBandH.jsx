@@ -15,7 +15,7 @@ export default function UpdateBandH () {
     const { userid, bookid, title, entries, itemid } = location.state;
 
     const [ formValidity, setformValidity ] = useState(false)
-    const checkFormValidity = (stateOfForm) => setformValidity(() => stateOfForm.isValid)
+    const checkFormValidity = (stateOfForm) => setformValidity(stateOfForm.isValid)
 
     const [userEntry, setUserEntry] = useState();
     useEffect(() => {

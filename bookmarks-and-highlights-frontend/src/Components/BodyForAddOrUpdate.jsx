@@ -84,7 +84,7 @@ export default function BodyForAddOrUpdate ({ bookid, entries, itemid, initialFo
         setTitleValue(book.bookTitle);
     };
 
-    console.log(stateOfForm)
+    console.log(stateOfForm.isValid)
 
     return (
         <form id="add-or-update-form" onKeyUp={keyHandle} onSubmit={submitHandler} className="w-85 sm:h-6/10 h-8/10 mt-10 mb-12 flex flex-wrap z-0">

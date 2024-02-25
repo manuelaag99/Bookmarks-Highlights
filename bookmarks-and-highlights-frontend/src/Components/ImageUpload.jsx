@@ -7,7 +7,7 @@ export default function ImageUpload ({ field, initialValidity, initialValue, onI
     const fileSelectorRef = useRef();
     const [file, setFile] = useState();
     const [previewUrl, setPreviewUrl] = useState();
-    const [validity, setValidity] = useState(false);
+    const [validity, setValidity] = useState(initialValue ? true : false);
     const [inputState, inputChangeHandler, inputBlurHandler] = useInput({ value: initialValue, isValid: initialValidity });
     const { value, isValid } = inputState;
 
