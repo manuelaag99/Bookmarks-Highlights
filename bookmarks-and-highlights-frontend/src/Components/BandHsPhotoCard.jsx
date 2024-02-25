@@ -24,9 +24,9 @@ export default function BandHsPhotoCard ({ bookTitle, bookid, date, entries, ite
             </div>
             <div className="flex flex-row h-2/10 w-full pt-2.5 relative">
                 <div className="flex w-9/10 pr-4">
-                    
+                    <p className="inline pr-2">tags: </p>
                     <TagsSection tagsArray={shortenedTags} />
-                    {(taglist.length > 4) && <p onClick={() => setTagsPopUp(() => true)} className="inline w-fit py-1.5 h-12 px-2.5 rounded-tag cursor-pointer mr-1 mb-2 bg-var-7 hover:bg-var-6 duration-300">...</p>}
+                    {(taglist.length > 4) && <p onClick={() => setTagsPopUp(() => true)} className="inline w-fit py-1.5 h-8 px-2.5 rounded-tag cursor-pointer mr-1 mb-2 bg-var-7 hover:bg-var-6 duration-300">...</p>}
                     <PopUpWithTags open={tagsPopUp} contentForTagsPopUp={taglist} onClose={() => setTagsPopUp(() => false)} />  
                 </div>
                 <Link to={"/" + userid + "/bandhs/labelid/" + bookid + "/update/itemid/" + itemid} state={{ userid: userid, bookid: bookid, title: title, entries: entries, itemid: itemid}}>
